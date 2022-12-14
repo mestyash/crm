@@ -4,5 +4,5 @@ import 'package:crm/features/common/app/view/app.dart';
 
 void main() {
   initGetIt();
-  bootstrap(() => const App());
+  bootstrap(() => sl.get<App>());
 }
