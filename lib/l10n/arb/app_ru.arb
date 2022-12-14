@@ -1,0 +1,5 @@
+{
+    "@@locale": "ru",
+    "loginScreenGreeting": "Добро пожаловать!",
+    "loginScreenMessage": "Авторизуйтесь, чтобы войти в приложение. Начнем ?)"
+}
