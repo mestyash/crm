@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+class ProjectMargin {
+  static double contentTop = 30.h;
+  static double contentHorizontal = 15.w;
+}
+
 class ProjectThemes {
   static final lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: Colors.white,
