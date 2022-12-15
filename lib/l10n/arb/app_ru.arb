@@ -1,5 +1,12 @@
 {
     "@@locale": "ru",
+    "login": "Логин",
+    "pass": "Пароль",
+    "enter": "Войти",
     "loginScreenGreeting": "Добро пожаловать!",
-    "loginScreenMessage": "Авторизуйтесь, чтобы войти в приложение. Начнем ?)"
+    "loginScreenMessage": "Авторизуйтесь, чтобы войти в приложение. Начнем ?)",
+    "loginScreenLoginPlaceholder": "Введите логин",
+    "loginScreenPassPlaceholder": "Введите пароль",
+    "loginScreenInputError": "*Допущена ошибка",
+    "loginScreenCheckbox": "Запомнить меня"
 }

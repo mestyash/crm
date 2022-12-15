@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProjectMargin {
   static double contentTop = 30.h;
   static double contentHorizontal = 15.w;
+  static double inputMargin = 24.h;
 }
 
 class ProjectThemes {
