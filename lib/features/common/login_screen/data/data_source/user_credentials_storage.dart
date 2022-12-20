@@ -17,7 +17,10 @@ class LoginStorage {
     return null;
   }
 
-  Future<void> upsertCredentials(String login, String pass) async {
+  Future<void> uploadCredentials({
+    required String login,
+    required String pass,
+  }) async {
     await storage.write<String>(
       key: LOGIN_CREDENTIALS,
       value: jsonEncode({
