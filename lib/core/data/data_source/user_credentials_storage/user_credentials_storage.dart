@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:crm/core/data/data_source/secure_storage/secure_storage.dart';
 
-const LOGIN_CREDENTIALS = 'loginCredentials';
+const USER_CREDENTIALS = 'loginCredentials';
 
-class LoginStorage {
+class UserCredentialsStorage {
   final SecureStorage storage;
 
-  LoginStorage({required this.storage});
+  UserCredentialsStorage({required this.storage});
 
   Future<Map<String, String>?>? getCredentials() async {
-    final jsonCredential = await storage.read<String>(key: LOGIN_CREDENTIALS);
+    final jsonCredential = await storage.read<String>(key: USER_CREDENTIALS);
     if (jsonCredential != null) {
       return Map.castFrom(jsonDecode(jsonCredential) as Map<String, dynamic>);
     }
@@ -22,7 +22,7 @@ class LoginStorage {
     required String pass,
   }) async {
     await storage.write<String>(
-      key: LOGIN_CREDENTIALS,
+      key: USER_CREDENTIALS,
       value: jsonEncode({
         'login': login,
         'pass': pass,
@@ -31,6 +31,6 @@ class LoginStorage {
   }
 
   Future<void> deleteCredentials() async {
-    await storage.delete(key: LOGIN_CREDENTIALS);
+    await storage.delete(key: USER_CREDENTIALS);
   }
 }

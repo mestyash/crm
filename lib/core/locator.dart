@@ -63,7 +63,7 @@ void initGetIt() {
   sl.registerFactory<LoginRepository>(
     () => LoginRepository(
       supabase: sl.get<LoginSupabase>(),
-      storage: sl.get<LoginStorage>(),
+      storage: sl.get<UserCredentialsStorage>(),
     ),
   );
   // ---------- DATA SOURCES ----------
@@ -72,8 +72,8 @@ void initGetIt() {
       client: sl.get<SupabaseClient>(),
     ),
   );
-  sl.registerFactory<LoginStorage>(
-    () => LoginStorage(
+  sl.registerFactory<UserCredentialsStorage>(
+    () => UserCredentialsStorage(
       storage: sl.get<SecureStorage>(),
     ),
   );
