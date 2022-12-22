@@ -5,19 +5,19 @@ import 'package:crm/core/data/data_source/user_credentials_storage/user_credenti
 import 'package:crm/features/common/login_screen/domain/login_usecase.dart';
 
 class LoginRepository extends ILoginRepository {
-  LoginSupabase _supabase;
+  ProfileSupabase _supabase;
   UserCredentialsStorage _storage;
 
   LoginRepository({
-    required LoginSupabase supabase,
+    required ProfileSupabase supabase,
     required UserCredentialsStorage storage,
   })  : _supabase = supabase,
         _storage = storage;
 
   @override
-  Future<CurrentUserModel> login(LoginParams params) async {
+  Future<CurrentUserModel> getProfile(GetProfileParams params) async {
     try {
-      final response = await _supabase.login(
+      final response = await _supabase.getProfile(
         login: params.login,
         pass: params.pass,
       );

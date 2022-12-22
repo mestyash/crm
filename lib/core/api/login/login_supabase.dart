@@ -1,12 +1,12 @@
 import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
 import 'package:crm/core/utils/supabase/supabase_utils.dart';
 
-class LoginSupabase {
+class ProfileSupabase {
   SupabaseClient _client;
 
-  LoginSupabase({required SupabaseClient client}) : _client = client;
+  ProfileSupabase({required SupabaseClient client}) : _client = client;
 
-  Future<Map<String, dynamic>> login({
+  Future<Map<String, dynamic>> getProfile({
     required String login,
     required String pass,
   }) async {

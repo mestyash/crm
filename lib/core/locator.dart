@@ -5,8 +5,8 @@ import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/app/view/app.dart';
 import 'package:crm/core/api/login/login_supabase.dart';
-import 'package:crm/features/common/login_screen/data/data_source/user_credentials_storage.dart';
-import 'package:crm/features/common/login_screen/data/repository/login_repository.dart';
+import 'package:crm/core/data/data_source/user_credentials_storage/user_credentials_storage.dart';
+import 'package:crm/features/common/login_screen/data/login_repository.dart';
 import 'package:crm/features/common/login_screen/presentation/cubit/login_cubit.dart';
 import 'package:crm/features/common/login_screen/presentation/view/login_screen.dart';
 import 'package:crm/features/teacher/main_teacher_screen/main_teacher_screen.dart';
@@ -62,13 +62,13 @@ void initGetIt() {
   // ---------- REPOSITORIES ----------
   sl.registerFactory<LoginRepository>(
     () => LoginRepository(
-      supabase: sl.get<LoginSupabase>(),
+      supabase: sl.get<ProfileSupabase>(),
       storage: sl.get<UserCredentialsStorage>(),
     ),
   );
   // ---------- DATA SOURCES ----------
-  sl.registerFactory<LoginSupabase>(
-    () => LoginSupabase(
+  sl.registerFactory<ProfileSupabase>(
+    () => ProfileSupabase(
       client: sl.get<SupabaseClient>(),
     ),
   );
