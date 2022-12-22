@@ -4,7 +4,7 @@ import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart
 import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/app/view/app.dart';
-import 'package:crm/features/common/login_screen/data/data_source/login_supabase.dart';
+import 'package:crm/core/api/login/login_supabase.dart';
 import 'package:crm/features/common/login_screen/data/data_source/user_credentials_storage.dart';
 import 'package:crm/features/common/login_screen/data/repository/login_repository.dart';
 import 'package:crm/features/common/login_screen/presentation/cubit/login_cubit.dart';
