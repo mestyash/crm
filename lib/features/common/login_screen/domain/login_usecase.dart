@@ -1,5 +1,4 @@
 import 'package:crm/core/domain/entity/current_user_model.dart';
-import 'package:equatable/equatable.dart';
 
 abstract class ILoginRepository {
   Future<CurrentUserModel> getProfile(GetProfileParams params);
