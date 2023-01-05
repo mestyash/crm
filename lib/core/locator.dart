@@ -9,6 +9,9 @@ import 'package:crm/core/data/data_source/user_credentials_storage/user_credenti
 import 'package:crm/features/common/login_screen/data/login_repository.dart';
 import 'package:crm/features/common/login_screen/presentation/cubit/login_cubit.dart';
 import 'package:crm/features/common/login_screen/presentation/view/login_screen.dart';
+import 'package:crm/features/common/splash_screen/data/splash_repository.dart';
+import 'package:crm/features/common/splash_screen/presentation/cubit/splash_cubit.dart';
+import 'package:crm/features/common/splash_screen/presentation/view/splash_screen.dart';
 import 'package:crm/features/teacher/main_teacher_screen/main_teacher_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -26,6 +29,7 @@ void initGetIt() {
   sl.registerLazySingleton<Map<String, WidgetBuilder>>(
     () => ({
       // --- common ---
+      Routes.splash: (context) => sl.get<SplashScreen>(),
       Routes.login: (context) => sl.get<LoginScreen>(),
       // --- teacher ---
       Routes.mainTeacher: (context) => sl.get<MainTeacherScreen>(),
@@ -35,6 +39,11 @@ void initGetIt() {
   );
   // ---------- FEATURES ----------
   // --- COMMON ---
+  sl.registerFactory<SplashScreen>(
+    () => SplashScreen(
+      cubit: sl.get<SplashCubit>(),
+    ),
+  );
   sl.registerFactory<LoginScreen>(
     () => LoginScreen(
       cubit: sl.get<LoginCubit>(),
@@ -50,8 +59,14 @@ void initGetIt() {
   );
   // ---------- BLOCS ----------
   // --- COMMON ---
-  sl.registerFactory<CurrentUserCubit>(
+  sl.registerLazySingleton<CurrentUserCubit>(
     () => CurrentUserCubit(),
+  );
+  sl.registerFactory<SplashCubit>(
+    () => SplashCubit(
+      currentUserCubit: sl.get<CurrentUserCubit>(),
+      repository: sl.get<SplashRepository>(),
+    ),
   );
   sl.registerFactory<LoginCubit>(
     () => LoginCubit(
@@ -60,6 +75,12 @@ void initGetIt() {
     ),
   );
   // ---------- REPOSITORIES ----------
+  sl.registerFactory<SplashRepository>(
+    () => SplashRepository(
+      supabase: sl.get<ProfileSupabase>(),
+      storage: sl.get<UserCredentialsStorage>(),
+    ),
+  );
   sl.registerFactory<LoginRepository>(
     () => LoginRepository(
       supabase: sl.get<ProfileSupabase>(),

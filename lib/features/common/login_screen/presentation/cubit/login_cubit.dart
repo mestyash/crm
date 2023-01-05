@@ -42,7 +42,14 @@ class LoginCubit extends Cubit<LoginState> {
         login: state.login,
         pass: state.pass,
       ));
-      if (state.saveUserCredentials) _currentUserCubit.setUserData(user);
+      if (state.saveUserCredentials)
+        await _repository.saveUserCredentials(
+          SaveUserCredentialsParams(
+            login: state.login,
+            pass: state.pass,
+          ),
+        );
+      _currentUserCubit.setUserData(user);
       emit(state.copyWith(
         successfullyLoggedIn: true,
         redirectRoute: user.isAdmin ? Routes.mainAdmin : Routes.mainTeacher,

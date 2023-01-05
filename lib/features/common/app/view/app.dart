@@ -40,7 +40,7 @@ class App extends StatelessWidget {
             routes: router,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            initialRoute: Routes.login,
+            initialRoute: Routes.splash,
           ),
         ),
       ),

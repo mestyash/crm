@@ -7,7 +7,7 @@ abstract class ILoginRepository {
   Future<void> saveUserCredentials(SaveUserCredentialsParams params);
 }
 
-class GetProfileParams extends Equatable {
+class GetProfileParams {
   final String login;
   final String pass;
 
@@ -15,12 +15,9 @@ class GetProfileParams extends Equatable {
     required this.login,
     required this.pass,
   });
-
-  @override
-  List<Object> get props => [login, pass];
 }
 
-class SaveUserCredentialsParams extends Equatable {
+class SaveUserCredentialsParams {
   final String login;
   final String pass;
 
@@ -28,7 +25,4 @@ class SaveUserCredentialsParams extends Equatable {
     required this.login,
     required this.pass,
   });
-
-  @override
-  List<Object> get props => [login, pass];
 }
