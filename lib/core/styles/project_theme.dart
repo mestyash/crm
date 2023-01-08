@@ -7,17 +7,29 @@ class ProjectMargin {
   static double inputMargin = 24.h;
 }
 
+class ProjectShadow {
+  static List<BoxShadow> boxShadow1 = [
+    BoxShadow(
+      blurRadius: 22,
+      offset: Offset(4, 4),
+      color: Color.fromARGB(16, 18, 46, 101),
+    )
+  ];
+}
+
 class ProjectThemes {
   static final lightTheme = ThemeData.light().copyWith(
+    useMaterial3: true,
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.lightBlue[800],
+    cardColor: Colors.white,
     appBarTheme: AppBarTheme(
-      color: Colors.white,
+      color: Color.fromARGB(255, 233, 233, 233),
       elevation: 0,
       titleTextStyle: TextStyle(
         color: Colors.black,
         fontSize: 18.sp,
-        height: 1.44,
+        height: 0,
         fontWeight: FontWeight.w700,
         fontFamily: 'Montserrat',
       ),
@@ -25,6 +37,9 @@ class ProjectThemes {
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Color.fromARGB(255, 54, 50, 50),
     ),
     textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.blue),
     inputDecorationTheme: InputDecorationTheme(
