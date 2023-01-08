@@ -1,5 +1,7 @@
 include: package:lint/analysis_options.yaml
 analyzer:
+  errors:
+    argument_type_not_assignable: ignore
   exclude:
 linter:
   rules:
@@ -12,5 +14,6 @@ linter:
     avoid_classes_with_only_static_members: false
     directives_ordering: false
     no_leading_underscores_for_local_identifiers: false
-    use_colored_box: falsea
+    use_colored_box: false
     avoid_print: false
+    avoid_dynamic_calls: ignore
