@@ -2,6 +2,7 @@ import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/splash_screen/presentation/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class SplashScreen extends StatelessWidget {
   final SplashCubit cubit;
@@ -18,6 +19,7 @@ class SplashScreen extends StatelessWidget {
         state.redirectRoute,
         (route) => false,
       );
+      FlutterNativeSplash.remove();
     }
     if (state.isUnauthenticated == true) {
       Navigator.pushNamedAndRemoveUntil(
@@ -25,6 +27,7 @@ class SplashScreen extends StatelessWidget {
         Routes.login,
         (route) => false,
       );
+      FlutterNativeSplash.remove();
     }
   }
 
