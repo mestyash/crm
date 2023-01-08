@@ -8,5 +8,6 @@
     "loginScreenLoginPlaceholder": "Введите логин",
     "loginScreenPassPlaceholder": "Введите пароль",
     "loginScreenInputError": "*Допущена ошибка",
-    "loginScreenCheckbox": "Запомнить меня"
+    "loginScreenCheckbox": "Запомнить меня",
+    "mainAdminNavBarStaff": "Персонал"
 }
