@@ -1,7 +1,10 @@
+import 'package:crm/core/api/staff/staff_supabase.dart';
 import 'package:crm/core/data/data_source/secure_storage/secure_storage.dart';
 import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
+import 'package:crm/features/admin/staff/staff_screen/data/repository/staff_repository.dart';
+import 'package:crm/features/admin/staff/staff_screen/presentation/cubit/staff_cubit.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/app/view/app.dart';
 import 'package:crm/core/api/profile/profile_supabase.dart';
@@ -55,7 +58,9 @@ void initGetIt() {
   );
   // --- ADMIN ---
   sl.registerFactory<MainAdminScreen>(
-    () => MainAdminScreen(),
+    () => MainAdminScreen(
+      staffCubit: sl.get<StaffCubit>(),
+    ),
   );
   // ---------- BLOCS ----------
   // --- COMMON ---
@@ -74,6 +79,12 @@ void initGetIt() {
       repository: sl.get<LoginRepository>(),
     ),
   );
+  // --- ADMIN ---
+  sl.registerFactory<StaffCubit>(
+    () => StaffCubit(
+      repository: sl.get<StaffRepository>(),
+    ),
+  );
   // ---------- REPOSITORIES ----------
   sl.registerFactory<SplashRepository>(
     () => SplashRepository(
@@ -87,12 +98,24 @@ void initGetIt() {
       storage: sl.get<UserCredentialsStorage>(),
     ),
   );
+  sl.registerFactory<StaffRepository>(
+    () => StaffRepository(
+      supabase: sl.get<StaffSupabase>(),
+    ),
+  );
   // ---------- DATA SOURCES ----------
+  // API
   sl.registerFactory<ProfileSupabase>(
     () => ProfileSupabase(
       client: sl.get<SupabaseClient>(),
     ),
   );
+  sl.registerFactory<StaffSupabase>(
+    () => StaffSupabase(
+      client: sl.get<SupabaseClient>(),
+    ),
+  );
+  // ---
   sl.registerFactory<UserCredentialsStorage>(
     () => UserCredentialsStorage(
       storage: sl.get<SecureStorage>(),

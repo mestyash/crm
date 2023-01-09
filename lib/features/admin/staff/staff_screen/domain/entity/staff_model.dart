@@ -2,8 +2,10 @@ import 'package:equatable/equatable.dart';
 
 class StaffModel extends Equatable {
   final int id;
-  final int name;
-  final int surname;
+  final String name;
+  final String surname;
+
+  String get fullName => name + ' ' + surname;
 
   StaffModel({
     required this.id,

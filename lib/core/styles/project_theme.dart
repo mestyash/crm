@@ -19,7 +19,6 @@ class ProjectShadow {
 
 class ProjectThemes {
   static final lightTheme = ThemeData.light().copyWith(
-    useMaterial3: true,
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.lightBlue[800],
     cardColor: Colors.white,

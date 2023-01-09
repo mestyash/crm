@@ -63,16 +63,6 @@ class MainNavBar extends StatelessWidget {
             text: _l10n.mainAdminNavBarStaff,
             iconColor: _scaffoldColor,
           ),
-          GButton(
-            leading: Icon(
-              Icons.person,
-              color: _scaffoldColor,
-              size: 18.r,
-            ),
-            icon: _defaultIcon,
-            text: _l10n.mainAdminNavBarStaff,
-            iconColor: _scaffoldColor,
-          ),
         ],
         selectedIndex: selectedIndex,
         onTabChange: onPageChanged,

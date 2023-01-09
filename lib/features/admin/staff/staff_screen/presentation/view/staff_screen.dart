@@ -1,18 +1,23 @@
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/custom_floating_action_button/custom_floating_action_button.dart';
+import 'package:crm/core/presentation/ui/refreshable/refreshable.dart';
+import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
+import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/admin/staff/staff_screen/presentation/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/staff_screen/presentation/view/widgets/card/staff_card.dart';
+import 'package:crm/features/admin/staff/staff_screen/presentation/view/widgets/search_bar/staff_search_bar.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StaffScreen extends StatelessWidget {
   const StaffScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    void _timetableListener(
+    void _listener(
       BuildContext context,
       StaffState state,
     ) {
@@ -25,12 +30,20 @@ class StaffScreen extends StatelessWidget {
       }
     }
 
-    return Container();
+    return BlocConsumer<StaffCubit, StaffState>(
+      listener: _listener,
+      builder: (context, state) => StaffScreenData(state: state),
+    );
   }
 }
 
 class StaffScreenData extends StatelessWidget {
-  const StaffScreenData({super.key});
+  final StaffState state;
+
+  const StaffScreenData({
+    super.key,
+    required this.state,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +53,37 @@ class StaffScreenData extends StatelessWidget {
       appBar: CustomAppBar(
         title: _l10n.mainAdminNavBarStaff,
       ),
-      body: Column(
-        children: [
-          StaffCard(),
-          StaffCard(),
-          StaffCard(),
-          StaffCard(),
-          StaffCard(),
-        ],
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: ProjectMargin.contentHorizontal,
+          vertical: ProjectMargin.contentTop,
+        ),
+        child: Column(
+          children: [
+            StaffSearchBar(
+              enabled: !state.isLoading,
+              onTextChange: (String z) => {},
+            ),
+            SizedBox(height: 20.h),
+            Expanded(
+              child: state.isScreenLoading
+                  ? ListView.builder(
+                      itemBuilder: (context, i) => ShimmerContainer(
+                        width: double.infinity,
+                        height: 35.h,
+                        margin: EdgeInsets.only(bottom: 10.h),
+                      ),
+                      itemCount: 30,
+                    )
+                  : ListView.builder(
+                      itemBuilder: (context, i) => StaffCard(
+                        staff: state.staffData![i],
+                      ),
+                      itemCount: state.filteredStaffData!.length,
+                    ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: CustomFloatingActionButton(
         action: () {},
