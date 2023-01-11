@@ -1,14 +1,14 @@
-import 'package:crm/features/admin/staff/staff_screen/presentation/cubit/staff_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StaffSearchBar extends StatelessWidget {
   final bool enabled;
+  final void Function(String text) onTextChange;
 
   const StaffSearchBar({
     Key? key,
     required this.enabled,
+    required this.onTextChange,
   }) : super(key: key);
 
   @override
@@ -40,8 +40,7 @@ class StaffSearchBar extends StatelessWidget {
                 style: _textTheme.bodyText1?.copyWith(
                   height: 1.42,
                 ),
-                onChanged: (text) =>
-                    context.read<StaffCubit>().onTextChange(text),
+                onChanged: onTextChange,
               ),
             ),
             FittedBox(

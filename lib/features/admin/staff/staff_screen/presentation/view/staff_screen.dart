@@ -5,7 +5,7 @@ import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/admin/staff/staff_screen/presentation/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/staff_screen/presentation/view/widgets/card/staff_card.dart';
-import 'package:crm/features/admin/staff/staff_screen/presentation/view/widgets/search_bar/staff_search_bar.dart';
+import 'package:crm/core/presentation/ui/search_bar/staff_search_bar.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,7 +70,11 @@ class StaffScreenData extends StatelessWidget {
         ),
         child: Column(
           children: [
-            StaffSearchBar(enabled: !state.isLoading),
+            StaffSearchBar(
+              enabled: !state.isLoading,
+              onTextChange: (text) =>
+                  context.read<StaffCubit>().onTextChange(text),
+            ),
             SizedBox(height: 20.h),
             Expanded(
               child: state.isScreenLoading
