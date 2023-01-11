@@ -15,4 +15,13 @@ class StaffSupabase {
       throw Exception(e);
     }
   }
+
+  Future<void> deleteStaffEmployee({required int id}) async {
+    try {
+      await _client.request.from('user').delete().eq('id', id);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
 }

@@ -1,11 +1,11 @@
-import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_model.dart';
+import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_employee_model.dart';
 
-List<StaffModel> mapStaff(List<dynamic> staff) => staff
+List<StaffEmployeeModel> mapStaff(List<dynamic> staff) => staff
     .map(
-      (e) => StaffModel(
-        id: e['id'],
-        name: e['name'],
-        surname: e['surname'],
+      (e) => StaffEmployeeModel(
+        id: e['id'] as int,
+        name: e['name'] as String,
+        surname: e['surname'] as String,
       ),
     )
     .toList();

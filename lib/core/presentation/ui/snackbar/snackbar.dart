@@ -37,7 +37,7 @@ class AppSnackBar {
         break;
 
       case AppSnackBarState.failure:
-        icon = Icons.error;
+        icon = Icons.priority_high;
         color = Colors.red;
         break;
     }

@@ -1,16 +1,18 @@
 import 'package:crm/core/styles/project_theme.dart';
-import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_model.dart';
+import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_employee_model.dart';
+import 'package:crm/features/admin/staff/staff_screen/presentation/cubit/staff_cubit.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StaffCard extends StatelessWidget {
-  final StaffModel staff;
+  final StaffEmployeeModel employee;
 
   const StaffCard({
     super.key,
-    required this.staff,
+    required this.employee,
   });
 
   void _deleteDialog(BuildContext context) {
@@ -20,7 +22,7 @@ class StaffCard extends StatelessWidget {
 
     showDialog(
       context: context,
-      builder: (context) => CupertinoAlertDialog(
+      builder: (_) => CupertinoAlertDialog(
         title: Text(
           _l10n.mainStaffScreenDeleteTeacher,
           style: _textTheme.subtitle2?.copyWith(height: 0),
@@ -41,7 +43,10 @@ class StaffCard extends StatelessWidget {
             ),
           ),
           CupertinoDialogAction(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pop(context);
+              context.read<StaffCubit>().deleteStaffEmployee(employee.id);
+            },
             child: Text(
               _l10n.delete,
               style: _textTheme.bodyText1?.copyWith(
@@ -74,7 +79,7 @@ class StaffCard extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              staff.fullName,
+              employee.fullName,
               style: _textTheme.subtitle2?.copyWith(height: 0),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

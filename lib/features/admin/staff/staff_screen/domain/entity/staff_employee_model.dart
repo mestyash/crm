@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-class StaffModel extends Equatable {
+class StaffEmployeeModel extends Equatable {
   final int id;
   final String name;
   final String surname;
 
   String get fullName => name + ' ' + surname;
 
-  StaffModel({
+  StaffEmployeeModel({
     required this.id,
     required this.name,
     required this.surname,

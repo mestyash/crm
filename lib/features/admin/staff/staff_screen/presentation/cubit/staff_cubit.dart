@@ -1,5 +1,5 @@
 import 'package:crm/features/admin/staff/staff_screen/data/repository/staff_repository.dart';
-import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_model.dart';
+import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_employee_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,5 +25,44 @@ class StaffCubit extends Cubit<StaffState> {
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));
     }
+  }
+
+  void onTextChange(String text) {
+    final filteredStaffData = _filterByText(state.staffData!, text);
+    emit(state.copyWith(
+      text: text,
+      filteredStaffData: filteredStaffData,
+      isFailure: false,
+      successfullyDeleted: false,
+    ));
+  }
+
+  Future<void> deleteStaffEmployee(int id) async {
+    try {
+      emit(state.copyWith(
+        isDeleting: true,
+        isFailure: false,
+        successfullyDeleted: false,
+      ));
+      await _repository.deleteStaffEmployee(id: id);
+      final staffData = await _repository.getStaffData();
+      final filteredStaffData = _filterByText(staffData, state.text);
+      emit(state.copyWith(
+        isDeleting: false,
+        successfullyDeleted: true,
+        staffData: staffData,
+        filteredStaffData: filteredStaffData,
+      ));
+    } catch (e) {
+      emit(state.copyWith(isDeleting: false, isFailure: true));
+    }
+  }
+
+  // --- utils ---
+  List<StaffEmployeeModel> _filterByText(
+    List<StaffEmployeeModel> staff,
+    String text,
+  ) {
+    return staff.where((e) => e.fullName.contains(text)).toList();
   }
 }

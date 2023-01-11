@@ -5,6 +5,7 @@
     "enter": "Войти",
     "delete": "Удалить",
     "cancel": "Отмена",
+    "error": "Упс, произошла ошибка :(",
     "loginScreenGreeting": "Добро пожаловать!",
     "loginScreenMessage": "Авторизуйтесь, чтобы войти в приложение. Начнем ?)",
     "loginScreenLoginPlaceholder": "Введите логин",
@@ -13,5 +14,6 @@
     "loginScreenCheckbox": "Запомнить меня",
     "mainAdminNavBarStaff": "Персонал",
     "mainStaffScreenDeleteTeacher": "Удалить учителя",
-    "mainStaffScreenDeleteTeacherConfirm": "Вы действительно хотите удалить учителя ?"
+    "mainStaffScreenDeleteTeacherConfirm": "Вы действительно хотите удалить учителя ?",
+    "mainStaffScreenSuccessfullyDeleted": "Учитель успешно удален!"
 }
