@@ -1,6 +1,6 @@
 import 'package:crm/core/styles/project_theme.dart';
-import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_employee_model.dart';
-import 'package:crm/features/admin/staff/staff_screen/presentation/cubit/staff_cubit.dart';
+import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model.dart';
+import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

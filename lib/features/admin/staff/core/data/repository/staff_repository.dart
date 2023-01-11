@@ -1,7 +1,7 @@
 import 'package:crm/core/api/staff/staff_supabase.dart';
-import 'package:crm/features/admin/staff/staff_screen/data/dto/staff_mapper.dart';
-import 'package:crm/features/admin/staff/staff_screen/domain/entity/staff_employee_model.dart';
-import 'package:crm/features/admin/staff/staff_screen/domain/usecase/staff_usecase.dart';
+import 'package:crm/features/admin/staff/core/data/dto/staff_mapper.dart';
+import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model.dart';
+import 'package:crm/features/admin/staff/core/domain/usecase/staff_usecase.dart';
 
 class StaffRepository extends IStaffRepository {
   final StaffSupabase _supabase;
