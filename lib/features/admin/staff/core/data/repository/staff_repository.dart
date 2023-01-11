@@ -1,5 +1,5 @@
 import 'package:crm/core/api/staff/staff_supabase.dart';
-import 'package:crm/features/admin/staff/core/data/dto/staff_mapper.dart';
+import 'package:crm/features/admin/staff/core/data/dto/staff/staff_mapper.dart';
 import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model.dart';
 import 'package:crm/features/admin/staff/core/domain/usecase/staff_usecase.dart';
 

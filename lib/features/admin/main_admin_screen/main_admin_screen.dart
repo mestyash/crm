@@ -1,6 +1,6 @@
 import 'package:crm/core/presentation/ui/main_nav_bar/main_nav_bar.dart';
-import 'package:crm/features/admin/staff/staff_screen/presentation/cubit/staff_cubit.dart';
-import 'package:crm/features/admin/staff/staff_screen/presentation/view/staff_screen.dart';
+import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
+import 'package:crm/features/admin/staff/features/staff_screen/view/staff_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
