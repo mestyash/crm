@@ -94,8 +94,9 @@ class __UploadStaffScreenDataState extends State<_UploadStaffScreenData> {
     _birthdayController = TextEditingController()
       ..text = CustomDateUtils.dateToString(widget.state.birthday);
     _loginController = TextEditingController()..text = widget.state.login;
-    _passwordController = TextEditingController();
-    _workplaceController = TextEditingController();
+    _passwordController = TextEditingController()..text = widget.state.password;
+    _workplaceController = TextEditingController()
+      ..text = widget.state.workplace;
     super.initState();
   }
 
