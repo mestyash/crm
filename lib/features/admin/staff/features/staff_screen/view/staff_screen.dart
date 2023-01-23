@@ -6,6 +6,7 @@ import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_search_bar.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/view/widgets/staff_card.dart';
+import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +56,13 @@ class StaffScreenData extends StatelessWidget {
     required this.state,
   });
 
+  Future<void> uploadEmployeeLink(BuildContext context) async {
+    final data = await Navigator.pushNamed(context, Routes.uploadStaff);
+    if (data != null) {
+      context.read<StaffCubit>().loadStaffData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final _l10n = context.l10n;
@@ -97,7 +105,7 @@ class StaffScreenData extends StatelessWidget {
         ),
       ),
       floatingActionButton: CustomFloatingActionButton(
-        action: () {},
+        action: () => uploadEmployeeLink(context),
       ),
     );
   }

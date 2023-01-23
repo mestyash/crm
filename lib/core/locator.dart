@@ -5,6 +5,8 @@ import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart
 import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
 import 'package:crm/features/admin/staff/core/data/repository/staff_repository.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
+import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';
+import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/app/view/app.dart';
 import 'package:crm/core/api/profile/profile_supabase.dart';
@@ -38,6 +40,7 @@ void initGetIt() {
       Routes.mainTeacher: (context) => sl.get<MainTeacherScreen>(),
       // --- admin ---
       Routes.mainAdmin: (context) => sl.get<MainAdminScreen>(),
+      Routes.uploadStaff: (context) => sl.get<UploadStaffScreen>(),
     }),
   );
   // ---------- FEATURES ----------
@@ -62,6 +65,11 @@ void initGetIt() {
       staffCubit: sl.get<StaffCubit>(),
     ),
   );
+  sl.registerFactory<UploadStaffScreen>(
+    () => UploadStaffScreen(
+      cubit: sl.get<UploadStaffCubit>(),
+    ),
+  );
   // ---------- BLOCS ----------
   // --- COMMON ---
   sl.registerLazySingleton<CurrentUserCubit>(
@@ -82,6 +90,11 @@ void initGetIt() {
   // --- ADMIN ---
   sl.registerFactory<StaffCubit>(
     () => StaffCubit(
+      repository: sl.get<StaffRepository>(),
+    ),
+  );
+  sl.registerFactory<UploadStaffCubit>(
+    () => UploadStaffCubit(
       repository: sl.get<StaffRepository>(),
     ),
   );
