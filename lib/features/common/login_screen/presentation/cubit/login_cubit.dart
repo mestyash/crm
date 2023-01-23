@@ -21,23 +21,20 @@ class LoginCubit extends Cubit<LoginState> {
         super(LoginState());
 
   void onLoginChanged(String login) {
-    emit(state.copyWith(isFailure: false, login: login));
+    emit(state.copyWith(login: login));
   }
 
   void onPassChanged(String pass) {
-    emit(state.copyWith(isFailure: false, pass: pass));
+    emit(state.copyWith(pass: pass));
   }
 
   void onCheckboxChanged() {
-    emit(state.copyWith(
-      isFailure: false,
-      saveUserCredentials: !state.saveUserCredentials,
-    ));
+    emit(state.copyWith(saveUserCredentials: !state.saveUserCredentials));
   }
 
   Future<void> onButtonPress() async {
     try {
-      emit(state.copyWith(isLoading: true, isFailure: false));
+      emit(state.copyWith(isLoading: true));
       final user = await _repository.getProfile(GetProfileParams(
         login: state.login,
         pass: state.pass,
@@ -56,6 +53,7 @@ class LoginCubit extends Cubit<LoginState> {
       ));
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));
+      addError(e);
     }
   }
 }

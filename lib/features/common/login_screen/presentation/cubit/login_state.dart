@@ -42,7 +42,7 @@ class LoginState extends Equatable {
   }) =>
       LoginState(
         isLoading: isLoading ?? this.isLoading,
-        isFailure: isFailure ?? this.isFailure,
+        isFailure: isFailure ?? false,
         successfullyLoggedIn: successfullyLoggedIn ?? this.successfullyLoggedIn,
         // ----
         login: login ?? this.login,

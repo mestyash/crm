@@ -32,7 +32,6 @@ class StaffCubit extends Cubit<StaffState> {
     emit(state.copyWith(
       text: text,
       filteredStaffData: filteredStaffData,
-      isFailure: false,
       successfullyDeleted: false,
     ));
   }
@@ -41,7 +40,6 @@ class StaffCubit extends Cubit<StaffState> {
     try {
       emit(state.copyWith(
         isDeleting: true,
-        isFailure: false,
         successfullyDeleted: false,
       ));
       await _repository.deleteStaffEmployee(id: id);
@@ -55,6 +53,7 @@ class StaffCubit extends Cubit<StaffState> {
       ));
     } catch (e) {
       emit(state.copyWith(isDeleting: false, isFailure: true));
+      addError(e);
     }
   }
 
