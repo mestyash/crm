@@ -1,4 +1,5 @@
 import 'package:crm/core/api/staff/staff_supabase.dart';
+import 'package:crm/core/utils/date/date_utils.dart';
 import 'package:crm/features/admin/staff/core/data/dto/employee/staff_employee_mapper.dart';
 import 'package:crm/features/admin/staff/core/data/dto/staff/staff_mapper.dart';
 import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model.dart';
@@ -51,7 +52,7 @@ class StaffRepository extends IStaffRepository {
         name: params.name,
         surname: params.surname,
         patronymic: params.patronymic,
-        birthday: params.birthday,
+        birthday: CustomDateUtils.prepareDateForBackend(params.birthday),
         login: params.login,
         password: params.password,
         workplace: params.workplace,

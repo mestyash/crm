@@ -4,7 +4,8 @@ class UploadStaffState extends Equatable {
   const UploadStaffState({
     this.isLoading = false,
     this.isUploading = false,
-    this.successfullyUploaded = false,
+    this.successfullyCreated = false,
+    this.successfullyEdited = false,
     this.isFailure = false,
     // ----
     this.id,
@@ -20,7 +21,8 @@ class UploadStaffState extends Equatable {
 
   final bool isLoading;
   final bool isUploading;
-  final bool successfullyUploaded;
+  final bool successfullyCreated;
+  final bool successfullyEdited;
   final bool isFailure;
   // ----
   final int? id;
@@ -33,10 +35,21 @@ class UploadStaffState extends Equatable {
   final String password;
   final int? workplace;
 
+  bool get canSend => ![
+        name.trim().isNotEmpty,
+        surname.trim().isNotEmpty,
+        patronymic.trim().isNotEmpty,
+        birthday != null,
+        login.trim().isNotEmpty,
+        password.trim().isNotEmpty,
+        workplace != null
+      ].contains(false);
+
   UploadStaffState copyWith({
     bool? isLoading,
     bool? isUploading,
-    bool? successfullyUploaded,
+    bool? successfullyCreated,
+    bool? successfullyEdited,
     bool? isFailure,
     // ----
     int? id,
@@ -52,7 +65,8 @@ class UploadStaffState extends Equatable {
       UploadStaffState(
         isLoading: isLoading ?? this.isLoading,
         isUploading: isUploading ?? this.isUploading,
-        successfullyUploaded: successfullyUploaded ?? this.successfullyUploaded,
+        successfullyCreated: successfullyCreated ?? this.successfullyCreated,
+        successfullyEdited: successfullyEdited ?? this.successfullyEdited,
         isFailure: isFailure ?? false,
         // ----
         id: id ?? this.id,
@@ -70,7 +84,8 @@ class UploadStaffState extends Equatable {
   List<Object?> get props => [
         isLoading,
         isUploading,
-        successfullyUploaded,
+        successfullyCreated,
+        successfullyEdited,
         isFailure,
         // ----
         id,

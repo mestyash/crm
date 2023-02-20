@@ -1,6 +1,6 @@
 import 'package:crm/core/presentation/ui/custom_checkbox/custom_checkbox.dart';
 import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_button.dart';
-import 'package:crm/core/presentation/ui/input_title/input_title.dart';
+import 'package:crm/core/presentation/ui/inputs/input_title/input_title.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/common/login_screen/presentation/cubit/login_cubit.dart';
 import 'package:crm/l10n/l10n.dart';
@@ -81,7 +81,7 @@ class _ScreenData extends StatelessWidget {
                 InputTitle(text: _l10n.login),
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: _l10n.loginScreenLoginPlaceholder,
+                    hintText: _l10n.loginPlaceholder,
                     errorText: _errorText,
                   ),
                   style: _textTheme.bodyText1?.copyWith(
@@ -93,7 +93,7 @@ class _ScreenData extends StatelessWidget {
                 InputTitle(text: _l10n.pass),
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: _l10n.loginScreenPassPlaceholder,
+                    hintText: _l10n.passPlaceholder,
                     errorText: _errorText,
                   ),
                   style: _textTheme.bodyText1?.copyWith(

@@ -63,7 +63,7 @@ class ApiEmployeeModel {
   final String name;
   final String surname;
   final String patronymic;
-  final DateTime birthday;
+  final String birthday;
   final String login;
   final String password;
   final int workplace;
@@ -87,5 +87,6 @@ class ApiEmployeeModel {
         'login': login,
         'password': password,
         'workplace': workplace,
+        'role': 0,
       };
 }

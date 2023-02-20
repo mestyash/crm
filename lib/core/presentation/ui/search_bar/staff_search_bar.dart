@@ -34,8 +34,7 @@ class StaffSearchBar extends StatelessWidget {
                   filled: true,
                   fillColor: _theme.appBarTheme.backgroundColor,
                 ),
-                expands: true,
-                maxLines: null,
+                maxLines: 1,
                 textAlignVertical: TextAlignVertical.center,
                 style: _textTheme.bodyText1?.copyWith(
                   height: 1.42,

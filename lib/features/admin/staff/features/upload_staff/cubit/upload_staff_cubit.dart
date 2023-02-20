@@ -27,6 +27,7 @@ class UploadStaffCubit extends Cubit<UploadStaffState> {
           login: data.login,
           password: data.password,
           workplace: data.workplace,
+          isLoading: false,
         ));
       }
     } catch (e) {
@@ -76,7 +77,11 @@ class UploadStaffCubit extends Cubit<UploadStaffState> {
         password: state.password,
         workplace: state.workplace!,
       ));
-      emit(state.copyWith(successfullyUploaded: true));
+      if (state.id == null) {
+        emit(state.copyWith(successfullyCreated: true));
+      } else {
+        emit(state.copyWith(successfullyEdited: true));
+      }
     } catch (e) {
       emit(state.copyWith(isUploading: false, isFailure: true));
       addError(e);
