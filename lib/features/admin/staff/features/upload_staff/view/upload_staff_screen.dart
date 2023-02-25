@@ -3,12 +3,12 @@ import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_b
 import 'package:crm/core/presentation/ui/inputs/input_date/input_date.dart';
 import 'package:crm/core/presentation/ui/inputs/input_select/input_select.dart';
 import 'package:crm/core/presentation/ui/inputs/input_text/input_text.dart';
+import 'package:crm/core/presentation/ui/loading_indicator/loading_indicator.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/settings/workplace_settings.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';
-import 'package:crm/features/admin/staff/features/upload_staff/view/widgets/upload_staff_shimmer.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,7 +79,7 @@ class UploadStaffScreen extends StatelessWidget {
             title: _l10n.mainAdminNavBarStaff,
           ),
           body: state.isLoading
-              ? UploadStaffShimmer()
+              ? LoadingIndicator()
               : _UploadStaffScreenData(state: state),
         ),
       ),

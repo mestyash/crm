@@ -20,10 +20,10 @@ class UploadStaffCubit extends Cubit<UploadStaffState> {
         final data = await _repository.getEmployeeData(id: id);
         emit(state.copyWith(
           id: id,
-          name: data.name,
-          surname: data.surname,
-          patronymic: data.patronymic,
-          birthday: data.birthday,
+          name: data.userData.name,
+          surname: data.userData.surname,
+          patronymic: data.userData.patronymic,
+          birthday: data.userData.birthday,
           login: data.login,
           password: data.password,
           workplace: data.workplace,

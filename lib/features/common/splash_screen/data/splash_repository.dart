@@ -1,5 +1,6 @@
 import 'package:crm/core/api/profile/profile_supabase.dart';
 import 'package:crm/core/data/data_source/user_credentials_storage/user_credentials_storage.dart';
+import 'package:crm/core/data/dto/current_user_mapper.dart';
 import 'package:crm/core/domain/entity/current_user_model.dart';
 import 'package:crm/features/common/splash_screen/domain/splash_usecase.dart';
 
@@ -27,15 +28,7 @@ class SplashRepository extends ISplashRepository {
         );
         final data = response['payload']['user'];
 
-        return CurrentUserModel(
-          id: data['id'] as int,
-          name: data['name'] as String,
-          surname: data['surname'] as String,
-          patronymic: data['patronymic'] as String,
-          birthday: DateTime.parse(data['birthday'] as String),
-          role: data['id'] as int,
-          workplace: data['id'] as int,
-        );
+        return mapCurrentUser(data);
       } else {
         throw Exception('no storage data');
       }

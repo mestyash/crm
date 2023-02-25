@@ -1,24 +1,15 @@
+import 'package:crm/core/domain/entity/user_model.dart';
 import 'package:equatable/equatable.dart';
 
 class StaffEmployeeModel extends Equatable {
-  final int id;
-  final String name;
-  final String surname;
-  final String patronymic;
-  final DateTime birthday;
+  final UserModel userData;
   final String login;
   final String password;
   final int role;
   final int workplace;
 
-  String get fullName => surname + ' ' + name;
-
   StaffEmployeeModel({
-    required this.id,
-    required this.name,
-    required this.surname,
-    required this.patronymic,
-    required this.birthday,
+    required this.userData,
     required this.login,
     required this.password,
     required this.role,
@@ -27,11 +18,6 @@ class StaffEmployeeModel extends Equatable {
 
   @override
   List<Object> get props => [
-        id,
-        name,
-        surname,
-        patronymic,
-        birthday,
         login,
         password,
         role,

@@ -3,15 +3,15 @@ import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'staff_state.dart';
+part 'students_state.dart';
 
-class StaffCubit extends Cubit<StaffState> {
+class StudentsCubit extends Cubit<StudentsState> {
   StaffRepository _repository;
 
-  StaffCubit({
+  StudentsCubit({
     required StaffRepository repository,
   })  : _repository = repository,
-        super(StaffState());
+        super(StudentsState());
 
   Future<void> loadStaffData() async {
     try {

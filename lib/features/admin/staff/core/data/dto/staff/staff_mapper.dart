@@ -5,4 +5,5 @@ List<StaffEmployeeModel> mapStaff(List<dynamic> staff) => staff
     .map(
       (e) => mapStaffEmployee(e),
     )
-    .toList();
+    .toList()
+  ..sort((a, b) => a.userData.fullName.compareTo(b.userData.fullName));
