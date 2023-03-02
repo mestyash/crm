@@ -9,8 +9,8 @@ class StudentsState extends Equatable {
     // ----
     this.text = '',
     // ----
-    this.staffData = null,
-    this.filteredStaffData = null,
+    this.students = null,
+    this.filteredStudents = null,
   });
 
   final bool isLoading;
@@ -20,10 +20,10 @@ class StudentsState extends Equatable {
   // ----
   final String text;
   // ----
-  final List<StaffEmployeeModel>? staffData;
-  final List<StaffEmployeeModel>? filteredStaffData;
+  final List<UserModel>? students;
+  final List<UserModel>? filteredStudents;
 
-  bool get isScreenLoading => isLoading && staffData == null;
+  bool get isScreenLoading => isLoading && students == null;
 
   StudentsState copyWith({
     bool? isLoading,
@@ -33,19 +33,19 @@ class StudentsState extends Equatable {
     // ----
     String? text,
     // ----
-    List<StaffEmployeeModel>? staffData,
-    List<StaffEmployeeModel>? filteredStaffData,
+    List<UserModel>? students,
+    List<UserModel>? filteredStudents,
   }) =>
       StudentsState(
         isLoading: isLoading ?? this.isLoading,
         isDeleting: isDeleting ?? this.isDeleting,
-        successfullyDeleted: successfullyDeleted ?? this.successfullyDeleted,
+        successfullyDeleted: successfullyDeleted ?? false,
         isFailure: isFailure ?? false,
         // ----
         text: text ?? this.text,
         // ----
-        staffData: staffData ?? this.staffData,
-        filteredStaffData: filteredStaffData ?? this.filteredStaffData,
+        students: students ?? this.students,
+        filteredStudents: filteredStudents ?? this.filteredStudents,
       );
 
   @override
@@ -57,7 +57,7 @@ class StudentsState extends Equatable {
         // ----
         text,
         // ----
-        staffData,
-        filteredStaffData,
+        students,
+        filteredStudents,
       ];
 }

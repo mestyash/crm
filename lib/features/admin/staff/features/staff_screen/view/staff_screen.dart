@@ -43,18 +43,15 @@ class StaffScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<StaffCubit, StaffState>(
       listener: _listener,
-      builder: (context, state) => StaffScreenData(state: state),
+      builder: (context, state) => _StaffScreenData(state: state),
     );
   }
 }
 
-class StaffScreenData extends StatelessWidget {
+class _StaffScreenData extends StatelessWidget {
   final StaffState state;
 
-  const StaffScreenData({
-    super.key,
-    required this.state,
-  });
+  const _StaffScreenData({required this.state});
 
   Future<void> uploadEmployeeLink(BuildContext context) async {
     final data = await Navigator.pushNamed(context, Routes.uploadStaff);

@@ -1,4 +1,5 @@
 import 'package:crm/core/api/staff/staff_supabase.dart';
+import 'package:crm/core/api/students/staff_supabase.dart';
 import 'package:crm/core/data/data_source/secure_storage/secure_storage.dart';
 import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
@@ -7,6 +8,8 @@ import 'package:crm/features/admin/staff/core/data/repository/staff_repository.d
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';
+import 'package:crm/features/admin/students/core/data/students_repository.dart';
+import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/app/view/app.dart';
 import 'package:crm/core/api/profile/profile_supabase.dart';
@@ -63,6 +66,7 @@ void initGetIt() {
   sl.registerFactory<MainAdminScreen>(
     () => MainAdminScreen(
       staffCubit: sl.get<StaffCubit>(),
+      studentsCubit: sl.get<StudentsCubit>(),
     ),
   );
   sl.registerFactory<UploadStaffScreen>(
@@ -98,6 +102,11 @@ void initGetIt() {
       repository: sl.get<StaffRepository>(),
     ),
   );
+  sl.registerFactory<StudentsCubit>(
+    () => StudentsCubit(
+      repository: sl.get<StudentsRepository>(),
+    ),
+  );
   // ---------- REPOSITORIES ----------
   sl.registerFactory<SplashRepository>(
     () => SplashRepository(
@@ -116,6 +125,11 @@ void initGetIt() {
       supabase: sl.get<StaffSupabase>(),
     ),
   );
+  sl.registerFactory<StudentsRepository>(
+    () => StudentsRepository(
+      supabase: sl.get<StudentsSupabase>(),
+    ),
+  );
   // ---------- DATA SOURCES ----------
   // API
   sl.registerFactory<ProfileSupabase>(
@@ -125,6 +139,11 @@ void initGetIt() {
   );
   sl.registerFactory<StaffSupabase>(
     () => StaffSupabase(
+      client: sl.get<SupabaseClient>(),
+    ),
+  );
+  sl.registerFactory<StudentsSupabase>(
+    () => StudentsSupabase(
       client: sl.get<SupabaseClient>(),
     ),
   );

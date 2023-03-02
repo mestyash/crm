@@ -1,3 +1,4 @@
+import 'package:crm/core/presentation/ui/custom_cupertino_dialog/custom_cupertino_dialog.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
@@ -18,49 +19,18 @@ class StaffCard extends StatelessWidget {
   });
 
   void _deleteDialog(BuildContext context) {
-    final _theme = Theme.of(context);
-    final _textTheme = _theme.textTheme;
     final _l10n = context.l10n;
-
-    showDialog(
+    CustomCupertinoDialog(
       context: context,
-      builder: (_) => CupertinoAlertDialog(
-        title: Text(
-          _l10n.mainStaffScreenDeleteTeacher,
-          style: _textTheme.subtitle2?.copyWith(height: 0),
-        ),
-        content: Text(
-          _l10n.mainStaffScreenDeleteTeacherConfirm,
-          style: _textTheme.bodyText2?.copyWith(height: 0, fontSize: 11.sp),
-        ),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              _l10n.cancel,
-              style: _textTheme.bodyText1?.copyWith(
-                height: 0,
-                color: _theme.primaryColor,
-              ),
-            ),
-          ),
-          CupertinoDialogAction(
-            onPressed: () {
-              Navigator.pop(context);
-              context
-                  .read<StaffCubit>()
-                  .deleteStaffEmployee(employee.userData.id);
-            },
-            child: Text(
-              _l10n.delete,
-              style: _textTheme.bodyText1?.copyWith(
-                height: 0,
-                color: Colors.red,
-              ),
-            ),
-          ),
-        ],
-      ),
+      title: _l10n.mainStaffScreenDeleteTeacher,
+      content: _l10n.mainStaffScreenDeleteTeacherConfirm,
+      firstActionText: _l10n.cancel,
+      firstAction: () => Navigator.pop(context),
+      secondActionText: _l10n.delete,
+      secondAction: () {
+        Navigator.pop(context);
+        context.read<StaffCubit>().deleteStaffEmployee(employee.userData.id);
+      },
     );
   }
 

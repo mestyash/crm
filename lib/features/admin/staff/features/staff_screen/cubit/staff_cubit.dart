@@ -29,19 +29,12 @@ class StaffCubit extends Cubit<StaffState> {
 
   void onTextChange(String text) {
     final filteredStaffData = _filterByText(state.staffData!, text);
-    emit(state.copyWith(
-      text: text,
-      filteredStaffData: filteredStaffData,
-      successfullyDeleted: false,
-    ));
+    emit(state.copyWith(text: text, filteredStaffData: filteredStaffData));
   }
 
   Future<void> deleteStaffEmployee(int id) async {
     try {
-      emit(state.copyWith(
-        isDeleting: true,
-        successfullyDeleted: false,
-      ));
+      emit(state.copyWith(isDeleting: true));
       await _repository.deleteStaffEmployee(id: id);
       final staffData = await _repository.getStaffData();
       final filteredStaffData = _filterByText(staffData, state.text);

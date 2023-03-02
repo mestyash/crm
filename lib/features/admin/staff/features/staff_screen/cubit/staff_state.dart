@@ -39,7 +39,7 @@ class StaffState extends Equatable {
       StaffState(
         isLoading: isLoading ?? this.isLoading,
         isDeleting: isDeleting ?? this.isDeleting,
-        successfullyDeleted: successfullyDeleted ?? this.successfullyDeleted,
+        successfullyDeleted: successfullyDeleted ?? false,
         isFailure: isFailure ?? false,
         // ----
         text: text ?? this.text,

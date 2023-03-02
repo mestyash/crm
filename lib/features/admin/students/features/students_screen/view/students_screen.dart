@@ -7,20 +7,20 @@ import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_search_bar.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';
+import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/l10n/l10n.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class StaffScreen extends StatelessWidget {
-  const StaffScreen({super.key});
+class StudentsScreen extends StatelessWidget {
+  const StudentsScreen({super.key});
 
   void _listener(
     BuildContext context,
-    StaffState state,
+    StudentsState state,
   ) {
     final _l10n = context.l10n;
 
@@ -43,17 +43,17 @@ class StaffScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StaffCubit, StaffState>(
+    return BlocConsumer<StudentsCubit, StudentsState>(
       listener: _listener,
-      builder: (context, state) => StaffScreenData(state: state),
+      builder: (context, state) => _StudentsScreenData(state: state),
     );
   }
 }
 
-class StaffScreenData extends StatelessWidget {
-  final StaffState state;
+class _StudentsScreenData extends StatelessWidget {
+  final StudentsState state;
 
-  const StaffScreenData({
+  const _StudentsScreenData({
     super.key,
     required this.state,
   });
@@ -66,48 +66,7 @@ class StaffScreenData extends StatelessWidget {
   }
 
   void _deleteDialog(BuildContext context, int id) {
-    final _theme = Theme.of(context);
-    final _textTheme = _theme.textTheme;
     final _l10n = context.l10n;
-
-    showDialog(
-      context: context,
-      builder: (_) => CupertinoAlertDialog(
-        title: Text(
-          _l10n.mainStaffScreenDeleteTeacher,
-          style: _textTheme.subtitle2?.copyWith(height: 0),
-        ),
-        content: Text(
-          _l10n.mainStaffScreenDeleteTeacherConfirm,
-          style: _textTheme.bodyText2?.copyWith(height: 0, fontSize: 11.sp),
-        ),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              _l10n.cancel,
-              style: _textTheme.bodyText1?.copyWith(
-                height: 0,
-                color: _theme.primaryColor,
-              ),
-            ),
-          ),
-          CupertinoDialogAction(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<StaffCubit>().deleteStaffEmployee(id);
-            },
-            child: Text(
-              _l10n.delete,
-              style: _textTheme.bodyText1?.copyWith(
-                height: 0,
-                color: Colors.red,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Future<void> _editUserLink(BuildContext context, int id) async {
@@ -155,15 +114,15 @@ class StaffScreenData extends StatelessWidget {
                     )
                   : ListView.builder(
                       itemBuilder: (context, i) {
-                        final employee = state.filteredStaffData![i];
-                        final id = employee.userData.id;
+                        final student = state.filteredStudents![i];
+                        final id = student.id;
                         return UserCard(
-                          fullName: employee.userData.fullName,
+                          fullName: student.fullName,
                           editAction: () => _editUserLink(context, id),
                           deleteAction: () => _deleteDialog(context, id),
                         );
                       },
-                      itemCount: state.filteredStaffData!.length,
+                      itemCount: state.filteredStudents!.length,
                     ),
             ),
           ],
