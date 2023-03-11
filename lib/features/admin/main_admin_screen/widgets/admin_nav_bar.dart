@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class MainNavBar extends StatelessWidget {
+class AdminNavBar extends StatelessWidget {
   final int selectedIndex;
   final void Function(int index) onPageChanged;
 
-  const MainNavBar({
+  const AdminNavBar({
     Key? key,
     required this.selectedIndex,
     required this.onPageChanged,
@@ -70,7 +70,7 @@ class MainNavBar extends StatelessWidget {
               size: 20.r,
             ),
             icon: _defaultIcon,
-            text: _l10n.mainAdminNavBarStaff,
+            text: _l10n.mainAdminNavBarStudents,
             iconColor: _scaffoldColor,
           ),
         ],

@@ -1,11 +1,13 @@
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
+import 'package:crm/core/presentation/ui/custom_cupertino_dialog/custom_cupertino_dialog.dart';
 import 'package:crm/core/presentation/ui/custom_floating_action_button/custom_floating_action_button.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
+import 'package:crm/core/presentation/ui/user_card/user_card.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_search_bar.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
-import 'package:crm/features/admin/staff/features/staff_screen/view/widgets/staff_card.dart';
+import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,7 @@ class StaffScreen extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
-          AppSnackBar.success(text: _l10n.mainStaffScreenSuccessfullyDeleted),
+          AppSnackBar.success(text: _l10n.staffScreenSuccessfullyDeleted),
         );
     } else if (state.isFailure) {
       context.loaderOverlay.hide();
@@ -55,6 +57,34 @@ class _StaffScreenData extends StatelessWidget {
 
   Future<void> uploadEmployeeLink(BuildContext context) async {
     final data = await Navigator.pushNamed(context, Routes.uploadStaff);
+    if (data != null) {
+      context.read<StaffCubit>().loadStaffData();
+    }
+  }
+
+  void _deleteDialog(BuildContext context, {required int id}) {
+    final _l10n = context.l10n;
+    CustomCupertinoDialog(
+      context: context,
+      title: _l10n.staffScreenDeleteTeacher,
+      content: _l10n.staffScreenDeleteTeacherConfirm,
+      firstActionText: _l10n.cancel,
+      firstAction: () => Navigator.pop(context),
+      secondActionText: _l10n.delete,
+      secondAction: () {
+        Navigator.pop(context);
+        context.read<StaffCubit>().deleteStaffEmployee(id);
+      },
+    );
+  }
+
+  Future<void> _editUserLink(BuildContext context, {required int id}) async {
+    final data = await Navigator.pushNamed(
+      context,
+      Routes.uploadStaff,
+      arguments: UploadStaffScreenArguments(id: id),
+    );
+
     if (data != null) {
       context.read<StaffCubit>().loadStaffData();
     }
@@ -92,9 +122,16 @@ class _StaffScreenData extends StatelessWidget {
                       itemCount: 30,
                     )
                   : ListView.builder(
-                      itemBuilder: (context, i) => StaffCard(
-                        employee: state.filteredStaffData![i],
-                      ),
+                      itemBuilder: (context, i) {
+                        final employee = state.filteredStaffData![i];
+                        final user = employee.userData;
+                        final id = user.id;
+                        return UserCard(
+                          fullName: user.fullName,
+                          editAction: () => _editUserLink(context, id: id),
+                          deleteAction: () => _deleteDialog(context, id: id),
+                        );
+                      },
                       itemCount: state.filteredStaffData!.length,
                     ),
             ),

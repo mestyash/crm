@@ -1,4 +1,5 @@
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
+import 'package:crm/core/presentation/ui/custom_cupertino_dialog/custom_cupertino_dialog.dart';
 import 'package:crm/core/presentation/ui/custom_floating_action_button/custom_floating_action_button.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
@@ -6,8 +7,8 @@ import 'package:crm/core/presentation/ui/user_card/user_card.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_search_bar.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
-import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
+import 'package:crm/features/admin/students/features/upload_student/view/upload_student_screen.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class StudentsScreen extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
-          AppSnackBar.success(text: _l10n.mainStaffScreenSuccessfullyDeleted),
+          AppSnackBar.success(text: _l10n.studentsScreenSuccessfullyDeleted),
         );
     } else if (state.isFailure) {
       context.loaderOverlay.hide();
@@ -54,30 +55,40 @@ class _StudentsScreenData extends StatelessWidget {
   final StudentsState state;
 
   const _StudentsScreenData({
-    super.key,
     required this.state,
   });
 
   Future<void> uploadEmployeeLink(BuildContext context) async {
-    final data = await Navigator.pushNamed(context, Routes.uploadStaff);
+    final data = await Navigator.pushNamed(context, Routes.uploadStudent);
     if (data != null) {
-      context.read<StaffCubit>().loadStaffData();
+      context.read<StudentsCubit>().loadStudents();
     }
   }
 
-  void _deleteDialog(BuildContext context, int id) {
+  void _deleteDialog(BuildContext context, {required int id}) {
     final _l10n = context.l10n;
+    CustomCupertinoDialog(
+      context: context,
+      title: _l10n.studentsScreenDeleteTeacher,
+      content: _l10n.studentsScreenDeleteTeacherConfirm,
+      firstActionText: _l10n.cancel,
+      firstAction: () => Navigator.pop(context),
+      secondActionText: _l10n.delete,
+      secondAction: () {
+        Navigator.pop(context);
+        context.read<StudentsCubit>().deleteStudent(id);
+      },
+    );
   }
 
-  Future<void> _editUserLink(BuildContext context, int id) async {
+  Future<void> _editUserLink(BuildContext context, {required int id}) async {
     final data = await Navigator.pushNamed(
       context,
-      Routes.uploadStaff,
-      arguments: UploadStaffScreenArguments(id: id),
+      Routes.uploadStudent,
+      arguments: UploadStudentScreenArguments(id: id),
     );
-
     if (data != null) {
-      context.read<StaffCubit>().loadStaffData();
+      context.read<StudentsCubit>().loadStudents();
     }
   }
 
@@ -87,7 +98,7 @@ class _StudentsScreenData extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: _l10n.mainAdminNavBarStaff,
+        title: _l10n.mainAdminNavBarStudents,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -99,7 +110,7 @@ class _StudentsScreenData extends StatelessWidget {
             StaffSearchBar(
               enabled: !state.isLoading,
               onTextChange: (text) =>
-                  context.read<StaffCubit>().onTextChange(text),
+                  context.read<StudentsCubit>().onTextChange(text),
             ),
             SizedBox(height: 20.h),
             Expanded(
@@ -118,8 +129,8 @@ class _StudentsScreenData extends StatelessWidget {
                         final id = student.id;
                         return UserCard(
                           fullName: student.fullName,
-                          editAction: () => _editUserLink(context, id),
-                          deleteAction: () => _deleteDialog(context, id),
+                          editAction: () => _editUserLink(context, id: id),
+                          deleteAction: () => _deleteDialog(context, id: id),
                         );
                       },
                       itemCount: state.filteredStudents!.length,

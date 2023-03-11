@@ -10,6 +10,8 @@ import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staf
 import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';
 import 'package:crm/features/admin/students/core/data/students_repository.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
+import 'package:crm/features/admin/students/features/upload_student/cubit/upload_student_cubit.dart';
+import 'package:crm/features/admin/students/features/upload_student/view/upload_student_screen.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/app/view/app.dart';
 import 'package:crm/core/api/profile/profile_supabase.dart';
@@ -44,6 +46,7 @@ void initGetIt() {
       // --- admin ---
       Routes.mainAdmin: (context) => sl.get<MainAdminScreen>(),
       Routes.uploadStaff: (context) => sl.get<UploadStaffScreen>(),
+      Routes.uploadStudent: (context) => sl.get<UploadStudentScreen>(),
     }),
   );
   // ---------- FEATURES ----------
@@ -72,6 +75,11 @@ void initGetIt() {
   sl.registerFactory<UploadStaffScreen>(
     () => UploadStaffScreen(
       cubit: sl.get<UploadStaffCubit>(),
+    ),
+  );
+  sl.registerFactory<UploadStudentScreen>(
+    () => UploadStudentScreen(
+      cubit: sl.get<UploadStudentCubit>(),
     ),
   );
   // ---------- BLOCS ----------
@@ -104,6 +112,11 @@ void initGetIt() {
   );
   sl.registerFactory<StudentsCubit>(
     () => StudentsCubit(
+      repository: sl.get<StudentsRepository>(),
+    ),
+  );
+  sl.registerFactory<UploadStudentCubit>(
+    () => UploadStudentCubit(
       repository: sl.get<StudentsRepository>(),
     ),
   );

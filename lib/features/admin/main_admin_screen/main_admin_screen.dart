@@ -1,4 +1,4 @@
-import 'package:crm/core/presentation/ui/main_nav_bar/main_nav_bar.dart';
+import 'package:crm/features/admin/main_admin_screen/widgets/admin_nav_bar.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/view/staff_screen.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
@@ -56,7 +56,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
         index: _selectedIndex,
         children: _pages,
       ),
-      bottomNavigationBar: MainNavBar(
+      bottomNavigationBar: AdminNavBar(
         selectedIndex: _selectedIndex,
         onPageChanged: onPageChanged,
       ),

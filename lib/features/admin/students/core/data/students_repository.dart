@@ -38,7 +38,7 @@ class StudentsRepository extends IStudentsRepository {
   Future<UserModel> getStudent({required int id}) async {
     try {
       final response = await _supabase.getStudent(id: id);
-      final data = response['payload']['student'] as List<dynamic>;
+      final data = response['payload']['student'] as dynamic;
       return mapUser(data);
     } catch (e) {
       print(e.toString());
