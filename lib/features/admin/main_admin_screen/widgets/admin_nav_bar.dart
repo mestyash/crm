@@ -73,6 +73,16 @@ class AdminNavBar extends StatelessWidget {
             text: _l10n.mainAdminNavBarStudents,
             iconColor: _scaffoldColor,
           ),
+          GButton(
+            leading: Icon(
+              Icons.monetization_on,
+              color: _scaffoldColor,
+              size: 20.r,
+            ),
+            icon: _defaultIcon,
+            text: _l10n.mainAdminNavBarPayments,
+            iconColor: _scaffoldColor,
+          ),
         ],
         selectedIndex: selectedIndex,
         onTabChange: onPageChanged,

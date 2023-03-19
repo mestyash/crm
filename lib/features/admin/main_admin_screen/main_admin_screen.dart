@@ -1,4 +1,5 @@
 import 'package:crm/features/admin/main_admin_screen/widgets/admin_nav_bar.dart';
+import 'package:crm/features/admin/payments/features/payments_screen/view/payments_screen.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/view/staff_screen.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
@@ -23,6 +24,7 @@ class MainAdminScreen extends StatefulWidget {
 class _MainTeacherScreenState extends State<MainAdminScreen> {
   late StaffScreen _staffScreen;
   late StudentsScreen _studentsScreen;
+  late PaymentsScreen _paymentsScreen;
 
   int _selectedIndex = 0;
   late List<Widget> _pages;
@@ -31,6 +33,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
   void initState() {
     _staffScreen = StaffScreen();
     _studentsScreen = StudentsScreen();
+    _paymentsScreen = PaymentsScreen();
 
     _pages = [
       BlocProvider<StaffCubit>(
@@ -41,6 +44,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
         create: (_) => widget.studentsCubit..loadStudents(),
         child: _studentsScreen,
       ),
+      _paymentsScreen,
     ];
     super.initState();
   }

@@ -2,7 +2,7 @@ import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
 import 'package:crm/core/utils/supabase/supabase_utils.dart';
 
 class StaffSupabase {
-  SupabaseClient _client;
+  final SupabaseClient _client;
 
   StaffSupabase({required SupabaseClient client}) : _client = client;
 
