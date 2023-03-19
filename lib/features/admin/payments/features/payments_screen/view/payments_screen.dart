@@ -11,10 +11,10 @@ class PaymentsScreen extends StatelessWidget {
     final x = PaymentsSupabase(client: SupabaseClient());
     final z = CustomDateUtils.firstOrLastDateOfCurrentMonth();
     final z1 = CustomDateUtils.firstOrLastDateOfCurrentMonth(first: false);
+    print([z, z1]);
     x.getPaymentsByRange(
         startDate: CustomDateUtils.prepareDateForBackend(z),
         endDate: CustomDateUtils.prepareDateForBackend(z1));
-    print([z, z1]);
     return Scaffold(
       appBar: AppBar(),
       body: Center(

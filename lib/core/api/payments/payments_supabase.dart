@@ -18,8 +18,6 @@ class PaymentsSupabase {
           .gte('createdAt', startDate)
           .lte('createdAt', endDate);
 
-      print(data);
-
       return SupabaseUtils.responseWrapper('payments', data);
     } catch (e) {
       print(e.toString());
