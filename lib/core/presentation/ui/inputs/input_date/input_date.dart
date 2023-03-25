@@ -15,17 +15,21 @@ class InputDate extends StatelessWidget {
   final bool isRequired;
   final void Function(DateTime date) onChange;
   final CupertinoDatePickerMode mode;
+  final DateTime? maximumDate;
+  final bool showBottomMargin;
 
   const InputDate({
     super.key,
     this.isLoading = false,
-    required this.title,
+    this.title = '',
     required this.date,
     required this.controller,
     this.hintText = '',
     this.isRequired = false,
     required this.onChange,
     this.mode = CupertinoDatePickerMode.date,
+    this.maximumDate,
+    this.showBottomMargin = true,
   });
 
   void openDatePicker(BuildContext context) {
@@ -37,6 +41,7 @@ class InputDate extends StatelessWidget {
         initialDateTime: date,
         changeDate: onChange,
         datePickerMode: mode,
+        maximumDate: maximumDate,
       ),
     );
   }
@@ -46,11 +51,13 @@ class InputDate extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
 
     return Padding(
-      padding: EdgeInsets.only(bottom: ProjectMargin.inputMargin),
+      padding: showBottomMargin
+          ? EdgeInsets.only(bottom: ProjectMargin.inputMargin)
+          : EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InputTitle(text: title, isRequired: isRequired),
+          if (title.isNotEmpty) InputTitle(text: title, isRequired: isRequired),
           isLoading
               ? ShimmerContainer(width: double.infinity, height: 42.h)
               : TextField(

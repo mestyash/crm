@@ -1,24 +1,36 @@
-import 'package:crm/core/api/payments/payments_supabase.dart';
-import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
-import 'package:crm/core/utils/date/date_utils.dart';
+import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
+import 'package:crm/core/styles/project_theme.dart';
+import 'package:crm/features/admin/payments/features/payments_screen/view/widgets/card/payments_card.dart';
+import 'package:crm/features/admin/payments/features/payments_screen/view/widgets/filter/payments_filter.dart';
+import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentsScreen extends StatelessWidget {
   const PaymentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final x = PaymentsSupabase(client: SupabaseClient());
-    final z = CustomDateUtils.firstOrLastDateOfCurrentMonth();
-    final z1 = CustomDateUtils.firstOrLastDateOfCurrentMonth(first: false);
-    print([z, z1]);
-    x.getPaymentsByRange(
-        startDate: CustomDateUtils.prepareDateForBackend(z),
-        endDate: CustomDateUtils.prepareDateForBackend(z1));
+    final _l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Text('payment'),
+      appBar: CustomAppBar(
+        title: _l10n.mainAdminNavBarPayments,
+      ),
+      body: Column(
+        children: [
+          PaymentsFilter(),
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.symmetric(
+                horizontal: ProjectMargin.contentHorizontal,
+                // vertical: ProjectMargin.contentTop,
+              ),
+              shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (context, i) => PaymentsCard(),
+            ),
+          ),
+        ],
       ),
     );
   }

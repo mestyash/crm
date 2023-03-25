@@ -25,7 +25,7 @@
     "loginScreenCheckbox": "Запомнить меня",
     "mainAdminNavBarStaff": "Персонал",
     "mainAdminNavBarStudents": "Студенты",
-    "mainAdminNavBarPayments": "Оплата",
+    "mainAdminNavBarPayments": "Платежи",
     "staffScreenDeleteTeacher": "Удалить учителя",
     "staffScreenDeleteTeacherConfirm": "Вы действительно хотите удалить учителя ?",
     "staffScreenSuccessfullyDeleted": "Учитель успешно удален!",

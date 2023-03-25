@@ -9,12 +9,14 @@ class CustomDatePicker extends StatefulWidget {
   final DateTime initialDateTime;
   final void Function(DateTime date) changeDate;
   final CupertinoDatePickerMode datePickerMode;
+  final DateTime? maximumDate;
 
   const CustomDatePicker({
     Key? key,
     required this.initialDateTime,
     required this.changeDate,
     this.datePickerMode = CupertinoDatePickerMode.date,
+    this.maximumDate,
   }) : super(key: key);
 
   @override
@@ -99,6 +101,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                   use24hFormat: true,
                   initialDateTime: widget.initialDateTime,
                   onDateTimeChanged: _changeTempPickedDate,
+                  maximumDate: widget.maximumDate,
                 ),
               ),
             ),
