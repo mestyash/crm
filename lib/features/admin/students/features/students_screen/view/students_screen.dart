@@ -5,7 +5,7 @@ import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dar
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/presentation/ui/user_card/user_card.dart';
 import 'package:crm/core/styles/project_theme.dart';
-import 'package:crm/core/presentation/ui/search_bar/staff_search_bar.dart';
+import 'package:crm/core/presentation/ui/search_bar/staff_bar.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
 import 'package:crm/features/admin/students/features/upload_student/view/upload_student_screen.dart';
@@ -107,7 +107,7 @@ class _StudentsScreenData extends StatelessWidget {
         ),
         child: Column(
           children: [
-            StaffSearchBar(
+            SearchBar(
               enabled: !state.isLoading,
               onTextChange: (text) =>
                   context.read<StudentsCubit>().onTextChange(text),

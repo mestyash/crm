@@ -8,4 +8,5 @@ class Routes {
   static const mainAdmin = '/mainAdmin';
   static const uploadStaff = '/uploadStaff';
   static const uploadStudent = '/uploadStudent';
+  static const createPayment = '/createPayment';
 }

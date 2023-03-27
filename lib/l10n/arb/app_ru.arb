@@ -14,11 +14,14 @@
     "birthday": "Дата рождения",
     "role": "Роль",
     "workplace": "Рабочее место",
+    "sum": "Сумма",
     "city1": "Новосибирск",
     "city2": "Крым",
+    "studentPlaceholder": "Выберите студента",
     "datePlaceholder": "Выберите дату",
     "loginPlaceholder": "Введите логин",
     "passPlaceholder": "Введите пароль",
+    "dataError": "Введите корректные данные!",
     "loginScreenGreeting": "Добро пожаловать!",
     "loginScreenMessage": "Авторизуйтесь, чтобы войти в приложение. Начнем ?)",
     "loginScreenInputError": "*Допущена ошибка",
@@ -40,5 +43,7 @@
     "studentsScreenDeleteTeacherConfirm": "Вы действительно хотите удалить студента ?",
     "studentsScreenSuccessfullyDeleted": "Студент успешно удален!",
     "uploadStudentSuccessfullyCreated": "Студент успешно создан!",
-    "uploadStudentSuccessfullyEdited": "Студент успешно отредактирован!"
+    "uploadStudentSuccessfullyEdited": "Студент успешно отредактирован!",
+    "createPaymentSumPlaceholder": "Введите сумму",
+    "createPaymentDatePlaceholder": "Платежный месяц"
 }

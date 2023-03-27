@@ -13,7 +13,9 @@ class InputText extends StatelessWidget {
   final bool isRequired;
   final int minLines;
   final int? maxLength;
+  final bool readOnly;
   final void Function(String text)? onChange;
+  final void Function()? onTap;
 
   const InputText({
     super.key,
@@ -25,6 +27,8 @@ class InputText extends StatelessWidget {
     this.keyboardType,
     this.minLines = 1,
     this.maxLength,
+    this.readOnly = false,
+    this.onTap,
     this.onChange,
   });
 
@@ -52,6 +56,8 @@ class InputText extends StatelessWidget {
                   minLines: minLines,
                   maxLines: minLines == 1 ? 1 : null,
                   onChanged: onChange,
+                  readOnly: readOnly,
+                  onTap: onTap,
                   maxLength: maxLength,
                 ),
         ],

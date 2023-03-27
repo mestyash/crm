@@ -4,6 +4,8 @@ import 'package:crm/core/data/data_source/secure_storage/secure_storage.dart';
 import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
+import 'package:crm/features/admin/payments/features/create_payment_screen/cubit/create_payment_cubit.dart';
+import 'package:crm/features/admin/payments/features/create_payment_screen/view/create_payment_screen.dart';
 import 'package:crm/features/admin/staff/core/data/repository/staff_repository.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';
@@ -47,6 +49,7 @@ void initGetIt() {
       Routes.mainAdmin: (context) => sl.get<MainAdminScreen>(),
       Routes.uploadStaff: (context) => sl.get<UploadStaffScreen>(),
       Routes.uploadStudent: (context) => sl.get<UploadStudentScreen>(),
+      Routes.createPayment: (context) => sl.get<CreatePaymentScreen>(),
     }),
   );
   // ---------- FEATURES ----------
@@ -80,6 +83,11 @@ void initGetIt() {
   sl.registerFactory<UploadStudentScreen>(
     () => UploadStudentScreen(
       cubit: sl.get<UploadStudentCubit>(),
+    ),
+  );
+  sl.registerFactory<CreatePaymentScreen>(
+    () => CreatePaymentScreen(
+      cubit: sl.get<CreatePaymentCubit>(),
     ),
   );
   // ---------- BLOCS ----------
@@ -119,6 +127,11 @@ void initGetIt() {
     () => UploadStudentCubit(
       repository: sl.get<StudentsRepository>(),
     ),
+  );
+  sl.registerFactory<CreatePaymentCubit>(
+    () => CreatePaymentCubit(
+        // repository: sl.get<StudentsRepository>(),
+        ),
   );
   // ---------- REPOSITORIES ----------
   sl.registerFactory<SplashRepository>(

@@ -56,6 +56,19 @@ class StudentsSupabase {
       throw Exception(e);
     }
   }
+
+  Future<Map<String, dynamic>> searchStudents(String name) async {
+    try {
+      final data = await _client.request
+          .from('student')
+          .select()
+          .textSearch('surname', name);
+      return SupabaseUtils.responseWrapper('students', data);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
 }
 
 class ApiStudentModel {
