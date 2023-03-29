@@ -1,10 +1,23 @@
+import 'package:crm/core/domain/entity/user_model.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_bar.dart';
+import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchUsersModalSheet extends StatelessWidget {
-  const SearchUsersModalSheet({super.key});
+  final void Function(String surname) onTextChange;
+  final bool isLoading;
+  final List<UserModel> users;
+  final void Function(UserModel) onSelectUser;
+
+  const SearchUsersModalSheet({
+    super.key,
+    required this.onTextChange,
+    required this.isLoading,
+    required this.users,
+    required this.onSelectUser,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +54,32 @@ class SearchUsersModalSheet extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: ProjectMargin.contentHorizontal,
               ),
-              child: SearchBar(enabled: true, onTextChange: (text) {}),
+              child: SearchBar(enabled: true, onTextChange: onTextChange),
             ),
             SizedBox(height: 15.h),
             Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ProjectMargin.contentHorizontal,
-                ),
-                shrinkWrap: true,
-                itemCount: 200,
-                itemBuilder: (context, i) => _UserCard(),
-              ),
+              child: isLoading
+                  ? ListView.builder(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ProjectMargin.contentHorizontal,
+                      ),
+                      itemBuilder: (_, i) => ShimmerContainer(
+                        margin: EdgeInsets.only(bottom: 10.h),
+                        width: double.infinity,
+                        height: 75.h,
+                      ),
+                    )
+                  : ListView.builder(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ProjectMargin.contentHorizontal,
+                      ),
+                      shrinkWrap: true,
+                      itemCount: users.length,
+                      itemBuilder: (context, i) => _UserCard(
+                        user: users[i],
+                        action: () => onSelectUser(users[i]),
+                      ),
+                    ),
             ),
             SizedBox(height: 5.h),
           ],
@@ -63,27 +90,36 @@ class SearchUsersModalSheet extends StatelessWidget {
 }
 
 class _UserCard extends StatelessWidget {
-  // final User user;
+  final UserModel user;
+  final void Function() action;
 
-  // const _UserCard({required this.user});
-  const _UserCard();
+  const _UserCard({
+    required this.user,
+    required this.action,
+  });
 
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     final _textTheme = _theme.textTheme;
 
-    return Container(
-      padding: EdgeInsets.all(10.r),
-      margin: EdgeInsets.only(bottom: 10.h),
-      decoration: BoxDecoration(
-        color: _theme.cardColor,
-        borderRadius: BorderRadius.circular(5.r),
-        boxShadow: ProjectShadow.boxShadow1,
-      ),
-      child: Text(
-        '123',
-        style: _textTheme.bodyText1,
+    return GestureDetector(
+      onTap: () {
+        action();
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.all(10.r),
+        margin: EdgeInsets.only(bottom: 10.h),
+        decoration: BoxDecoration(
+          color: _theme.cardColor,
+          borderRadius: BorderRadius.circular(5.r),
+          boxShadow: ProjectShadow.boxShadow1,
+        ),
+        child: Text(
+          user.fullName,
+          style: _textTheme.bodyText1,
+        ),
       ),
     );
   }

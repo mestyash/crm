@@ -1,10 +1,12 @@
-import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
+import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart'
+    as client;
 import 'package:crm/core/utils/supabase/supabase_utils.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class StudentsSupabase {
-  final SupabaseClient _client;
+  final client.SupabaseClient _client;
 
-  StudentsSupabase({required SupabaseClient client}) : _client = client;
+  StudentsSupabase({required client.SupabaseClient client}) : _client = client;
 
   Future<Map<String, dynamic>> getStudents() async {
     try {
@@ -57,12 +59,12 @@ class StudentsSupabase {
     }
   }
 
-  Future<Map<String, dynamic>> searchStudents(String name) async {
+  Future<Map<String, dynamic>> searchStudentsBySurname(String surname) async {
     try {
       final data = await _client.request
           .from('student')
           .select()
-          .textSearch('surname', name);
+          .textSearch('surname', surname, type: TextSearchType.plain);
       return SupabaseUtils.responseWrapper('students', data);
     } catch (e) {
       print(e.toString());

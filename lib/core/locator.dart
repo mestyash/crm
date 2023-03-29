@@ -1,10 +1,11 @@
 import 'package:crm/core/api/staff/staff_supabase.dart';
-import 'package:crm/core/api/students/staff_supabase.dart';
+import 'package:crm/core/api/students/students_supabase.dart';
 import 'package:crm/core/data/data_source/secure_storage/secure_storage.dart';
 import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
-import 'package:crm/features/admin/payments/features/create_payment_screen/cubit/create_payment_cubit.dart';
+import 'package:crm/features/admin/payments/core/data/repository/payments_repository.dart';
+import 'package:crm/features/admin/payments/features/create_payment_screen/bloc/create_payment_bloc.dart';
 import 'package:crm/features/admin/payments/features/create_payment_screen/view/create_payment_screen.dart';
 import 'package:crm/features/admin/staff/core/data/repository/staff_repository.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
@@ -87,7 +88,7 @@ void initGetIt() {
   );
   sl.registerFactory<CreatePaymentScreen>(
     () => CreatePaymentScreen(
-      cubit: sl.get<CreatePaymentCubit>(),
+      bloc: sl.get<CreatePaymentBloc>(),
     ),
   );
   // ---------- BLOCS ----------
@@ -128,10 +129,10 @@ void initGetIt() {
       repository: sl.get<StudentsRepository>(),
     ),
   );
-  sl.registerFactory<CreatePaymentCubit>(
-    () => CreatePaymentCubit(
-        // repository: sl.get<StudentsRepository>(),
-        ),
+  sl.registerFactory<CreatePaymentBloc>(
+    () => CreatePaymentBloc(
+      repository: sl.get<PaymentsRepository>(),
+    ),
   );
   // ---------- REPOSITORIES ----------
   sl.registerFactory<SplashRepository>(
@@ -154,6 +155,11 @@ void initGetIt() {
   sl.registerFactory<StudentsRepository>(
     () => StudentsRepository(
       supabase: sl.get<StudentsSupabase>(),
+    ),
+  );
+  sl.registerFactory<PaymentsRepository>(
+    () => PaymentsRepository(
+      studentsSupabase: sl.get<StudentsSupabase>(),
     ),
   );
   // ---------- DATA SOURCES ----------

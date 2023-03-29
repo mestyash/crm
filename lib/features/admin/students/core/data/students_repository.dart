@@ -1,4 +1,4 @@
-import 'package:crm/core/api/students/staff_supabase.dart';
+import 'package:crm/core/api/students/students_supabase.dart';
 import 'package:crm/core/data/dto/user_mapper.dart';
 import 'package:crm/core/domain/entity/user_model.dart';
 import 'package:crm/core/utils/date/date_utils.dart';

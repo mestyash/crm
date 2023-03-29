@@ -1,3 +1,4 @@
+import 'package:crm/core/domain/entity/user_model.dart';
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_button.dart';
 import 'package:crm/core/presentation/ui/inputs/input_date/input_date.dart';
@@ -6,22 +7,34 @@ import 'package:crm/core/presentation/ui/search_users_modal_sheet/search_users_m
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
-import 'package:crm/features/admin/payments/features/create_payment_screen/cubit/create_payment_cubit.dart';
+import 'package:crm/features/admin/payments/features/create_payment_screen/bloc/create_payment_bloc.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class CreatePaymentScreen extends StatelessWidget {
-  final CreatePaymentCubit cubit;
+  final CreatePaymentBloc bloc;
 
   const CreatePaymentScreen({
     super.key,
-    required this.cubit,
+    required this.bloc,
   });
 
   void _listener(BuildContext context, CreatePaymentState state) {
     final _l10n = context.l10n;
-
+    if (state.isLoading) {
+      context.loaderOverlay.show();
+    }
+    if (state.successfullyCreated) {
+      context.loaderOverlay.hide();
+      Navigator.pop(context, true);
+    }
+    if (state.textFailure) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(AppSnackBar.failure(text: _l10n.error));
+    }
     if (state.textFailure) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
@@ -35,8 +48,8 @@ class CreatePaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _l10n = context.l10n;
 
-    return BlocProvider<CreatePaymentCubit>(
-      create: (_) => cubit,
+    return BlocProvider<CreatePaymentBloc>(
+      create: (_) => bloc,
       child: Scaffold(
         appBar: CustomAppBar(
           title: _l10n.mainAdminNavBarPayments,
@@ -46,9 +59,9 @@ class CreatePaymentScreen extends StatelessWidget {
             horizontal: ProjectMargin.contentHorizontal,
             vertical: ProjectMargin.contentTop,
           ),
-          child: BlocListener<CreatePaymentCubit, CreatePaymentState>(
+          child: BlocConsumer<CreatePaymentBloc, CreatePaymentState>(
             listener: _listener,
-            child: _ScreenData(),
+            builder: (context, state) => _ScreenData(state: state),
           ),
         ),
       ),
@@ -57,26 +70,39 @@ class CreatePaymentScreen extends StatelessWidget {
 }
 
 class _ScreenData extends StatefulWidget {
-  const _ScreenData();
+  final CreatePaymentState state;
+
+  const _ScreenData({required this.state});
 
   @override
   State<_ScreenData> createState() => _ScreenDataState();
 }
 
 class _ScreenDataState extends State<_ScreenData> {
-  late CreatePaymentCubit _cubit;
+  late CreatePaymentBloc _bloc;
+  late TextEditingController _studentController;
   late TextEditingController _dateController;
 
   @override
   void initState() {
-    _cubit = context.read<CreatePaymentCubit>();
-    _dateController = TextEditingController()..text;
+    _bloc = context.read<CreatePaymentBloc>();
+    _studentController = TextEditingController();
+    _dateController = TextEditingController();
     super.initState();
   }
 
   void _onDateChange(DateTime date) {
     _dateController.text = CustomDateUtils.dateToString(date);
-    _cubit.onDateChange(date);
+    _bloc.add(CreatePaymentEventDate(date: date));
+  }
+
+  void _onStudentChange(UserModel student) {
+    _bloc.add(CreatePaymentEventStudent(student: student));
+    _studentController.text = student.fullName;
+  }
+
+  void _onSearchStudents(String surname) {
+    _bloc.add(CreatePaymentEventSearchStudents(surname: surname));
   }
 
   void _openModalSheet() {
@@ -84,12 +110,25 @@ class _ScreenDataState extends State<_ScreenData> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => SearchUsersModalSheet(),
+      builder: (_) => BlocProvider<CreatePaymentBloc>.value(
+        value: _bloc,
+        child: BlocBuilder<CreatePaymentBloc, CreatePaymentState>(
+          builder: (context, state) {
+            return SearchUsersModalSheet(
+              onTextChange: _onSearchStudents,
+              isLoading: state.isSearching,
+              users: state.students,
+              onSelectUser: _onStudentChange,
+            );
+          },
+        ),
+      ),
     );
   }
 
   @override
   void dispose() {
+    _studentController.dispose();
     _dateController.dispose();
     super.dispose();
   }
@@ -105,8 +144,7 @@ class _ScreenDataState extends State<_ScreenData> {
           title: _l10n.apply,
           hintText: _l10n.studentPlaceholder,
           readOnly: true,
-          keyboardType:
-              TextInputType.numberWithOptions(signed: true, decimal: true),
+          controller: _studentController,
           onTap: _openModalSheet,
         ),
         InputText(
@@ -115,7 +153,7 @@ class _ScreenDataState extends State<_ScreenData> {
           keyboardType: TextInputType.numberWithOptions(
             decimal: true,
           ),
-          onChange: (sum) => _cubit.onSumChange(sum),
+          onChange: (sum) => _bloc.add(CreatePaymentEventSum(sum: sum)),
         ),
         InputDate(
           title: _l10n.createPaymentDatePlaceholder,
@@ -126,7 +164,7 @@ class _ScreenDataState extends State<_ScreenData> {
         ),
         CustomElevatedButton(
           text: _l10n.save.toUpperCase(),
-          onTap: () {},
+          onTap: widget.state.canUpload ? () {} : null,
         )
       ],
     );
