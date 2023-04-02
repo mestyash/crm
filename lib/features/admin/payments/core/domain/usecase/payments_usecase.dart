@@ -2,7 +2,7 @@ import 'package:crm/core/domain/entity/user_model.dart';
 
 abstract class IPaymentsRepository {
   Future<List<UserModel>> searchStudents({required String surname});
-  Future<void> uploadPayment();
+  Future<void> uploadPayment(UploadPaymentParams params);
 }
 
 class UploadPaymentParams {

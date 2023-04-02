@@ -35,7 +35,8 @@ class CreatePaymentScreen extends StatelessWidget {
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.failure(text: _l10n.error));
     }
-    if (state.textFailure) {
+    if (state.isFailure) {
+      context.loaderOverlay.hide();
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.failure(
@@ -164,7 +165,9 @@ class _ScreenDataState extends State<_ScreenData> {
         ),
         CustomElevatedButton(
           text: _l10n.save.toUpperCase(),
-          onTap: widget.state.canUpload ? () {} : null,
+          onTap: widget.state.canUpload
+              ? () => _bloc.add(CreatePaymentEventUpload())
+              : null,
         )
       ],
     );

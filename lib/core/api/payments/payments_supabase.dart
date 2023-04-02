@@ -24,27 +24,34 @@ class PaymentsSupabase {
       throw Exception(e);
     }
   }
+
+  Future<void> createPayment(ApiPaymentModel data) async {
+    try {
+      await _client.request.from('payment').insert(data.toJson());
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
 }
 
-// class ApiStudentModel {
-//   final int? id;
-//   final String name;
-//   final String surname;
-//   final String patronymic;
-//   final String birthday;
+class ApiPaymentModel {
+  final int studentId;
+  final double sum;
+  final String paymentMonth;
+  final String createdAt;
 
-//   ApiStudentModel({
-//     required this.id,
-//     required this.name,
-//     required this.surname,
-//     required this.patronymic,
-//     required this.birthday,
-//   });
+  ApiPaymentModel({
+    required this.studentId,
+    required this.sum,
+    required this.paymentMonth,
+    required this.createdAt,
+  });
 
-//   Map<String, dynamic> toJson() => {
-//         'name': name,
-//         'surname': surname,
-//         'patronymic': patronymic,
-//         'birthday': birthday,
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        'studentId': studentId,
+        'sum': sum,
+        'paymentMonth': paymentMonth,
+        'createdAt': createdAt,
+      };
+}

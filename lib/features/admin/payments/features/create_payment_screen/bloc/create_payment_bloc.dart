@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/user_model.dart';
 import 'package:crm/features/admin/payments/core/data/repository/payments_repository.dart';
+import 'package:crm/features/admin/payments/core/domain/usecase/payments_usecase.dart';
 import 'package:equatable/equatable.dart';
 
 part 'create_payment_event.dart';
@@ -69,6 +70,11 @@ class CreatePaymentBloc extends Bloc<CreatePaymentEvent, CreatePaymentState> {
   ) async {
     try {
       emit(state.copyWith(isLoading: true));
+      await _repository.uploadPayment(UploadPaymentParams(
+        userId: state.student!.id,
+        sum: state.sum,
+        date: state.date!,
+      ));
       emit(state.copyWith(successfullyCreated: true));
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));

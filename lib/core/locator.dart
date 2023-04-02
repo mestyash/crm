@@ -1,3 +1,4 @@
+import 'package:crm/core/api/payments/payments_supabase.dart';
 import 'package:crm/core/api/staff/staff_supabase.dart';
 import 'package:crm/core/api/students/students_supabase.dart';
 import 'package:crm/core/data/data_source/secure_storage/secure_storage.dart';
@@ -160,6 +161,7 @@ void initGetIt() {
   sl.registerFactory<PaymentsRepository>(
     () => PaymentsRepository(
       studentsSupabase: sl.get<StudentsSupabase>(),
+      paymentsSupabase: sl.get<PaymentsSupabase>(),
     ),
   );
   // ---------- DATA SOURCES ----------
@@ -176,6 +178,11 @@ void initGetIt() {
   );
   sl.registerFactory<StudentsSupabase>(
     () => StudentsSupabase(
+      client: sl.get<SupabaseClient>(),
+    ),
+  );
+  sl.registerFactory<PaymentsSupabase>(
+    () => PaymentsSupabase(
       client: sl.get<SupabaseClient>(),
     ),
   );
