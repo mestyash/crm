@@ -8,6 +8,7 @@ import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
 import 'package:crm/features/admin/payments/core/data/repository/payments_repository.dart';
 import 'package:crm/features/admin/payments/features/create_payment_screen/bloc/create_payment_bloc.dart';
 import 'package:crm/features/admin/payments/features/create_payment_screen/view/create_payment_screen.dart';
+import 'package:crm/features/admin/payments/features/payments_screen/bloc/payments_bloc.dart';
 import 'package:crm/features/admin/staff/core/data/repository/staff_repository.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';
@@ -75,6 +76,7 @@ void initGetIt() {
     () => MainAdminScreen(
       staffCubit: sl.get<StaffCubit>(),
       studentsCubit: sl.get<StudentsCubit>(),
+      paymentsBloc: sl.get<PaymentsBloc>(),
     ),
   );
   sl.registerFactory<UploadStaffScreen>(
@@ -128,6 +130,11 @@ void initGetIt() {
   sl.registerFactory<UploadStudentCubit>(
     () => UploadStudentCubit(
       repository: sl.get<StudentsRepository>(),
+    ),
+  );
+  sl.registerFactory<PaymentsBloc>(
+    () => PaymentsBloc(
+      repository: sl.get<PaymentsRepository>(),
     ),
   );
   sl.registerFactory<CreatePaymentBloc>(

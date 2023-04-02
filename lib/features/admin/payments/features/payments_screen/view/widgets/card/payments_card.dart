@@ -1,9 +1,15 @@
+import 'package:crm/core/domain/entity/payment_model.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentsCard extends StatelessWidget {
-  const PaymentsCard({super.key});
+  final PaymentModel payment;
+
+  const PaymentsCard({
+    super.key,
+    required this.payment,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +28,12 @@ class PaymentsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Voytenko A.M.',
+            payment.student.fullName1,
             style: _textTheme.headline3,
           ),
           SizedBox(height: 10.h),
           Text(
-            '500 ₽',
+            '${payment.sum} ₽',
             style: _textTheme.subtitle2,
           ),
           SizedBox(height: 10.h),
@@ -43,7 +49,7 @@ class PaymentsCard extends StatelessWidget {
                       ?.copyWith(fontStyle: FontStyle.italic),
                 ),
                 TextSpan(
-                  text: '27.02.2001',
+                  text: payment.stringCreatedAt,
                   style: _textTheme.bodyText1?.copyWith(
                     decoration: TextDecoration.underline,
                   ),

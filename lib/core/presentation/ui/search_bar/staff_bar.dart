@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SearchBar extends StatelessWidget {
   final bool enabled;
   final void Function(String text) onTextChange;
+  final String placeholder;
 
   const SearchBar({
     Key? key,
     required this.enabled,
     required this.onTextChange,
+    this.placeholder = '',
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class SearchBar extends StatelessWidget {
               child: TextField(
                 enabled: enabled,
                 decoration: InputDecoration(
+                  hintText: placeholder,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(0),
                     borderSide: BorderSide.none,

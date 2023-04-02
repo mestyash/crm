@@ -1,4 +1,5 @@
 import 'package:crm/features/admin/main_admin_screen/widgets/admin_nav_bar.dart';
+import 'package:crm/features/admin/payments/features/payments_screen/bloc/payments_bloc.dart';
 import 'package:crm/features/admin/payments/features/payments_screen/view/payments_screen.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/view/staff_screen.dart';
@@ -10,11 +11,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MainAdminScreen extends StatefulWidget {
   final StaffCubit staffCubit;
   final StudentsCubit studentsCubit;
+  final PaymentsBloc paymentsBloc;
 
   const MainAdminScreen({
     super.key,
     required this.staffCubit,
     required this.studentsCubit,
+    required this.paymentsBloc,
   });
 
   @override
@@ -44,7 +47,10 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
         create: (_) => widget.studentsCubit..loadStudents(),
         child: _studentsScreen,
       ),
-      _paymentsScreen,
+      BlocProvider<PaymentsBloc>(
+        create: (_) => widget.paymentsBloc,
+        child: _paymentsScreen,
+      ),
     ];
     super.initState();
   }

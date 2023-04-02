@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/user_model.dart';
 import 'package:crm/features/admin/payments/core/data/repository/payments_repository.dart';
-import 'package:crm/features/admin/payments/core/domain/usecase/payments_usecase.dart';
+import 'package:crm/features/admin/payments/core/domain/payments_usecase.dart';
 import 'package:equatable/equatable.dart';
 
 part 'create_payment_event.dart';
@@ -30,9 +30,15 @@ class CreatePaymentBloc extends Bloc<CreatePaymentEvent, CreatePaymentState> {
     Emitter<CreatePaymentState> emit,
   ) async {
     try {
-      emit(state.copyWith(isSearching: true));
-      final students = await _repository.searchStudents(surname: event.surname);
-      emit(state.copyWith(isSearching: false, students: students));
+      if (event.surname.isNotEmpty) {
+        emit(state.copyWith(isSearching: true));
+        await Future.delayed(Duration(seconds: 1));
+        final students =
+            await _repository.searchStudents(surname: event.surname);
+        emit(state.copyWith(isSearching: false, students: students));
+      } else {
+        emit(state.copyWith(isSearching: false, students: []));
+      }
     } catch (e) {
       emit(state.copyWith(isSearching: false, isFailure: true));
     }

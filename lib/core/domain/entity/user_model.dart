@@ -16,6 +16,7 @@ class UserModel extends Equatable {
   });
 
   String get fullName => surname + ' ' + name;
+  String get fullName1 => surname + ' ' + name[0] + '.' + patronymic[0] + '.';
 
   @override
   List<Object?> get props => [id, name, surname, patronymic, birthday];

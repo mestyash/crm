@@ -2,6 +2,7 @@ import 'package:crm/core/domain/entity/user_model.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_bar.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/styles/project_theme.dart';
+import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,6 +22,7 @@ class SearchUsersModalSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _l10n = context.l10n;
     final _theme = Theme.of(context);
 
     return Container(
@@ -54,7 +56,11 @@ class SearchUsersModalSheet extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: ProjectMargin.contentHorizontal,
               ),
-              child: SearchBar(enabled: true, onTextChange: onTextChange),
+              child: SearchBar(
+                enabled: true,
+                onTextChange: onTextChange,
+                placeholder: _l10n.enterSurname,
+              ),
             ),
             SizedBox(height: 15.h),
             Expanded(

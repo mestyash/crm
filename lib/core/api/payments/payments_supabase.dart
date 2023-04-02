@@ -11,10 +11,29 @@ class PaymentsSupabase {
     required String endDate,
   }) async {
     try {
-      print(startDate);
       final data = await _client.request
           .from('payment')
           .select('*, student:studentId (*)')
+          .gte('createdAt', startDate)
+          .lte('createdAt', endDate);
+
+      return SupabaseUtils.responseWrapper('payments', data);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
+
+  Future<Map<String, dynamic>> getStudentPaymentsByRange({
+    required String startDate,
+    required String endDate,
+    required int id,
+  }) async {
+    try {
+      final data = await _client.request
+          .from('payment')
+          .select('*, student:studentId (*)')
+          .eq('studentId', id)
           .gte('createdAt', startDate)
           .lte('createdAt', endDate);
 

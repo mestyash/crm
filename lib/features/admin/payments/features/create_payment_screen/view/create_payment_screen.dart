@@ -142,7 +142,7 @@ class _ScreenDataState extends State<_ScreenData> {
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       children: [
         InputText(
-          title: _l10n.apply,
+          title: _l10n.student,
           hintText: _l10n.studentPlaceholder,
           readOnly: true,
           controller: _studentController,
