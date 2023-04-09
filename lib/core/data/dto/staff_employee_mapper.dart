@@ -1,5 +1,5 @@
 import 'package:crm/core/data/dto/user_mapper.dart';
-import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model.dart';
+import 'package:crm/core/domain/entity/staff_employee_model.dart';
 
 StaffEmployeeModel mapStaffEmployee(dynamic employee) => StaffEmployeeModel(
       userData: mapUser(employee),

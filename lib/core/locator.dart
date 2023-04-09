@@ -9,7 +9,7 @@ import 'package:crm/features/admin/payments/core/data/repository/payments_reposi
 import 'package:crm/features/admin/payments/features/create_payment_screen/bloc/create_payment_bloc.dart';
 import 'package:crm/features/admin/payments/features/create_payment_screen/view/create_payment_screen.dart';
 import 'package:crm/features/admin/payments/features/payments_screen/bloc/payments_bloc.dart';
-import 'package:crm/features/admin/staff/core/data/repository/staff_repository.dart';
+import 'package:crm/features/admin/staff/core/data/staff_repository.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';

@@ -1,5 +1,5 @@
-import 'package:crm/features/admin/staff/core/data/repository/staff_repository.dart';
-import 'package:crm/features/admin/staff/core/domain/usecase/staff_usecase.dart';
+import 'package:crm/features/admin/staff/core/data/staff_repository.dart';
+import 'package:crm/features/admin/staff/core/domain/staff_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
