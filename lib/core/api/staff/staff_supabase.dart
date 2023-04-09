@@ -8,7 +8,11 @@ class StaffSupabase {
 
   Future<Map<String, dynamic>> getStaffData() async {
     try {
-      final data = await _client.request.from('user').select().eq('role', 0);
+      final data = await _client.request
+          .from('user')
+          .select()
+          .eq('role', 0)
+          .eq('isDeleted', false);
       return SupabaseUtils.responseWrapper('users', data);
     } catch (e) {
       print(e.toString());
@@ -18,7 +22,9 @@ class StaffSupabase {
 
   Future<void> deleteStaffEmployee({required int id}) async {
     try {
-      await _client.request.from('user').delete().eq('id', id);
+      await _client.request.from('user').update(
+        {'isDeleted': true},
+      ).eq('id', id);
     } catch (e) {
       print(e.toString());
       throw Exception(e);

@@ -6,7 +6,6 @@ import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/presentation/ui/user_card/user_card.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_bar.dart';
-import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
 import 'package:crm/features/admin/students/features/upload_student/view/upload_student_screen.dart';
 import 'package:crm/features/common/app/router/router.dart';
@@ -75,7 +74,6 @@ class _StudentsScreenData extends StatelessWidget {
       firstAction: () => Navigator.pop(context),
       secondActionText: _l10n.delete,
       secondAction: () {
-        Navigator.pop(context);
         context.read<StudentsCubit>().deleteStudent(id);
       },
     );

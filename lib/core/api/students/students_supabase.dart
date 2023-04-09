@@ -10,7 +10,8 @@ class StudentsSupabase {
 
   Future<Map<String, dynamic>> getStudents() async {
     try {
-      final data = await _client.request.from('student').select();
+      final data =
+          await _client.request.from('student').select().eq('isDeleted', false);
       return SupabaseUtils.responseWrapper('students', data);
     } catch (e) {
       print(e.toString());
@@ -20,7 +21,9 @@ class StudentsSupabase {
 
   Future<void> deleteStudent({required int id}) async {
     try {
-      await _client.request.from('student').delete().eq('id', id);
+      await _client.request.from('student').update(
+        {'isDeleted': true},
+      ).eq('id', id);
     } catch (e) {
       print(e.toString());
       throw Exception(e);
