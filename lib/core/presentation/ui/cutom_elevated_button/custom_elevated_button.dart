@@ -22,7 +22,8 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
+    final _theme = Theme.of(context);
+    final _textTheme = _theme.textTheme;
 
     // styles
     final _paddingVertical = EdgeInsets.symmetric(vertical: pVertical ?? 10.h);
@@ -52,7 +53,9 @@ class CustomElevatedButton extends StatelessWidget {
           ),
           color: Colors.transparent,
         ),
-        color: onTap != null ? Colors.blue : Colors.blue.withOpacity(0.5),
+        color: onTap != null
+            ? _theme.primaryColor
+            : _theme.appBarTheme.backgroundColor,
       ),
     );
   }

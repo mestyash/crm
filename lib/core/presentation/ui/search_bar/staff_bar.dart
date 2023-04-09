@@ -35,7 +35,7 @@ class SearchBar extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor: _theme.appBarTheme.backgroundColor,
+                  fillColor: _theme.canvasColor,
                 ),
                 maxLines: 1,
                 textAlignVertical: TextAlignVertical.center,

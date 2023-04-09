@@ -17,13 +17,19 @@ class ProjectShadow {
   ];
 }
 
+class ProjectColors {
+  static const primary = Color(0xFF33452C);
+  static const secondary = Color(0xFFA7BE8F);
+}
+
 class ProjectThemes {
   static final lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: Colors.white,
-    primaryColor: Colors.lightBlue[800],
+    primaryColor: ProjectColors.primary,
+    canvasColor: Color.fromARGB(255, 233, 233, 233),
     cardColor: Colors.white,
     appBarTheme: AppBarTheme(
-      color: Color.fromARGB(255, 233, 233, 233),
+      color: ProjectColors.secondary,
       elevation: 0,
       titleTextStyle: TextStyle(
         color: Colors.black,
@@ -38,9 +44,12 @@ class ProjectThemes {
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Color.fromARGB(255, 54, 50, 50),
+      // backgroundColor: Color.fromARGB(255, 54, 50, 50),
+      backgroundColor: ProjectColors.secondary,
     ),
-    textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.blue),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: ProjectColors.secondary,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
         color: Color(0xFF21262E),

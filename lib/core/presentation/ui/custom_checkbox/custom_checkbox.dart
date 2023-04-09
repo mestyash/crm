@@ -13,6 +13,7 @@ class CustomCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context);
     return GestureDetector(
       onTap: action,
       child: AnimatedContainer(
@@ -21,7 +22,7 @@ class CustomCheckbox extends StatelessWidget {
         duration: Duration(milliseconds: 200),
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.blue,
+            color: _theme.primaryColor,
             width: 1.r,
           ),
           borderRadius: BorderRadius.circular(5.r),
@@ -34,7 +35,7 @@ class CustomCheckbox extends StatelessWidget {
           child: Icon(
             Icons.check,
             size: 15.r,
-            color: Colors.blue,
+            color: _theme.primaryColor,
           ),
         ),
       ),
