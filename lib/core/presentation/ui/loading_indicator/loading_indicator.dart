@@ -1,3 +1,4 @@
+import 'package:crm/core/styles/project_theme.dart';
 import 'package:flutter/material.dart';
 
 class LoadingIndicator extends StatelessWidget {
@@ -5,10 +6,9 @@ class LoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
     return Center(
       child: CircularProgressIndicator(
-        color: _theme.primaryColor,
+        color: ProjectColors.primary,
       ),
     );
   }

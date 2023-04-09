@@ -1,5 +1,4 @@
 import 'package:crm/core/domain/entity/group_model.dart';
-import 'package:crm/core/domain/entity/staff_employee_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,12 +12,12 @@ class GroupsStateCubit extends Cubit<GroupsState> {
   })  : _repository = repository,
         super(GroupsState());
 
-  Future<void> loadStaffData() async {
+  Future<void> loadGroups() async {
     try {
       emit(state.copyWith(isLoading: true, isFailure: false));
-      final data = await _repository.getStaffData();
-      emit(
-          state.copyWith(isLoading: false, groups: data, filteredGroups: data));
+      // final data = await _repository.getStaffData();
+      // emit(
+      // state.copyWith(isLoading: false, groups: data, filteredGroups: data));
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));
     }
