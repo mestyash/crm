@@ -31,6 +31,7 @@
     "mainAdminNavBarStaff": "Персонал",
     "mainAdminNavBarStudents": "Студенты",
     "mainAdminNavBarPayments": "Платежи",
+    "mainAdminNavBarGroups": "Группы",
     "staffScreenDeleteTeacher": "Удалить учителя",
     "staffScreenDeleteTeacherConfirm": "Вы действительно хотите удалить учителя ?",
     "staffScreenSuccessfullyDeleted": "Учитель успешно удален!",
