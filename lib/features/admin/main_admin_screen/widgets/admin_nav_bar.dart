@@ -25,6 +25,13 @@ class AdminNavBar extends StatelessWidget {
     final _marginBot = _phoneMarginBottom == 0 ? 17.5.h : _phoneMarginBottom;
     final _scaffoldColor = _theme.scaffoldBackgroundColor;
 
+    Color _iconColor(int buttonIndex) {
+      if (buttonIndex == selectedIndex) {
+        return _scaffoldColor;
+      }
+      return ProjectColors.primary;
+    }
+
     final _defaultIcon = Icons.home;
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -56,7 +63,7 @@ class AdminNavBar extends StatelessWidget {
           GButton(
             leading: Icon(
               Icons.person,
-              color: _scaffoldColor,
+              color: _iconColor(0),
               size: 20.r,
             ),
             icon: _defaultIcon,
@@ -66,7 +73,7 @@ class AdminNavBar extends StatelessWidget {
           GButton(
             leading: Icon(
               Icons.child_care,
-              color: _scaffoldColor,
+              color: _iconColor(1),
               size: 20.r,
             ),
             icon: _defaultIcon,
@@ -76,7 +83,7 @@ class AdminNavBar extends StatelessWidget {
           GButton(
             leading: Icon(
               Icons.monetization_on,
-              color: _scaffoldColor,
+              color: _iconColor(2),
               size: 20.r,
             ),
             icon: _defaultIcon,
