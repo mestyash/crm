@@ -99,6 +99,8 @@ class _ScreenData extends StatelessWidget {
                   style: _textTheme.bodyText1?.copyWith(
                     height: 1.42,
                   ),
+                  obscureText: true,
+                  obscuringCharacter: '∗',
                   onChanged: (pass) => _cubit.onPassChanged(pass),
                 ),
                 SizedBox(height: 24.h),

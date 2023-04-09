@@ -1,7 +1,7 @@
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
+import 'package:crm/core/presentation/ui/loading_indicator/loading_indicator.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/common/app/router/router.dart';
-import 'package:crm/features/common/app/view/widgets/overlay_loader.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         child: GlobalLoaderOverlay(
           closeOnBackButton: true,
           useDefaultLoading: false,
-          overlayWidget: OverlayLoader(),
+          overlayWidget: LoadingIndicator(),
           child: MaterialApp(
             theme: ProjectThemes.lightTheme,
             themeMode: ThemeMode.light,
