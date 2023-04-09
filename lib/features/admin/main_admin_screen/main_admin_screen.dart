@@ -5,6 +5,7 @@ import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit
 import 'package:crm/features/admin/staff/features/staff_screen/view/staff_screen.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
 import 'package:crm/features/admin/students/features/students_screen/view/students_screen.dart';
+import 'package:crm/features/common/groups/features/groups/view/groups_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,6 +29,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
   late StaffScreen _staffScreen;
   late StudentsScreen _studentsScreen;
   late PaymentsScreen _paymentsScreen;
+  late GroupsScreen _groupsScreen;
 
   int _selectedIndex = 0;
   late List<Widget> _pages;
@@ -37,6 +39,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
     _staffScreen = StaffScreen();
     _studentsScreen = StudentsScreen();
     _paymentsScreen = PaymentsScreen();
+    _groupsScreen = GroupsScreen();
 
     _pages = [
       BlocProvider<StaffCubit>(
@@ -51,6 +54,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
         create: (_) => widget.paymentsBloc,
         child: _paymentsScreen,
       ),
+      _groupsScreen,
     ];
     super.initState();
   }

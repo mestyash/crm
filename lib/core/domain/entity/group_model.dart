@@ -4,6 +4,7 @@ import 'package:crm/core/domain/entity/user_model.dart';
 
 class GroupModel extends Equatable {
   final int id;
+  final String name;
   final int language;
   final StaffEmployeeModel teacher;
   final num price;
@@ -12,6 +13,7 @@ class GroupModel extends Equatable {
 
   GroupModel({
     required this.id,
+    required this.name,
     required this.language,
     required this.teacher,
     required this.price,
@@ -23,6 +25,7 @@ class GroupModel extends Equatable {
   List<Object> get props {
     return [
       id,
+      name,
       language,
       teacher,
       price,
