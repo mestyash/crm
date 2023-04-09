@@ -72,7 +72,6 @@ class _StaffScreenData extends StatelessWidget {
       firstAction: () => Navigator.pop(context),
       secondActionText: _l10n.delete,
       secondAction: () {
-        Navigator.pop(context);
         context.read<StaffCubit>().deleteStaffEmployee(id);
       },
     );
