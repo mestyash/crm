@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/payment_model.dart';
 import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/utils/bloc/bloc_utils.dart';
 import 'package:crm/features/admin/payments/core/data/repository/payments_repository.dart';
 import 'package:crm/features/admin/payments/core/domain/payments_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -50,7 +51,11 @@ class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
     final newMode = currentMode == PaymentsStateMode.all
         ? PaymentsStateMode.student
         : PaymentsStateMode.all;
-    emit(state.copyWith(mode: newMode, studentInList: [], payments: []));
+    emit(state.copyWith(
+      mode: newMode,
+      student: Wrapped.value(null),
+      payments: [],
+    ));
     add(PaymentsEventSearch());
   }
 
@@ -77,7 +82,7 @@ class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
     PaymentsEventStudent event,
     Emitter<PaymentsState> emit,
   ) {
-    emit(state.copyWith(studentInList: [event.student]));
+    emit(state.copyWith(student: Wrapped.value(event.student)));
     add(PaymentsEventSearch());
   }
 

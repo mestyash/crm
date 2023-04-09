@@ -9,7 +9,7 @@ class PaymentsState extends Equatable {
     this.startDate,
     this.endDate,
     this.mode = PaymentsStateMode.all,
-    this.studentInList = const [],
+    this.student,
     this.students = const [],
     this.payments = const [],
   });
@@ -21,7 +21,7 @@ class PaymentsState extends Equatable {
   final DateTime? startDate;
   final DateTime? endDate;
   final PaymentsStateMode mode;
-  final List<UserModel> studentInList;
+  final UserModel? student;
   final List<UserModel> students;
   final List<PaymentModel> payments;
 
@@ -30,15 +30,7 @@ class PaymentsState extends Equatable {
     if (mode == PaymentsStateMode.all) {
       return hasDates;
     } else {
-      return hasDates && studentInList.isNotEmpty;
-    }
-  }
-
-  UserModel? get student {
-    if (studentInList.isNotEmpty) {
-      return studentInList[0];
-    } else {
-      return null;
+      return hasDates && student != null;
     }
   }
 
@@ -50,7 +42,7 @@ class PaymentsState extends Equatable {
     DateTime? startDate,
     DateTime? endDate,
     PaymentsStateMode? mode,
-    List<UserModel>? studentInList,
+    Wrapped<UserModel?>? student,
     List<UserModel>? students,
     List<PaymentModel>? payments,
   }) {
@@ -62,7 +54,7 @@ class PaymentsState extends Equatable {
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       mode: mode ?? this.mode,
-      studentInList: studentInList ?? this.studentInList,
+      student: student != null ? student.value : this.student,
       students: students ?? this.students,
       payments: payments ?? this.payments,
     );
@@ -78,7 +70,7 @@ class PaymentsState extends Equatable {
       startDate,
       endDate,
       mode,
-      studentInList,
+      student,
       students,
       payments,
     ];
