@@ -5,7 +5,7 @@ import 'package:crm/core/presentation/ui/inputs/input_select/input_select.dart';
 import 'package:crm/core/presentation/ui/inputs/input_text/input_text.dart';
 import 'package:crm/core/presentation/ui/loading_indicator/loading_indicator.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
-import 'package:crm/core/settings/workplace_settings.dart';
+import 'package:crm/core/settings/workplace/workplace_settings.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';

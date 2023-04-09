@@ -18,6 +18,8 @@
     "student": "Студент",
     "city1": "Новосибирск",
     "city2": "Крым",
+    "lang1": "Английский",
+    "lang2": "Немецкий",
     "enterSurname": "Введите фамилию",
     "studentPlaceholder": "Выберите студента",
     "datePlaceholder": "Выберите дату",

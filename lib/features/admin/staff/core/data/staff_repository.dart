@@ -1,9 +1,8 @@
 import 'package:crm/core/api/staff/staff_supabase.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
-import 'package:crm/features/admin/staff/core/data/dto/employee/staff_employee_mapper.dart';
-import 'package:crm/features/admin/staff/core/data/dto/staff/staff_mapper.dart';
-import 'package:crm/features/admin/staff/core/domain/entity/staff_employee_model.dart';
-import 'package:crm/features/admin/staff/core/domain/usecase/staff_usecase.dart';
+import 'package:crm/core/data/dto/staff_employee_mapper.dart';
+import 'package:crm/core/domain/entity/staff_employee_model.dart';
+import 'package:crm/features/admin/staff/core/domain/staff_usecase.dart';
 
 class StaffRepository extends IStaffRepository {
   final StaffSupabase _supabase;
@@ -15,7 +14,7 @@ class StaffRepository extends IStaffRepository {
     try {
       final response = await _supabase.getStaffData();
       final data = response['payload']['users'] as List<dynamic>;
-      return mapStaff(data);
+      return data.map((e) => mapStaffEmployee(e)).toList();
     } catch (e) {
       print(e.toString());
       throw Exception(e);

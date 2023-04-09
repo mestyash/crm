@@ -1,7 +1,10 @@
 import 'package:crm/l10n/l10n.dart';
 
 class WorkplaceSettings {
-  static List<int> places = [0, 1];
+  static List<int> places = [
+    0, // Новосибирск
+    1, // Крым
+  ];
 
   static String translatePlace(AppLocalizations l10n, int number) {
     switch (number) {
