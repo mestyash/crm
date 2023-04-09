@@ -19,7 +19,6 @@ class StudentsRepository extends IStudentsRepository {
       return data.map((e) => mapUser(e)).toList();
     } catch (e) {
       print(e.toString());
-      print('kek');
       throw Exception(e);
     }
   }
