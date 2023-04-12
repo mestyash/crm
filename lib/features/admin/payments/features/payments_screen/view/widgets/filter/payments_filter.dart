@@ -129,7 +129,7 @@ class PpaymentsFilterState extends State<PaymentsFilter> {
                 Expanded(
                   child: InputText(
                     title: '',
-                    hintText: _l10n.studentPlaceholder,
+                    hintText: _l10n.selectStudent,
                     readOnly: true,
                     controller: _studentController,
                     onTap: _openModalSheet,

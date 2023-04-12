@@ -15,7 +15,7 @@ class StaffCubit extends Cubit<StaffState> {
 
   Future<void> loadStaffData() async {
     try {
-      emit(state.copyWith(isLoading: true, isFailure: false));
+      emit(state.copyWith(isLoading: true));
       final data = await _repository.getStaffData();
       emit(state.copyWith(
         isLoading: false,

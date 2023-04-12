@@ -1,3 +1,4 @@
+import 'package:crm/core/api/groups/groups_supabase.dart';
 import 'package:crm/core/api/payments/payments_supabase.dart';
 import 'package:crm/core/api/staff/staff_supabase.dart';
 import 'package:crm/core/api/students/students_supabase.dart';
@@ -21,6 +22,9 @@ import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/app/view/app.dart';
 import 'package:crm/core/api/profile/profile_supabase.dart';
 import 'package:crm/core/data/data_source/user_credentials_storage/user_credentials_storage.dart';
+import 'package:crm/features/common/groups/core/data/groups_repository.dart';
+import 'package:crm/features/common/groups/features/group/view/group_screen.dart';
+import 'package:crm/features/common/groups/features/groups/cubit/groups_cubit.dart';
 import 'package:crm/features/common/login_screen/data/login_repository.dart';
 import 'package:crm/features/common/login_screen/presentation/cubit/login_cubit.dart';
 import 'package:crm/features/common/login_screen/presentation/view/login_screen.dart';
@@ -48,6 +52,7 @@ void initGetIt() {
       Routes.login: (context) => sl.get<LoginScreen>(),
       // --- teacher ---
       Routes.mainTeacher: (context) => sl.get<MainTeacherScreen>(),
+      Routes.group: (context) => sl.get<GroupScreen>(),
       // --- admin ---
       Routes.mainAdmin: (context) => sl.get<MainAdminScreen>(),
       Routes.uploadStaff: (context) => sl.get<UploadStaffScreen>(),
@@ -77,6 +82,7 @@ void initGetIt() {
       staffCubit: sl.get<StaffCubit>(),
       studentsCubit: sl.get<StudentsCubit>(),
       paymentsBloc: sl.get<PaymentsBloc>(),
+      groupsCubit: sl.get<GroupsCubit>(),
     ),
   );
   sl.registerFactory<UploadStaffScreen>(
@@ -94,6 +100,11 @@ void initGetIt() {
       bloc: sl.get<CreatePaymentBloc>(),
     ),
   );
+  sl.registerFactory<GroupScreen>(
+    () => GroupScreen(
+        // bloc: sl.get<CreatePaymentBloc>(),
+        ),
+  );
   // ---------- BLOCS ----------
   // --- COMMON ---
   sl.registerLazySingleton<CurrentUserCubit>(
@@ -109,6 +120,11 @@ void initGetIt() {
     () => LoginCubit(
       currentUserCubit: sl.get<CurrentUserCubit>(),
       repository: sl.get<LoginRepository>(),
+    ),
+  );
+  sl.registerFactory<GroupsCubit>(
+    () => GroupsCubit(
+      repository: sl.get<GroupsRepository>(),
     ),
   );
   // --- ADMIN ---
@@ -171,6 +187,11 @@ void initGetIt() {
       paymentsSupabase: sl.get<PaymentsSupabase>(),
     ),
   );
+  sl.registerFactory<GroupsRepository>(
+    () => GroupsRepository(
+      supabase: sl.get<GroupsSupabase>(),
+    ),
+  );
   // ---------- DATA SOURCES ----------
   // API
   sl.registerFactory<ProfileSupabase>(
@@ -190,6 +211,11 @@ void initGetIt() {
   );
   sl.registerFactory<PaymentsSupabase>(
     () => PaymentsSupabase(
+      client: sl.get<SupabaseClient>(),
+    ),
+  );
+  sl.registerFactory<GroupsSupabase>(
+    () => GroupsSupabase(
       client: sl.get<SupabaseClient>(),
     ),
   );

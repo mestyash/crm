@@ -4,14 +4,15 @@ import 'package:crm/core/styles/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class InputSelect extends StatelessWidget {
+class InputSelect<T> extends StatelessWidget {
   final bool isLoading;
   final String title;
   final String hintText;
   final bool isRequired;
   final dynamic selectedValue;
   final List<String> valueNames;
-  final List<dynamic> values;
+  final List<T> values;
+  final bool readOnly;
   final void Function(dynamic value) onChange;
 
   const InputSelect({
@@ -23,6 +24,7 @@ class InputSelect extends StatelessWidget {
     required this.selectedValue,
     required this.valueNames,
     required this.values,
+    this.readOnly = false,
     required this.onChange,
   });
 
@@ -52,7 +54,7 @@ class InputSelect extends StatelessWidget {
                         ),
                       ),
                   ],
-                  onChanged: onChange,
+                  onChanged: readOnly ? null : onChange,
                 ),
         ],
       ),

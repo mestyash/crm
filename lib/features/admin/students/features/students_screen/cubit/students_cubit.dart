@@ -15,7 +15,7 @@ class StudentsCubit extends Cubit<StudentsState> {
 
   Future<void> loadStudents() async {
     try {
-      emit(state.copyWith(isLoading: true, isFailure: false));
+      emit(state.copyWith(isLoading: true));
       final data = await _repository.getStudents();
       emit(state.copyWith(
         isLoading: false,

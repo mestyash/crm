@@ -44,7 +44,7 @@ class UploadStaffScreen extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.success(
-          text: _l10n.uploadStaffSuccessfullyCreated,
+          text: _l10n.uploadStaffScreenSuccessfullyCreated,
         ));
     }
     if (state.successfullyEdited) {
@@ -53,7 +53,7 @@ class UploadStaffScreen extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.success(
-          text: _l10n.uploadStaffSuccessfullyEdited,
+          text: _l10n.uploadStaffScreenSuccessfullyEdited,
         ));
     }
     if (state.isFailure) {
@@ -106,6 +106,7 @@ class __UploadStaffScreenDataState extends State<_UploadStaffScreenData> {
   late TextEditingController _loginController;
   late TextEditingController _passwordController;
   late TextEditingController _workplaceController;
+  final _places = WorkplaceSettings.places;
 
   @override
   void initState() {
@@ -157,19 +158,19 @@ class __UploadStaffScreenDataState extends State<_UploadStaffScreenData> {
           children: [
             InputText(
               title: _l10n.name,
-              hintText: _l10n.uploadStaffNamePlaceholder,
+              hintText: _l10n.enterName,
               controller: _nameController,
               onChange: (text) => _cubit.onNameChange(text),
             ),
             InputText(
               title: _l10n.surname,
-              hintText: _l10n.uploadStaffSurnamePlaceholder,
+              hintText: _l10n.enterSurname,
               controller: _surnameController,
               onChange: (text) => _cubit.onSurnameChange(text),
             ),
             InputText(
               title: _l10n.patronymic,
-              hintText: _l10n.uploadStaffPatronymicPlaceholder,
+              hintText: _l10n.enterPatronymic,
               controller: _patronymicController,
               onChange: (text) => _cubit.onPatronymicChange(text),
             ),
@@ -192,14 +193,14 @@ class __UploadStaffScreenDataState extends State<_UploadStaffScreenData> {
               controller: _passwordController,
               onChange: (text) => _cubit.onPasswordChange(text),
             ),
-            InputSelect(
+            InputSelect<int>(
               title: _l10n.workplace,
-              hintText: _l10n.uploadStaffWorkplacePlaceholder,
+              hintText: _l10n.uploadStaffScreenWorkplacePlaceholder,
               selectedValue: widget.state.workplace,
-              valueNames: WorkplaceSettings.places
+              valueNames: _places
                   .map((e) => WorkplaceSettings.translatePlace(_l10n, e))
                   .toList(),
-              values: WorkplaceSettings.places,
+              values: _places,
               onChange: (place) => _cubit.onWorkplaceChange(place as int),
             ),
             SizedBox(height: 20.h),

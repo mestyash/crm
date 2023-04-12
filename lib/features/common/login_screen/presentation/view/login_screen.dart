@@ -1,5 +1,6 @@
 import 'package:crm/core/presentation/ui/custom_checkbox/custom_checkbox.dart';
 import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_button.dart';
+import 'package:crm/core/presentation/ui/inputs/input_checkbox/input_checkbox.dart';
 import 'package:crm/core/presentation/ui/inputs/input_title/input_title.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/common/login_screen/presentation/cubit/login_cubit.dart';
@@ -104,33 +105,12 @@ class _ScreenData extends StatelessWidget {
                   onChanged: (pass) => _cubit.onPassChanged(pass),
                 ),
                 SizedBox(height: 24.h),
-                GestureDetector(
-                  onTap: () => _cubit.onCheckboxChanged(),
-                  child: IntrinsicWidth(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(width: 5.r),
-                        CustomCheckbox(
-                          isSelected: state.saveUserCredentials,
-                          action: () => _cubit.onCheckboxChanged(),
-                        ),
-                        SizedBox(width: 10.r),
-                        Text(
-                          _l10n.loginScreenCheckbox,
-                          style: _textTheme.bodyText1?.copyWith(
-                            height: 0,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.fade,
-                          softWrap: false,
-                        )
-                      ],
-                    ),
-                  ),
+                InputCheckbox(
+                  action: () => _cubit.onCheckboxChanged(),
+                  isSelected: state.saveUserCredentials,
+                  text: _l10n.loginScreenCheckbox,
                 ),
-                SizedBox(height: 49.h),
+                SizedBox(height: 25.h),
                 CustomElevatedButton(
                   text: _l10n.enter.toUpperCase(),
                   onTap: state.canSend

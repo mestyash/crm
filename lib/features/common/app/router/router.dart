@@ -4,6 +4,7 @@ class Routes {
   static const login = '/login';
   // --- teacher ---
   static const mainTeacher = '/mainTeacher';
+  static const group = '/group';
   // --- admin ---
   static const mainAdmin = '/mainAdmin';
   static const uploadStaff = '/uploadStaff';

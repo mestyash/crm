@@ -143,13 +143,13 @@ class _ScreenDataState extends State<_ScreenData> {
       children: [
         InputText(
           title: _l10n.student,
-          hintText: _l10n.studentPlaceholder,
+          hintText: _l10n.selectStudent,
           readOnly: true,
           controller: _studentController,
           onTap: _openModalSheet,
         ),
         InputText(
-          title: _l10n.createPaymentSumPlaceholder,
+          title: _l10n.createPaymentScreenSumPlaceholder,
           hintText: _l10n.sum,
           keyboardType: TextInputType.numberWithOptions(
             decimal: true,
@@ -157,7 +157,7 @@ class _ScreenDataState extends State<_ScreenData> {
           onChange: (sum) => _bloc.add(CreatePaymentEventSum(sum: sum)),
         ),
         InputDate(
-          title: _l10n.createPaymentDatePlaceholder,
+          title: _l10n.createPaymentScreenDatePlaceholder,
           hintText: _l10n.datePlaceholder,
           controller: _dateController,
           date: DateTime.now(),

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserCard extends StatelessWidget {
   final String fullName;
-  final void Function() editAction;
+  final void Function()? editAction;
   final void Function() deleteAction;
 
   const UserCard({
@@ -42,14 +42,19 @@ class UserCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 5.w),
-            GestureDetector(
-              child: Icon(
-                Icons.edit,
-                size: 20.r,
-                color: _theme.primaryColor,
+            Visibility(
+              visible: editAction != null,
+              child: Padding(
+                padding: EdgeInsets.only(right: 15.w),
+                child: GestureDetector(
+                  child: Icon(
+                    Icons.edit,
+                    size: 20.r,
+                    color: _theme.primaryColor,
+                  ),
+                ),
               ),
             ),
-            SizedBox(width: 15.w),
             GestureDetector(
               onTap: deleteAction,
               child: Icon(

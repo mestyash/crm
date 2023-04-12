@@ -1,22 +1,25 @@
 import 'package:crm/core/domain/entity/group_model.dart';
+import 'package:crm/features/common/groups/core/data/groups_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'groups_state.dart';
 
-class GroupsStateCubit extends Cubit<GroupsState> {
-  dynamic _repository;
+class GroupsCubit extends Cubit<GroupsState> {
+  final GroupsRepository _repository;
 
-  GroupsStateCubit({
-    required dynamic repository,
+  GroupsCubit({
+    required GroupsRepository repository,
   })  : _repository = repository,
         super(GroupsState());
 
   Future<void> loadGroups() async {
     try {
-      emit(state.copyWith(isLoading: true, isFailure: false));
-      // final data = await _repository.getStaffData();
+      emit(state.copyWith(isLoading: true));
+      // print('zxczxc');
+      // await _repository.getGroups();
       // emit(
+      emit(state.copyWith(isLoading: false, groups: []));
       // state.copyWith(isLoading: false, groups: data, filteredGroups: data));
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));

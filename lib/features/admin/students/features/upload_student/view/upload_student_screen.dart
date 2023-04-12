@@ -147,19 +147,19 @@ class __UploadStudentScreenDataState extends State<_UploadStudentScreenData> {
           children: [
             InputText(
               title: _l10n.name,
-              hintText: _l10n.uploadStaffNamePlaceholder,
+              hintText: _l10n.enterName,
               controller: _nameController,
               onChange: (text) => _cubit.onNameChange(text),
             ),
             InputText(
               title: _l10n.surname,
-              hintText: _l10n.uploadStaffSurnamePlaceholder,
+              hintText: _l10n.enterSurname,
               controller: _surnameController,
               onChange: (text) => _cubit.onSurnameChange(text),
             ),
             InputText(
               title: _l10n.patronymic,
-              hintText: _l10n.uploadStaffPatronymicPlaceholder,
+              hintText: _l10n.enterPatronymic,
               controller: _patronymicController,
               onChange: (text) => _cubit.onPatronymicChange(text),
             ),
