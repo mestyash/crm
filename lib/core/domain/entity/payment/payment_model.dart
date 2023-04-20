@@ -1,6 +1,6 @@
 import 'package:crm/core/utils/date/date_utils.dart';
 import 'package:equatable/equatable.dart';
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 
 class PaymentModel extends Equatable {
   final int id;

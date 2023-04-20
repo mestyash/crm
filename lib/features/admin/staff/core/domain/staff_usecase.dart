@@ -1,4 +1,4 @@
-import 'package:crm/core/domain/entity/staff_employee_model.dart';
+import 'package:crm/core/domain/entity/staff_employee/staff_employee_model.dart';
 
 abstract class IStaffRepository {
   Future<List<StaffEmployeeModel>> getStaffData();

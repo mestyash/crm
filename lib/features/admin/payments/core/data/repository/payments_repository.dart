@@ -1,9 +1,9 @@
 import 'package:crm/core/api/payments/payments_supabase.dart';
 import 'package:crm/core/api/students/students_supabase.dart';
-import 'package:crm/core/data/dto/payment_mapper.dart';
-import 'package:crm/core/data/dto/user_mapper.dart';
-import 'package:crm/core/domain/entity/payment_model.dart';
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/data/dto/payment/payment_mapper.dart';
+import 'package:crm/core/data/dto/user/user_mapper.dart';
+import 'package:crm/core/domain/entity/payment/payment_model.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
 import 'package:crm/features/admin/payments/core/domain/payments_usecase.dart';
 

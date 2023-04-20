@@ -23,6 +23,7 @@ import 'package:crm/features/common/app/view/app.dart';
 import 'package:crm/core/api/profile/profile_supabase.dart';
 import 'package:crm/core/data/data_source/user_credentials_storage/user_credentials_storage.dart';
 import 'package:crm/features/common/groups/core/data/groups_repository.dart';
+import 'package:crm/features/common/groups/features/group/bloc/group_bloc.dart';
 import 'package:crm/features/common/groups/features/group/view/group_screen.dart';
 import 'package:crm/features/common/groups/features/groups/cubit/groups_cubit.dart';
 import 'package:crm/features/common/login_screen/data/login_repository.dart';
@@ -102,8 +103,8 @@ void initGetIt() {
   );
   sl.registerFactory<GroupScreen>(
     () => GroupScreen(
-        // bloc: sl.get<CreatePaymentBloc>(),
-        ),
+      bloc: sl.get<GroupBloc>(),
+    ),
   );
   // ---------- BLOCS ----------
   // --- COMMON ---
@@ -125,6 +126,11 @@ void initGetIt() {
   sl.registerFactory<GroupsCubit>(
     () => GroupsCubit(
       repository: sl.get<GroupsRepository>(),
+    ),
+  );
+  sl.registerFactory<GroupBloc>(
+    () => GroupBloc(
+      groupsRepository: sl.get<GroupsRepository>(),
     ),
   );
   // --- ADMIN ---

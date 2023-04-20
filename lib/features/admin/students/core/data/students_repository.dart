@@ -1,6 +1,6 @@
 import 'package:crm/core/api/students/students_supabase.dart';
-import 'package:crm/core/data/dto/user_mapper.dart';
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/data/dto/user/user_mapper.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
 import 'package:crm/features/admin/students/core/domain/students_usecase.dart';
 

@@ -1,4 +1,4 @@
-import 'package:crm/core/domain/entity/group_model.dart';
+import 'package:crm/core/domain/entity/group/group_model.dart';
 
 abstract class IGroupsRepository {
   Future<List<GroupModel>> getGroups();

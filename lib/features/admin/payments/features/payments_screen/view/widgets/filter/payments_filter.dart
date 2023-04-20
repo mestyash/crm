@@ -1,4 +1,4 @@
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/presentation/ui/inputs/input_date/input_date.dart';
 import 'package:crm/core/presentation/ui/inputs/input_text/input_text.dart';
 import 'package:crm/core/presentation/ui/search_users_modal_sheet/search_users_modal_sheet.dart';

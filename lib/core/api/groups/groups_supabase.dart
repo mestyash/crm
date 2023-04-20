@@ -9,7 +9,10 @@ class GroupsSupabase {
 
   Future<Map<String, dynamic>> getGroups() async {
     try {
-      final data = await _client.request.from('group').select();
+      final data = await _client.request
+          .from('group')
+          .select()
+          .order('isActive', ascending: true);
       return SupabaseUtils.responseWrapper('groups', data);
     } catch (e) {
       print(e.toString());
@@ -22,8 +25,15 @@ class GroupsSupabase {
       final data = await _client.request
           .from('group')
           .select('*, user:teacherId (*)')
-          .eq('teacherId', id);
-      return SupabaseUtils.responseWrapper('groups', data);
+          .eq('teacherId', id)
+          .order('isActive', ascending: true);
+      return SupabaseUtils.responseWrapper(
+        'groups',
+        {
+          ...(data as Map<String, dynamic>),
+          'students': [],
+        },
+      );
     } catch (e) {
       print(e.toString());
       throw Exception(e);
@@ -54,7 +64,7 @@ class GroupsSupabase {
     }
   }
 
-  Future<void> createGroup(ApiStudentModel data) async {
+  Future<void> createGroup(ApiGroupModel data) async {
     try {
       await _client.request.from('group').insert(data.toJson());
     } catch (e) {
@@ -63,7 +73,7 @@ class GroupsSupabase {
     }
   }
 
-  Future<void> uploadGroup(ApiStudentModel data) async {
+  Future<void> updateGroup(ApiGroupModel data) async {
     try {
       await _client.request
           .from('group')
@@ -76,7 +86,7 @@ class GroupsSupabase {
   }
 }
 
-class ApiStudentModel {
+class ApiGroupModel {
   final int? id;
   final int language;
   final int teacherId;
@@ -85,7 +95,7 @@ class ApiStudentModel {
   final List<int> studentIds;
   final bool isActive;
 
-  ApiStudentModel({
+  ApiGroupModel({
     required this.id,
     required this.language,
     required this.teacherId,

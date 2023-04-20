@@ -1,4 +1,4 @@
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_bar.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/styles/project_theme.dart';

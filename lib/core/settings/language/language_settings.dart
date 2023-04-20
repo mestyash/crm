@@ -16,4 +16,11 @@ class LanguageSettings {
         return '';
     }
   }
+
+  static List<String> stringLanguages(AppLocalizations l10n) {
+    return [
+      l10n.lang1,
+      l10n.lang2,
+    ];
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_button.dart';
 import 'package:crm/core/presentation/ui/inputs/input_date/input_date.dart';

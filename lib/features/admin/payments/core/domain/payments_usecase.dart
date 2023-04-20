@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:crm/core/domain/entity/payment_model.dart';
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/domain/entity/payment/payment_model.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 
 abstract class IPaymentsRepository {
   Future<List<PaymentModel>> getPaymentsByRange(

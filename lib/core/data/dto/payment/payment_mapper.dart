@@ -1,5 +1,5 @@
-import 'package:crm/core/data/dto/user_mapper.dart';
-import 'package:crm/core/domain/entity/payment_model.dart';
+import 'package:crm/core/data/dto/user/user_mapper.dart';
+import 'package:crm/core/domain/entity/payment/payment_model.dart';
 
 PaymentModel mapPayment(dynamic data) {
   return PaymentModel(

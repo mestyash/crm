@@ -1,4 +1,4 @@
-import 'package:crm/core/domain/entity/user_model.dart';
+import 'package:crm/core/domain/entity/user/user_model.dart';
 
 UserModel mapUser(dynamic data) {
   return UserModel(

@@ -1,7 +1,7 @@
 import 'package:crm/core/api/staff/staff_supabase.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
-import 'package:crm/core/data/dto/staff_employee_mapper.dart';
-import 'package:crm/core/domain/entity/staff_employee_model.dart';
+import 'package:crm/core/data/dto/staff_employee/staff_employee_mapper.dart';
+import 'package:crm/core/domain/entity/staff_employee/staff_employee_model.dart';
 import 'package:crm/features/admin/staff/core/domain/staff_usecase.dart';
 
 class StaffRepository extends IStaffRepository {

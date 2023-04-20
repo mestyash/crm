@@ -4,37 +4,66 @@ import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_b
 import 'package:crm/core/presentation/ui/inputs/input_checkbox/input_checkbox.dart';
 import 'package:crm/core/presentation/ui/inputs/input_select/input_select.dart';
 import 'package:crm/core/presentation/ui/inputs/input_text/input_text.dart';
+import 'package:crm/core/presentation/ui/search_users_modal_sheet/search_users_modal_sheet.dart';
 import 'package:crm/core/settings/language/language_settings.dart';
 import 'package:crm/core/styles/project_theme.dart';
+import 'package:crm/features/admin/students/features/upload_student/view/upload_student_screen.dart';
+import 'package:crm/features/common/groups/features/group/bloc/group_bloc.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+class GroupScreenScreenArguments {
+  final int id;
+  GroupScreenScreenArguments({required this.id});
+}
+
 class GroupScreen extends StatelessWidget {
-  const GroupScreen({super.key});
+  final GroupBloc bloc;
+
+  const GroupScreen({super.key, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
+    final _screenArguments = ModalRoute.of(context)?.settings.arguments
+        as UploadStudentScreenArguments?;
+
     final _l10n = context.l10n;
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: _l10n.mainAdminNavBarGroups,
+    return BlocProvider<GroupBloc>(
+      create: (_) => bloc..add(GroupEventLoad(id: _screenArguments?.id)),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: _l10n.mainAdminNavBarGroups,
+        ),
+        body: BlocConsumer<GroupBloc, GroupState>(
+          listener: (context, state) => {},
+          builder: (context, state) => _ScreenData(
+            state: state,
+            languages: LanguageSettings.stringLanguages(_l10n),
+          ),
+        ),
       ),
-      body: _ScreenData(),
     );
   }
 }
 
 class _ScreenData extends StatefulWidget {
-  const _ScreenData();
+  final GroupState state;
+  final List<String> languages;
+
+  const _ScreenData({
+    required this.state,
+    required this.languages,
+  });
 
   @override
   State<_ScreenData> createState() => _ScreenDataState();
 }
 
 class _ScreenDataState extends State<_ScreenData> {
+  late GroupBloc _bloc;
   late TextEditingController _nameController;
   late TextEditingController _languageController;
   late TextEditingController _teacherController;
@@ -43,34 +72,42 @@ class _ScreenDataState extends State<_ScreenData> {
 
   @override
   void initState() {
-    _nameController = TextEditingController();
-    _languageController = TextEditingController();
-    _teacherController = TextEditingController();
-    _priceController = TextEditingController();
-    _salaryController = TextEditingController();
+    final state = widget.state;
+    _bloc = context.read<GroupBloc>();
+    _nameController = TextEditingController()..text = state.name;
+    _languageController = TextEditingController()
+      ..text = state.language == null ? '' : widget.languages[state.language!];
+    _teacherController = TextEditingController()
+      ..text = state.teacher?.fullName ?? '';
+    _priceController = TextEditingController()..text = state.price.toString();
+    _salaryController = TextEditingController()..text = state.salary.toString();
     super.initState();
   }
 
-  void _openModalSheet() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => BlocProvider<CreatePaymentBloc>.value(
-        value: _bloc,
-        child: BlocBuilder<CreatePaymentBloc, CreatePaymentState>(
-          builder: (context, state) {
-            return SearchUsersModalSheet(
-              onTextChange: _onSearchStudents,
-              isLoading: state.isSearching,
-              users: state.students,
-              onSelectUser: _onStudentChange,
-            );
-          },
-        ),
-      ),
-    );
+  void _onLanguageChange(int value) {
+    _languageController.text = widget.languages[value];
+    _bloc.add();
   }
+  // void _openModalSheet() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     backgroundColor: Colors.transparent,
+  //     builder: (_) => BlocProvider<GroupBloc>.value(
+  //       value: _bloc,
+  //       child: BlocBuilder<CreatePaymentBloc, CreatePaymentState>(
+  //         builder: (context, state) {
+  //           return SearchUsersModalSheet(
+  //             onTextChange: _onSearchStudents,
+  //             isLoading: state.isSearching,
+  //             users: state.students,
+  //             onSelectUser: _onStudentChange,
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   void dispose() {
@@ -102,14 +139,14 @@ class _ScreenDataState extends State<_ScreenData> {
               title: _l10n.name,
               hintText: _l10n.enterName,
               controller: _nameController,
-              // onChange: (text) => _cubit.onNameChange(text),
+              onChange: (text) => _bloc.add(GroupEventName(name: text)),
               readOnly: !isAdmin,
             ),
             InputSelect<int>(
               title: _l10n.language,
               hintText: _l10n.selectLanguage,
               selectedValue: null,
-              valueNames: _languages
+              valueNames: widget.languages
                   .map((e) => LanguageSettings.translateLanguage(_l10n, e))
                   .toList(),
               values: _languages,

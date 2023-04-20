@@ -1,4 +1,4 @@
-import 'package:crm/core/domain/entity/payment_model.dart';
+import 'package:crm/core/domain/entity/payment/payment_model.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
