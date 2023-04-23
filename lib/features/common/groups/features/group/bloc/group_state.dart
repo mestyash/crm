@@ -39,6 +39,15 @@ class GroupState extends Equatable {
   final List<UserModel> students;
   final List<UserModel> availableStudents;
 
+  bool get canSend => ![
+        name.trim().isNotEmpty,
+        language != null,
+        teacher != null,
+        price > 0,
+        salary > 0,
+        students.isNotEmpty,
+      ].contains(false);
+
   GroupState copyWith({
     bool? isLoading,
     bool? isUploading,

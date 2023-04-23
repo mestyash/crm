@@ -1,7 +1,6 @@
 import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart'
     as client;
 import 'package:crm/core/utils/supabase/supabase_utils.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class StudentsSupabase {
   final client.SupabaseClient _client;
@@ -62,12 +61,30 @@ class StudentsSupabase {
     }
   }
 
-  Future<Map<String, dynamic>> searchStudentsBySurname(String surname) async {
+  Future<Map<String, dynamic>> searchActiveStudentsBySurname(
+    String surname,
+  ) async {
     try {
       final data = await _client.request
           .from('student')
           .select()
-          .textSearch('surname', surname, type: TextSearchType.plain);
+          .is_('isDeleted', false)
+          .ilike('surname', '%$surname%');
+      return SupabaseUtils.responseWrapper('students', data);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
+
+  Future<Map<String, dynamic>> searchStudentsBySurname(
+    String surname,
+  ) async {
+    try {
+      final data = await _client.request
+          .from('student')
+          .select()
+          .ilike('surname', '%$surname%');
       return SupabaseUtils.responseWrapper('students', data);
     } catch (e) {
       print(e.toString());

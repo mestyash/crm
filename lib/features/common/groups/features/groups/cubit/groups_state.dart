@@ -9,7 +9,7 @@ class GroupsState extends Equatable {
     this.text = '',
     // ----
     this.groups = null,
-    this.filteredGroups = null,
+    this.filteredGroups = const [],
   });
 
   final bool isLoading;
@@ -18,7 +18,7 @@ class GroupsState extends Equatable {
   final String text;
   // ----
   final List<GroupModel>? groups;
-  final List<GroupModel>? filteredGroups;
+  final List<GroupModel> filteredGroups;
 
   bool get isScreenLoading => isLoading && groups == null;
 

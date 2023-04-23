@@ -12,7 +12,7 @@ GroupModel mapGroup(
       price: data['price'] as num,
       salary: data['salary'] as num,
       students:
-          (data['students'] as List<dynamic>).map((e) => mapUser(data)).toList()
+          (data['students'] as List<dynamic>).map((e) => mapUser(e)).toList()
             ..sort(
               (a, b) => a.fullName.compareTo(b.name),
             ),

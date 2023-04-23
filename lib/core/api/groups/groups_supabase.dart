@@ -11,9 +11,22 @@ class GroupsSupabase {
     try {
       final data = await _client.request
           .from('group')
-          .select()
-          .order('isActive', ascending: true);
-      return SupabaseUtils.responseWrapper('groups', data);
+          .select('*, teacher:teacherId (*)')
+          .in_('isActive', [true]) as List<dynamic>;
+
+      final groupsWithStudents = [
+        ...data.map(
+          (e) => {
+            ...(e as Map<String, dynamic>),
+            'students': [],
+          },
+        )
+      ];
+
+      return SupabaseUtils.responseWrapper(
+        'groups',
+        groupsWithStudents,
+      );
     } catch (e) {
       print(e.toString());
       throw Exception(e);
@@ -25,14 +38,25 @@ class GroupsSupabase {
       final data = await _client.request
           .from('group')
           .select('*, user:teacherId (*)')
-          .eq('teacherId', id)
-          .order('isActive', ascending: true);
+          .match(
+        {
+          'teacherId': id,
+          'isActive': true,
+        },
+      );
+
+      final groupsWithStudents = [
+        ...data.map(
+          (e) => {
+            ...(e as Map<String, dynamic>),
+            'students': [],
+          },
+        )
+      ];
+
       return SupabaseUtils.responseWrapper(
         'groups',
-        {
-          ...(data as Map<String, dynamic>),
-          'students': [],
-        },
+        groupsWithStudents,
       );
     } catch (e) {
       print(e.toString());
@@ -44,10 +68,11 @@ class GroupsSupabase {
     try {
       final groupData = await _client.request
           .from('group')
-          .select('*, user:teacherId (*)')
+          .select('*, teacher:teacherId (*)')
           .eq('id', id)
           .single();
-      final studentIds = groupData['studentIds'] as List<int>;
+      final studentIds = groupData['studentIds'] as List<dynamic>;
+
       final students =
           await _client.request.from('student').select().in_('id', studentIds);
 
@@ -88,6 +113,7 @@ class GroupsSupabase {
 
 class ApiGroupModel {
   final int? id;
+  final String name;
   final int language;
   final int teacherId;
   final num price;
@@ -97,6 +123,7 @@ class ApiGroupModel {
 
   ApiGroupModel({
     required this.id,
+    required this.name,
     required this.language,
     required this.teacherId,
     required this.price,
@@ -107,7 +134,8 @@ class ApiGroupModel {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'id': id,
+      if (id != null) 'id': id,
+      'name': name,
       'language': language,
       'teacherId': teacherId,
       'price': price,

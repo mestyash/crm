@@ -126,11 +126,12 @@ void initGetIt() {
   sl.registerFactory<GroupsCubit>(
     () => GroupsCubit(
       repository: sl.get<GroupsRepository>(),
+      currentUserCubit: sl.get<CurrentUserCubit>(),
     ),
   );
   sl.registerFactory<GroupBloc>(
     () => GroupBloc(
-      groupsRepository: sl.get<GroupsRepository>(),
+      repository: sl.get<GroupsRepository>(),
     ),
   );
   // --- ADMIN ---
@@ -195,7 +196,9 @@ void initGetIt() {
   );
   sl.registerFactory<GroupsRepository>(
     () => GroupsRepository(
-      supabase: sl.get<GroupsSupabase>(),
+      groupsSupabase: sl.get<GroupsSupabase>(),
+      studentsSupabase: sl.get<StudentsSupabase>(),
+      staffSupabase: sl.get<StaffSupabase>(),
     ),
   );
   // ---------- DATA SOURCES ----------

@@ -17,10 +17,11 @@ class StaffCubit extends Cubit<StaffState> {
     try {
       emit(state.copyWith(isLoading: true));
       final data = await _repository.getStaffData();
+      final filteredStaffData = _filterByText(data, state.text);
       emit(state.copyWith(
         isLoading: false,
         staffData: data,
-        filteredStaffData: data,
+        filteredStaffData: filteredStaffData,
       ));
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));

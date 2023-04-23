@@ -62,6 +62,22 @@ class StaffSupabase {
       throw Exception(e);
     }
   }
+
+  Future<Map<String, dynamic>> searchActiveEmployeeBySurname(
+    String surname,
+  ) async {
+    try {
+      final data = await _client.request
+          .from('user')
+          .select()
+          .is_('isDeleted', false)
+          .ilike('surname', '%$surname%');
+      return SupabaseUtils.responseWrapper('users', data);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
 }
 
 class ApiEmployeeModel {

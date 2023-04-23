@@ -9,11 +9,11 @@ class InputSelect<T> extends StatelessWidget {
   final String title;
   final String hintText;
   final bool isRequired;
-  final dynamic selectedValue;
+  final T? selectedValue;
   final List<String> valueNames;
   final List<T> values;
   final bool readOnly;
-  final void Function(dynamic value) onChange;
+  final void Function(T? value) onChange;
 
   const InputSelect({
     super.key,
@@ -40,13 +40,13 @@ class InputSelect<T> extends StatelessWidget {
           InputTitle(text: title, isRequired: isRequired),
           isLoading
               ? ShimmerContainer(width: double.infinity, height: 42.h)
-              : DropdownButtonFormField<dynamic>(
+              : DropdownButtonFormField<T>(
                   value: selectedValue,
                   decoration: InputDecoration(hintText: hintText),
                   isExpanded: true,
                   items: [
                     for (int i = 0; i < valueNames.length; i++)
-                      DropdownMenuItem<dynamic>(
+                      DropdownMenuItem<T>(
                         value: values[i],
                         child: Text(
                           valueNames[i],

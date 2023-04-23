@@ -31,7 +31,10 @@ class _ScreenData extends StatelessWidget {
   const _ScreenData({required this.state});
 
   Future<void> _link(BuildContext context) async {
-    final date = await Navigator.pushNamed(context, Routes.createPayment);
+    final data = await Navigator.pushNamed(context, Routes.createPayment);
+    if (data != null) {
+      context.read<PaymentsBloc>().add(PaymentsEventSearch());
+    }
   }
 
   @override

@@ -64,7 +64,7 @@ class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
     Emitter<PaymentsState> emit,
   ) async {
     try {
-      if (event.surname.isNotEmpty) {
+      if (event.surname.length > 1) {
         emit(state.copyWith(isSearching: true));
         await Future.delayed(Duration(seconds: 1));
         final students =

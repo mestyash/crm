@@ -17,10 +17,11 @@ class StudentsCubit extends Cubit<StudentsState> {
     try {
       emit(state.copyWith(isLoading: true));
       final data = await _repository.getStudents();
+      final filteredStudents = _filterByText(data, state.text);
       emit(state.copyWith(
         isLoading: false,
         students: data,
-        filteredStudents: data,
+        filteredStudents: filteredStudents,
       ));
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));

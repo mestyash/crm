@@ -41,12 +41,26 @@ class _ScreenData extends StatelessWidget {
 
   const _ScreenData({required this.state});
 
+  Future<void> _link(BuildContext context) async {
+    final data = await Navigator.pushNamed(
+      context,
+      Routes.group,
+    );
+    if (data != null) {
+      await context.read<GroupsCubit>().loadGroups();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final _l10n = context.l10n;
+
+    final cubit = context.read<GroupsCubit>();
+
     final _padding = EdgeInsets.symmetric(
       horizontal: ProjectMargin.contentHorizontal,
     );
+
     return Scaffold(
       appBar: CustomAppBar(
         title: _l10n.mainAdminNavBarGroups,
@@ -60,10 +74,13 @@ class _ScreenData extends StatelessWidget {
               ProjectMargin.contentHorizontal,
               20.h,
             ),
-            child: SearchBar(enabled: true, onTextChange: (text) => {}),
+            child: SearchBar(
+              enabled: true,
+              onTextChange: (text) => cubit.onTextChange(text),
+            ),
           ),
           Expanded(
-            child: state.isLoading
+            child: state.isScreenLoading
                 ? ListView.builder(
                     padding: _padding,
                     itemBuilder: (context, i) => ShimmerContainer(
@@ -77,15 +94,15 @@ class _ScreenData extends StatelessWidget {
                     shrinkWrap: true,
                     padding: _padding,
                     itemBuilder: (context, i) {
-                      return GroupsCard();
+                      return GroupsCard(group: state.filteredGroups[i]);
                     },
-                    itemCount: state.groups!.length,
+                    itemCount: state.filteredGroups.length,
                   ),
           ),
         ],
       ),
       floatingActionButton: CustomFloatingActionButton(
-        action: () => Navigator.pushNamed(context, Routes.group),
+        action: () => _link(context),
       ),
     );
   }

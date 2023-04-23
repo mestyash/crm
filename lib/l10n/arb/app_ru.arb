@@ -58,5 +58,6 @@
     "uploadStudentSuccessfullyEdited": "Студент успешно отредактирован!",
     "createPaymentScreenSumPlaceholder": "Введите сумму",
     "createPaymentScreenDatePlaceholder": "Платежный месяц",
-    "groupCheckbox": "Активировать группу"
+    "groupCheckbox": "Активировать группу",
+    "groupSuccessfullyCreated": "Группа успешно загружена!"
 }

@@ -33,14 +33,14 @@ class CreatePaymentScreen extends StatelessWidget {
     if (state.textFailure) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(AppSnackBar.failure(text: _l10n.error));
+        ..showSnackBar(AppSnackBar.failure(text: _l10n.dataError));
     }
     if (state.isFailure) {
       context.loaderOverlay.hide();
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.failure(
-          text: _l10n.dataError,
+          text: _l10n.error,
         ));
     }
   }

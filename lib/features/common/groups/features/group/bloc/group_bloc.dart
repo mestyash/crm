@@ -3,16 +3,17 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/features/common/groups/core/data/groups_repository.dart';
+import 'package:crm/features/common/groups/core/domain/groups_usecase.dart';
 import 'package:equatable/equatable.dart';
 
 part 'group_event.dart';
 part 'group_state.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
-  final GroupsRepository _groupsRepository;
+  final GroupsRepository _repository;
 
-  GroupBloc({required GroupsRepository groupsRepository})
-      : _groupsRepository = groupsRepository,
+  GroupBloc({required GroupsRepository repository})
+      : _repository = repository,
         super(GroupState()) {
     on<GroupEventLoad>(_onGroupLoad);
     on<GroupEventName>(_onNameChange);
@@ -32,17 +33,19 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     GroupEventLoad event,
     Emitter<GroupState> emit,
   ) async {
-    if (event.id != null) return;
+    if (event.id == null) return;
     try {
       emit(state.copyWith(isLoading: true));
-      final data = await _groupsRepository.getGroup(id: event.id!);
+      final data = await _repository.getGroup(id: event.id!);
       emit(state.copyWith(
         isLoading: false,
         id: event.id,
         name: data.name,
+        language: data.language,
         teacher: data.teacher,
         price: data.price,
         salary: data.salary,
+        students: data.students,
         isActive: data.isActive,
       ));
     } catch (e) {
@@ -68,12 +71,21 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     GroupEventSearchTeacher event,
     Emitter<GroupState> emit,
   ) async {
-    try {
-      emit(state.copyWith(isSearching: true));
-
-      emit(state.copyWith(isSearching: false));
-    } catch (e) {
-      emit(state.copyWith(isSearching: false, isFailure: true));
+    if (event.surname.length > 1) {
+      try {
+        emit(state.copyWith(isSearching: true));
+        final data = await _repository.searchTeacher(surname: event.surname);
+        final availableTeachers =
+            data.where((e) => e.id != state.teacher?.id).toList();
+        emit(state.copyWith(
+          isSearching: false,
+          availableTeachers: availableTeachers,
+        ));
+      } catch (e) {
+        emit(state.copyWith(isSearching: false, isFailure: true));
+      }
+    } else {
+      emit(state.copyWith(isSearching: false, availableTeachers: []));
     }
   }
 
@@ -81,19 +93,34 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     GroupEventSelectTeacher event,
     Emitter<GroupState> emit,
   ) {
-    emit(state.copyWith(teacher: event.teacher));
+    emit(state.copyWith(teacher: event.teacher, availableTeachers: []));
   }
 
   Future<void> _onSearchStudent(
     GroupEventSearchStudent event,
     Emitter<GroupState> emit,
   ) async {
-    try {
-      emit(state.copyWith(isSearching: true));
+    if (event.surname.length > 1) {
+      try {
+        emit(state.copyWith(isSearching: true));
+        final data = await _repository.searchStudent(surname: event.surname);
 
-      emit(state.copyWith(isSearching: false));
-    } catch (e) {
-      emit(state.copyWith(isSearching: false, isFailure: true));
+        final selectedStudentIds = state.students.map((e) => e.id);
+        final availableStudents = data
+            .where(
+              (e) => !selectedStudentIds.contains(e.id),
+            )
+            .toList();
+
+        emit(state.copyWith(
+          isSearching: false,
+          availableStudents: availableStudents,
+        ));
+      } catch (e) {
+        emit(state.copyWith(isSearching: false, isFailure: true));
+      }
+    } else {
+      emit(state.copyWith(isSearching: false, availableStudents: []));
     }
   }
 
@@ -105,14 +132,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
         (a, b) => a.fullName.compareTo(b.fullName),
       );
 
-    final availableStudents = [...state.availableStudents]
-        .where((e) => e.id != event.student.id)
-        .toList();
-
-    emit(state.copyWith(
-      students: students,
-      availableStudents: availableStudents,
-    ));
+    emit(state.copyWith(students: students, availableStudents: []));
   }
 
   void _onRemoveStudent(
@@ -141,7 +161,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   ) {
     try {
       final salary = double.parse(event.salary);
-      emit(state.copyWith(price: salary, textFailure: false));
+      emit(state.copyWith(salary: salary, textFailure: false));
     } catch (e) {
       emit(state.copyWith(textFailure: true));
     }
@@ -160,10 +180,19 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   ) async {
     try {
       emit(state.copyWith(isUploading: true));
-
+      await _repository.uploadGroup(UploadGroupParams(
+        id: state.id,
+        name: state.name,
+        language: state.language!,
+        teacherId: state.teacher!.id,
+        price: state.price,
+        salary: state.salary,
+        studentIds: state.students.map((e) => e.id).toList(),
+        isActive: state.isActive,
+      ));
       emit(state.copyWith(successfullyCreated: true));
     } catch (e) {
-      emit(state.copyWith(isUploading: true, isFailure: false));
+      emit(state.copyWith(isUploading: false, isFailure: true));
     }
   }
 }
