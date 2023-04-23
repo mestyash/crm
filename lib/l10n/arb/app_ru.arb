@@ -13,6 +13,8 @@
     "patronymic": "Отчество",
     "birthday": "Дата рождения",
     "role": "Роль",
+    "statements": "Ведомости",
+    "info": "Информация",
     "language": "Язык",
     "workplace": "Рабочее место",
     "sum": "Сумма",
