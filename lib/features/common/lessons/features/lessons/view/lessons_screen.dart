@@ -29,7 +29,7 @@ class LessonsScreen extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as LessonsScreenArguments;
 
     return BlocProvider<LessonsCubit>(
-      create: (_) => cubit..loadLessons(),
+      create: (_) => cubit..loadLessons(_screenArguments.id),
       child: BlocConsumer<LessonsCubit, LessonsState>(
         listener: (context, state) => {},
         builder: (context, state) => Scaffold(

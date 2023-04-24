@@ -1,4 +1,5 @@
 import 'package:crm/core/api/groups/groups_supabase.dart';
+import 'package:crm/core/api/lessons/lessons_supabase.dart';
 import 'package:crm/core/api/payments/payments_supabase.dart';
 import 'package:crm/core/api/staff/staff_supabase.dart';
 import 'package:crm/core/api/students/students_supabase.dart';
@@ -26,6 +27,7 @@ import 'package:crm/features/common/groups/core/data/groups_repository.dart';
 import 'package:crm/features/common/groups/features/group/bloc/group_bloc.dart';
 import 'package:crm/features/common/groups/features/group/view/group_screen.dart';
 import 'package:crm/features/common/groups/features/groups/cubit/groups_cubit.dart';
+import 'package:crm/features/common/lessons/core/data/lessons_repository.dart';
 import 'package:crm/features/common/lessons/features/lessons/cubit/lessons_cubit.dart';
 import 'package:crm/features/common/lessons/features/lessons/view/lessons_screen.dart';
 import 'package:crm/features/common/login_screen/data/login_repository.dart';
@@ -144,8 +146,8 @@ void initGetIt() {
   );
   sl.registerFactory<LessonsCubit>(
     () => LessonsCubit(
-        // repository: sl.get<GroupsRepository>(),
-        ),
+      repository: sl.get<LessonsRepository>(),
+    ),
   );
   // --- ADMIN ---
   sl.registerFactory<StaffCubit>(
@@ -214,6 +216,12 @@ void initGetIt() {
       staffSupabase: sl.get<StaffSupabase>(),
     ),
   );
+  sl.registerFactory<LessonsRepository>(
+    () => LessonsRepository(
+      lessonsSupabase: sl.get<LessonsSupabase>(),
+      groupsSupabase: sl.get<GroupsSupabase>(),
+    ),
+  );
   // ---------- DATA SOURCES ----------
   // API
   sl.registerFactory<ProfileSupabase>(
@@ -238,6 +246,11 @@ void initGetIt() {
   );
   sl.registerFactory<GroupsSupabase>(
     () => GroupsSupabase(
+      client: sl.get<SupabaseClient>(),
+    ),
+  );
+  sl.registerFactory<LessonsSupabase>(
+    () => LessonsSupabase(
       client: sl.get<SupabaseClient>(),
     ),
   );
