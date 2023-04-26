@@ -28,6 +28,8 @@ import 'package:crm/features/common/groups/features/group/bloc/group_bloc.dart';
 import 'package:crm/features/common/groups/features/group/view/group_screen.dart';
 import 'package:crm/features/common/groups/features/groups/cubit/groups_cubit.dart';
 import 'package:crm/features/common/lessons/core/data/lessons_repository.dart';
+import 'package:crm/features/common/lessons/features/lesson/cubit/lesson_cubit.dart';
+import 'package:crm/features/common/lessons/features/lesson/view/lesson_screen.dart';
 import 'package:crm/features/common/lessons/features/lessons/cubit/lessons_cubit.dart';
 import 'package:crm/features/common/lessons/features/lessons/view/lessons_screen.dart';
 import 'package:crm/features/common/login_screen/data/login_repository.dart';
@@ -59,6 +61,7 @@ void initGetIt() {
       Routes.mainTeacher: (context) => sl.get<MainTeacherScreen>(),
       Routes.group: (context) => sl.get<GroupScreen>(),
       Routes.lessons: (context) => sl.get<LessonsScreen>(),
+      Routes.lesson: (context) => sl.get<LessonScreen>(),
       // --- admin ---
       Routes.mainAdmin: (context) => sl.get<MainAdminScreen>(),
       Routes.uploadStaff: (context) => sl.get<UploadStaffScreen>(),
@@ -116,6 +119,11 @@ void initGetIt() {
       cubit: sl.get<LessonsCubit>(),
     ),
   );
+  sl.registerFactory<LessonScreen>(
+    () => LessonScreen(
+      cubit: sl.get<LessonCubit>(),
+    ),
+  );
   // ---------- BLOCS ----------
   // --- COMMON ---
   sl.registerLazySingleton<CurrentUserCubit>(
@@ -146,6 +154,11 @@ void initGetIt() {
   );
   sl.registerFactory<LessonsCubit>(
     () => LessonsCubit(
+      repository: sl.get<LessonsRepository>(),
+    ),
+  );
+  sl.registerFactory<LessonCubit>(
+    () => LessonCubit(
       repository: sl.get<LessonsRepository>(),
     ),
   );

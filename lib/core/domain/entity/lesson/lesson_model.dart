@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:intl/intl.dart';
@@ -11,6 +13,7 @@ class LessonModel extends Equatable {
   final num salary;
   final DateTime date;
   final String comment;
+  final DateTime createdAt;
 
   String get stringDate => DateFormat('dd MMMM yyyy').format(date);
 
@@ -23,6 +26,7 @@ class LessonModel extends Equatable {
     required this.salary,
     required this.date,
     required this.comment,
+    required this.createdAt,
   });
 
   @override
@@ -36,6 +40,7 @@ class LessonModel extends Equatable {
       salary,
       date,
       comment,
+      createdAt,
     ];
   }
 }

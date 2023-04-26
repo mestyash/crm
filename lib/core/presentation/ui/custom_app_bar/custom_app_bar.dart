@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final List<Widget> actions;
 
   const CustomAppBar({
     Key? key,
     required this.title,
+    this.actions = const [],
   }) : super(key: key);
 
   @override
@@ -20,6 +23,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title.toUpperCase(),
       ),
+      actions: [
+        ...actions,
+        SizedBox(width: 10.w),
+      ],
     );
   }
 }

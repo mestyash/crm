@@ -29,6 +29,14 @@ class LessonState extends Equatable {
   final List<int> studentIds;
   final String comment;
 
+  bool get isCreating => id == null;
+  bool get canDelete => ![
+        !isLoading,
+        !isUploading,
+        !isCreating,
+        DateTime.now().compareTo(lesson!.createdAt.add(Duration(hours: 5))) <= 1
+      ].contains(false);
+
   LessonState copyWith({
     bool? isLoading,
     bool? isUploading,

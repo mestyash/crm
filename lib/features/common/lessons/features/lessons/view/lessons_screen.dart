@@ -2,6 +2,8 @@ import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/custom_floating_action_button/custom_floating_action_button.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/styles/project_theme.dart';
+import 'package:crm/features/common/app/router/router.dart';
+import 'package:crm/features/common/lessons/features/lesson/view/lesson_screen.dart';
 import 'package:crm/features/common/lessons/features/lessons/cubit/lessons_cubit.dart';
 import 'package:crm/features/common/lessons/features/lessons/view/widgets/lessons_card.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +25,26 @@ class LessonsScreen extends StatelessWidget {
 
   const LessonsScreen({super.key, required this.cubit});
 
+  Future<void> _createLessonLink(BuildContext context, int groupId) async {
+    final data = await Navigator.pushNamed(
+      context,
+      Routes.lesson,
+      arguments: LessonScreenArguments(groupId: groupId),
+    );
+
+    if (data != null) {
+      context.read<LessonsCubit>().loadLessons(groupId);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final _screenArguments =
         ModalRoute.of(context)?.settings.arguments as LessonsScreenArguments;
+    final groupId = _screenArguments.id;
 
     return BlocProvider<LessonsCubit>(
-      create: (_) => cubit..loadLessons(_screenArguments.id),
+      create: (_) => cubit..loadLessons(groupId),
       child: BlocConsumer<LessonsCubit, LessonsState>(
         listener: (context, state) => {},
         builder: (context, state) => Scaffold(
@@ -38,7 +53,7 @@ class LessonsScreen extends StatelessWidget {
           ),
           body: _ScreenData(state: state),
           floatingActionButton: CustomFloatingActionButton(
-            action: () => {},
+            action: () => _createLessonLink(context, groupId),
           ),
         ),
       ),

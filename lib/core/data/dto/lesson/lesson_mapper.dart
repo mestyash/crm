@@ -15,5 +15,6 @@ LessonModel mapLesson(dynamic data) {
     salary: data['salary'] as num,
     date: DateTime.parse(data['date'] as String),
     comment: data['comment'] as String,
+    createdAt: DateTime.parse(data['createdAt'] as String),
   );
 }

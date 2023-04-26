@@ -122,7 +122,9 @@ class _ModalSheet extends StatelessWidget {
           child: Column(
             children: [
               _ModalSheetItem(action: link1, text: _l10n.statements),
-              SizedBox(height: 15.h),
+              SizedBox(height: 10.h),
+              Divider(height: 0),
+              SizedBox(height: 7.5.h),
               _ModalSheetItem(action: link2, text: _l10n.info),
               SizedBox(height: 5.h),
             ],
