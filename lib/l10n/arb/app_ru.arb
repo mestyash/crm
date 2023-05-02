@@ -63,5 +63,7 @@
     "createPaymentScreenSumPlaceholder": "Введите сумму",
     "createPaymentScreenDatePlaceholder": "Платежный месяц",
     "groupCheckbox": "Активировать группу",
-    "groupSuccessfullyCreated": "Группа успешно загружена!"
+    "groupSuccessfullyCreated": "Группа успешно загружена!",
+    "lessonSuccessfullyCreated": "Урок успешно загружен!",
+    "lessonSuccessfullyDeleted": "Урок успешно удален!"
 }

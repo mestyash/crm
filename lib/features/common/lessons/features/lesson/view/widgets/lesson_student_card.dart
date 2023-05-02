@@ -23,7 +23,9 @@ class LessonStudentCard extends StatelessWidget {
       onTap: action,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 7.5.r),
+        margin: EdgeInsets.only(bottom: 15.h),
         decoration: BoxDecoration(
+          border: Border.all(width: 0.4.r),
           borderRadius: BorderRadius.circular(5.r),
           boxShadow: ProjectShadow.boxShadow1,
         ),
@@ -32,7 +34,7 @@ class LessonStudentCard extends StatelessWidget {
             Expanded(
               child: Text(
                 name,
-                style: textTheme.bodyText1,
+                style: textTheme.bodyText1?.copyWith(height: 0),
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
               ),

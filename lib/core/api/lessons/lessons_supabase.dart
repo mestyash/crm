@@ -31,16 +31,19 @@ class LessonsSupabase {
       final data = await _client.request
           .from('lesson')
           .select('*, teacher: teacherId (*)')
-          .eq('id', id);
+          .eq('id', id)
+          .single();
 
-      final studentIds = data['visitingStudentIds'] as List<int>;
+      final List studentIds =
+          (data['visitingStudentIds'] as List<dynamic>).cast<int>();
+
       final students = await _client.request.from('student').select().in_(
             'id',
             studentIds,
           );
 
       return SupabaseUtils.responseWrapper(
-        'lessons',
+        'lesson',
         {
           ...(data as Map<String, dynamic>),
           'students': students,

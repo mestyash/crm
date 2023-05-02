@@ -3,21 +3,24 @@ import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_button.dart';
 import 'package:crm/core/presentation/ui/inputs/input_text/input_text.dart';
 import 'package:crm/core/presentation/ui/loading_indicator/loading_indicator.dart';
+import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/common/lessons/features/lesson/cubit/lesson_cubit.dart';
+import 'package:crm/features/common/lessons/features/lesson/view/widgets/lesson_student_card.dart';
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class LessonScreenArguments {
-  final int groupId;
+  final int? groupId;
   final int? lessonId;
 
   LessonScreenArguments({
-    required this.groupId,
+    this.groupId,
     this.lessonId,
-  });
+  }) : assert(lessonId != null || groupId != null);
 }
 
 class LessonScreen extends StatelessWidget {
@@ -30,14 +33,47 @@ class LessonScreen extends StatelessWidget {
     LessonState state,
   ) {
     final _l10n = context.l10n;
+    if (state.isUploading) {
+      context.loaderOverlay.show();
+    }
+    if (state.isFailure) {
+      context.loaderOverlay.hide();
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(AppSnackBar.failure(text: _l10n.error));
+    }
+    if (state.successfullyCreated) {
+      context.loaderOverlay.hide();
+      Navigator.pop(context, true);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(AppSnackBar.success(
+          text: _l10n.lessonSuccessfullyCreated,
+        ));
+    }
+    if (state.successfullyDeleted) {
+      context.loaderOverlay.hide();
+      Navigator.pop(context, true);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(AppSnackBar.success(
+          text: _l10n.lessonSuccessfullyDeleted,
+        ));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final _l10n = context.l10n;
+    final _screenArguments =
+        ModalRoute.of(context)?.settings.arguments as LessonScreenArguments;
 
     return BlocProvider<LessonCubit>(
-      create: (_) => cubit,
+      create: (_) => cubit
+        ..loadInitialData(
+          groupId: _screenArguments.groupId,
+          lessonId: _screenArguments.lessonId,
+        ),
       child: BlocConsumer<LessonCubit, LessonState>(
         listener: _listener,
         builder: (context, state) => Scaffold(
@@ -45,8 +81,9 @@ class LessonScreen extends StatelessWidget {
             title: _l10n.lesson,
             actions: [
               Visibility(
+                visible: state.canDelete,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () => context.read<LessonCubit>().onDelete(),
                   child: Icon(
                     Icons.delete,
                     size: 20.r,
@@ -85,11 +122,20 @@ class _ScreenDataState extends State<_ScreenData> {
 
   @override
   void initState() {
+    final group = widget.state.group;
+    final lesson = widget.state.lesson;
+
+    final teacherName =
+        group?.teacher.fullName ?? lesson?.teacher.fullName ?? '';
+    final salary = (group?.salary ?? lesson?.salary ?? 0).toString();
+    final price = (group?.price ?? lesson?.price ?? 0).toString();
+    final comment = lesson?.comment ?? '';
+
     _cubit = context.read<LessonCubit>();
-    _teacherController = TextEditingController();
-    _salaryController = TextEditingController();
-    _priceController = TextEditingController();
-    _commentController = TextEditingController();
+    _teacherController = TextEditingController()..text = teacherName;
+    _salaryController = TextEditingController()..text = salary;
+    _priceController = TextEditingController()..text = price;
+    _commentController = TextEditingController()..text = comment;
     super.initState();
   }
 
@@ -105,6 +151,7 @@ class _ScreenDataState extends State<_ScreenData> {
   @override
   Widget build(BuildContext context) {
     final _l10n = context.l10n;
+    final state = widget.state;
     final isAdmin = context.select((CurrentUserCubit e) => e.state!.isAdmin);
 
     return ListView(
@@ -131,12 +178,41 @@ class _ScreenDataState extends State<_ScreenData> {
             readOnly: true,
           ),
         ),
+        Column(
+          children: state.group != null
+              ? state.group!.students
+                  .map(
+                    (e) => LessonStudentCard(
+                      name: e.fullName,
+                      isSelected: state.studentIds.contains(e.id),
+                      action: () => _cubit.onSelectStudent(e.id),
+                    ),
+                  )
+                  .toList()
+              : state.lesson!.visitingStudents
+                  .map(
+                    (e) => LessonStudentCard(
+                      action: () {},
+                      name: e.fullName,
+                      isSelected: true,
+                    ),
+                  )
+                  .toList(),
+        ),
         InputText(
           title: _l10n.comment,
           minLines: 3,
           controller: _commentController,
+          onChange: (t) => _cubit.onCommentChange(t),
+          readOnly: !state.isCreating,
         ),
-        CustomElevatedButton(text: _l10n.save, onTap: () {})
+        Visibility(
+          visible: state.isCreating,
+          child: CustomElevatedButton(
+            text: _l10n.save,
+            onTap: state.studentIds.isNotEmpty ? () => _cubit.onUpload() : null,
+          ),
+        ),
       ],
     );
   }

@@ -6,7 +6,7 @@ LessonModel mapLesson(dynamic data) {
     id: data['id'] as int,
     groupId: data['groupId'] as int,
     teacher: mapUser(data['teacher']),
-    visitingStudents: (data['students'] as List<dynamic>)
+    visitingStudents: ((data['students'] ?? []) as List<dynamic>)
         .map(
           (e) => mapUser(e),
         )
@@ -15,6 +15,6 @@ LessonModel mapLesson(dynamic data) {
     salary: data['salary'] as num,
     date: DateTime.parse(data['date'] as String),
     comment: data['comment'] as String,
-    createdAt: DateTime.parse(data['createdAt'] as String),
+    createdAt: DateTime.parse(data['date'] as String),
   );
 }

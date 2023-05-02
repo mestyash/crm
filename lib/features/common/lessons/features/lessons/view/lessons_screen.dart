@@ -1,11 +1,13 @@
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/custom_floating_action_button/custom_floating_action_button.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
+import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:crm/features/common/lessons/features/lesson/view/lesson_screen.dart';
 import 'package:crm/features/common/lessons/features/lessons/cubit/lessons_cubit.dart';
 import 'package:crm/features/common/lessons/features/lessons/view/widgets/lessons_card.dart';
+import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,6 +26,19 @@ class LessonsScreen extends StatelessWidget {
   final LessonsCubit cubit;
 
   const LessonsScreen({super.key, required this.cubit});
+
+  void _listener(
+    BuildContext context,
+    LessonsState state,
+  ) {
+    final _l10n = context.l10n;
+
+    if (state.isFailure) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(AppSnackBar.failure(text: _l10n.error));
+    }
+  }
 
   Future<void> _createLessonLink(BuildContext context, int groupId) async {
     final data = await Navigator.pushNamed(
@@ -46,14 +61,19 @@ class LessonsScreen extends StatelessWidget {
     return BlocProvider<LessonsCubit>(
       create: (_) => cubit..loadLessons(groupId),
       child: BlocConsumer<LessonsCubit, LessonsState>(
-        listener: (context, state) => {},
+        listener: _listener,
         builder: (context, state) => Scaffold(
-          appBar: CustomAppBar(
-            title: _screenArguments.groupName,
-          ),
-          body: _ScreenData(state: state),
-          floatingActionButton: CustomFloatingActionButton(
-            action: () => _createLessonLink(context, groupId),
+          body: Scaffold(
+            appBar: CustomAppBar(
+              title: _screenArguments.groupName,
+            ),
+            body: _ScreenData(
+              groupId: groupId,
+              state: state,
+            ),
+            floatingActionButton: CustomFloatingActionButton(
+              action: () => _createLessonLink(context, groupId),
+            ),
           ),
         ),
       ),
@@ -62,9 +82,13 @@ class LessonsScreen extends StatelessWidget {
 }
 
 class _ScreenData extends StatelessWidget {
+  final int groupId;
   final LessonsState state;
 
-  const _ScreenData({required this.state});
+  const _ScreenData({
+    required this.groupId,
+    required this.state,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +111,7 @@ class _ScreenData extends StatelessWidget {
             padding: padding,
             shrinkWrap: true,
             itemBuilder: (context, i) => LessonsCard(
+              groupId: groupId,
               lessonId: state.lessons![i].id,
               date: state.lessons![i].stringDate,
             ),
