@@ -263,7 +263,7 @@ class _ScreenDataState extends State<_ScreenData> {
                     padding: EdgeInsets.zero,
                     label: Text(
                       e.fullName1,
-                      style: _textTheme.bodyText1?.copyWith(height: 0),
+                      style: _textTheme.bodyLarge?.copyWith(height: 0),
                     ),
                     onDeleted: isAdmin
                         ? () => _bloc.add(GroupEventRemoveStudent(id: e.id))

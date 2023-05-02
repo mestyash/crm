@@ -34,7 +34,7 @@ class LessonStudentCard extends StatelessWidget {
             Expanded(
               child: Text(
                 name,
-                style: textTheme.bodyText1?.copyWith(height: 0),
+                style: textTheme.bodyLarge?.copyWith(height: 0),
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
               ),

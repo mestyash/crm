@@ -1,4 +1,3 @@
-import 'package:crm/core/presentation/ui/custom_checkbox/custom_checkbox.dart';
 import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_button.dart';
 import 'package:crm/core/presentation/ui/inputs/input_checkbox/input_checkbox.dart';
 import 'package:crm/core/presentation/ui/inputs/input_title/input_title.dart';
@@ -74,10 +73,10 @@ class _ScreenData extends StatelessWidget {
               children: [
                 Text(
                   _l10n.loginScreenGreeting.toUpperCase(),
-                  style: _textTheme.headline1,
+                  style: _textTheme.displayLarge,
                 ),
                 SizedBox(height: 17.5.h),
-                Text(_l10n.loginScreenMessage, style: _textTheme.bodyText1),
+                Text(_l10n.loginScreenMessage, style: _textTheme.bodyLarge),
                 SizedBox(height: 33.h),
                 InputTitle(text: _l10n.login),
                 TextFormField(
@@ -85,7 +84,7 @@ class _ScreenData extends StatelessWidget {
                     hintText: _l10n.loginPlaceholder,
                     errorText: _errorText,
                   ),
-                  style: _textTheme.bodyText1?.copyWith(
+                  style: _textTheme.bodyLarge?.copyWith(
                     height: 1.42,
                   ),
                   onChanged: (login) => _cubit.onLoginChanged(login),
@@ -97,7 +96,7 @@ class _ScreenData extends StatelessWidget {
                     hintText: _l10n.passPlaceholder,
                     errorText: _errorText,
                   ),
-                  style: _textTheme.bodyText1?.copyWith(
+                  style: _textTheme.bodyLarge?.copyWith(
                     height: 1.42,
                   ),
                   obscureText: true,

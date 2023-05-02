@@ -39,7 +39,7 @@ class SearchBar extends StatelessWidget {
                 ),
                 maxLines: 1,
                 textAlignVertical: TextAlignVertical.center,
-                style: _textTheme.bodyText1?.copyWith(
+                style: _textTheme.bodyLarge?.copyWith(
                   height: 1.42,
                 ),
                 onChanged: onTextChange,

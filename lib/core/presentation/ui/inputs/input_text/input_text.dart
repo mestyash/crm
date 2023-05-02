@@ -50,7 +50,7 @@ class InputText extends StatelessWidget {
                     hintText: hintText,
                   ),
                   keyboardType: keyboardType,
-                  style: _textTheme.bodyText1?.copyWith(
+                  style: _textTheme.bodyLarge?.copyWith(
                     height: 1.42,
                   ),
                   minLines: minLines,

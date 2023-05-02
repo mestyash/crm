@@ -67,7 +67,7 @@ class PaymentsCard extends StatelessWidget {
             children: [
               Text(
                 payment.student.fullName1,
-                style: _textTheme.headline3,
+                style: _textTheme.displaySmall,
               ),
               Spacer(),
               SizedBox(width: 5.w),
@@ -88,7 +88,7 @@ class PaymentsCard extends StatelessWidget {
           SizedBox(height: 10.h),
           Text(
             '${payment.sum} ₽',
-            style: _textTheme.subtitle2,
+            style: _textTheme.titleSmall,
           ),
           SizedBox(height: 10.h),
           RichText(
@@ -99,12 +99,12 @@ class PaymentsCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: 'Дата:  ',
-                  style: _textTheme.bodyText1
+                  style: _textTheme.bodyLarge
                       ?.copyWith(fontStyle: FontStyle.italic),
                 ),
                 TextSpan(
                   text: payment.stringCreatedAt,
-                  style: _textTheme.bodyText1?.copyWith(
+                  style: _textTheme.bodyLarge?.copyWith(
                     decoration: TextDecoration.underline,
                   ),
                 ),

@@ -124,7 +124,7 @@ class _UserCard extends StatelessWidget {
         ),
         child: Text(
           user.fullName,
-          style: _textTheme.bodyText1,
+          style: _textTheme.bodyLarge,
         ),
       ),
     );

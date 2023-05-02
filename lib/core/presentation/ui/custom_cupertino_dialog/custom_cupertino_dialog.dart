@@ -20,13 +20,13 @@ void CustomCupertinoDialog({
     builder: (_) => CupertinoAlertDialog(
       title: Text(
         title,
-        style: _textTheme.subtitle2?.copyWith(height: 0),
+        style: _textTheme.titleSmall?.copyWith(height: 0),
       ),
       content: Visibility(
         visible: content != null,
         child: Text(
           content ?? '',
-          style: _textTheme.bodyText2?.copyWith(height: 0, fontSize: 11.sp),
+          style: _textTheme.bodyMedium?.copyWith(height: 0, fontSize: 11.sp),
         ),
       ),
       actions: [
@@ -34,7 +34,7 @@ void CustomCupertinoDialog({
           onPressed: () => Navigator.pop(context),
           child: Text(
             firstActionText,
-            style: _textTheme.bodyText1?.copyWith(
+            style: _textTheme.bodyLarge?.copyWith(
               height: 0,
               color: _theme.primaryColor,
             ),
@@ -47,7 +47,7 @@ void CustomCupertinoDialog({
           },
           child: Text(
             secondActionText,
-            style: _textTheme.bodyText1?.copyWith(
+            style: _textTheme.bodyLarge?.copyWith(
               height: 0,
               color: isRedSecondAction ? Colors.red : null,
             ),

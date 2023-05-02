@@ -47,7 +47,7 @@ class LessonsCard extends StatelessWidget {
         ),
         child: Text(
           date,
-          style: _textTheme.bodyText1?.copyWith(height: 0),
+          style: _textTheme.bodyLarge?.copyWith(height: 0),
         ),
       ),
     );

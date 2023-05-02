@@ -171,7 +171,7 @@ class _DatePicker extends StatelessWidget {
       children: [
         Text(
           title,
-          style: _textTheme.bodyText1?.copyWith(height: 0),
+          style: _textTheme.bodyLarge?.copyWith(height: 0),
         ),
         SizedBox(width: 10.w),
         SizedBox(

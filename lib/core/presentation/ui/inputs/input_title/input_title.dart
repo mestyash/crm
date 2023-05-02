@@ -25,7 +25,7 @@ class InputTitle extends StatelessWidget {
           children: [
             TextSpan(
               text: text,
-              style: _textTheme.subtitle2?.copyWith(height: 0),
+              style: _textTheme.titleSmall?.copyWith(height: 0),
             ),
             if (isRequired)
               TextSpan(

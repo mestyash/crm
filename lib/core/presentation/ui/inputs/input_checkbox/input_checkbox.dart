@@ -34,7 +34,7 @@ class InputCheckbox extends StatelessWidget {
               SizedBox(width: 10.r),
               Text(
                 text,
-                style: _textTheme.bodyText1?.copyWith(
+                style: _textTheme.bodyLarge?.copyWith(
                   height: 0,
                   fontWeight: FontWeight.w400,
                 ),

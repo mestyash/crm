@@ -54,7 +54,7 @@ class AdminNavBar extends StatelessWidget {
         color: _scaffoldColor,
         textStyle: TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: 13.sm,
+          fontSize: 13.spMin,
           height: 0,
           fontFamily: 'Montserrat',
           color: _scaffoldColor,

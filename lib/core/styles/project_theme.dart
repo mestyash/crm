@@ -76,28 +76,28 @@ class ProjectThemes {
       isDense: true,
     ),
     textTheme: TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
         color: Colors.black,
         fontSize: 22.sp,
         height: 1.18,
         fontWeight: FontWeight.w800,
         fontFamily: 'Montserrat',
       ),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
         color: Colors.black,
         fontSize: 18.sp,
         height: 1.44,
         fontWeight: FontWeight.w700,
         fontFamily: 'Montserrat',
       ),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
         color: Colors.black,
         fontSize: 16.sp,
         height: 1.625,
         fontWeight: FontWeight.w800,
         fontFamily: 'Montserrat',
       ),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
         color: Colors.black,
         fontSize: 16.sp,
         height: 1.25,
@@ -105,7 +105,7 @@ class ProjectThemes {
         fontFamily: 'Montserrat',
       ),
       // input hint
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         color: Colors.black,
         fontSize: 14.sp,
         fontWeight: FontWeight.w600,
@@ -113,28 +113,28 @@ class ProjectThemes {
         fontFamily: 'Montserrat',
       ),
       // input text
-      caption: TextStyle(
+      bodySmall: TextStyle(
         color: Colors.black,
         fontSize: 14.sp,
         fontWeight: FontWeight.w500,
         height: 1.42,
         fontFamily: 'Montserrat',
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         color: Colors.black,
         fontSize: 14.sp,
         height: 1.53,
         fontWeight: FontWeight.w500,
         fontFamily: 'Montserrat',
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         color: Colors.black,
         fontSize: 12.sp,
         height: 1.38,
         fontWeight: FontWeight.w500,
         fontFamily: 'Montserrat',
       ),
-      button: TextStyle(
+      labelLarge: TextStyle(
         color: Colors.black,
         fontSize: 13.sp,
         height: 1.538,

@@ -40,7 +40,7 @@ class CustomElevatedButton extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 text,
-                style: _textTheme.bodyText1?.copyWith(
+                style: _textTheme.bodyLarge?.copyWith(
                   height: 0,
                   color: Colors.white,
                   fontWeight: FontWeight.w700,

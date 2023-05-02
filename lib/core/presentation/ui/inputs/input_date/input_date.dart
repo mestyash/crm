@@ -65,7 +65,7 @@ class InputDate extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: hintText,
                   ),
-                  style: _textTheme.bodyText1?.copyWith(
+                  style: _textTheme.bodyLarge?.copyWith(
                     height: 1.42,
                   ),
                   maxLines: 1,

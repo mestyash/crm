@@ -36,7 +36,7 @@ class UserCard extends StatelessWidget {
             Expanded(
               child: Text(
                 fullName,
-                style: _textTheme.subtitle2?.copyWith(height: 0),
+                style: _textTheme.titleSmall?.copyWith(height: 0),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

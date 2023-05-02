@@ -78,12 +78,12 @@ class GroupsCard extends StatelessWidget {
           children: [
             Text(
               group.name,
-              style: _textTheme.headline3,
+              style: _textTheme.displaySmall,
             ),
             SizedBox(height: 10.h),
             Text(
               LanguageSettings.translateLanguage(_l10n, group.language),
-              style: _textTheme.subtitle2,
+              style: _textTheme.titleSmall,
             ),
             Visibility(
               visible: isAdmin,
@@ -91,7 +91,7 @@ class GroupsCard extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.h),
                 child: Text(
                   group.teacher.fullName,
-                  style: _textTheme.subtitle2,
+                  style: _textTheme.titleSmall,
                 ),
               ),
             ),
@@ -151,7 +151,7 @@ class _ModalSheetItem extends StatelessWidget {
       onTap: action,
       child: Text(
         text,
-        style: _textTheme.bodyText1,
+        style: _textTheme.bodyLarge,
       ),
     );
   }
