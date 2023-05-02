@@ -1,3 +1,4 @@
+import 'package:crm/core/presentation/ui/delete_icon/delete_icon.dart';
 import 'package:crm/core/styles/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,6 @@ class UserCard extends StatelessWidget {
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only(bottom: 10.h),
-        // padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 5.r),
         padding: EdgeInsets.all(10.r),
         decoration: BoxDecoration(
           color: _theme.cardColor,
@@ -55,14 +55,7 @@ class UserCard extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: deleteAction,
-              child: Icon(
-                Icons.delete,
-                size: 20.r,
-                color: Colors.red,
-              ),
-            ),
+            DeleteIcon(action: deleteAction)
           ],
         ),
       ),

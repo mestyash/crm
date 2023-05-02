@@ -1,6 +1,7 @@
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/cutom_elevated_button/custom_elevated_button.dart';
+import 'package:crm/core/presentation/ui/delete_icon/delete_icon.dart';
 import 'package:crm/core/presentation/ui/inputs/input_text/input_text.dart';
 import 'package:crm/core/presentation/ui/loading_indicator/loading_indicator.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
@@ -10,7 +11,6 @@ import 'package:crm/features/common/lessons/features/lesson/view/widgets/lesson_
 import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class LessonScreenArguments {
@@ -48,7 +48,7 @@ class LessonScreen extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.success(
-          text: _l10n.lessonSuccessfullyCreated,
+          text: _l10n.lessonScreenSuccessfullyCreated,
         ));
     }
     if (state.successfullyDeleted) {
@@ -57,7 +57,7 @@ class LessonScreen extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.success(
-          text: _l10n.lessonSuccessfullyDeleted,
+          text: _l10n.lessonScreenSuccessfullyDeleted,
         ));
     }
   }
@@ -82,13 +82,8 @@ class LessonScreen extends StatelessWidget {
             actions: [
               Visibility(
                 visible: state.canDelete,
-                child: GestureDetector(
-                  onTap: () => context.read<LessonCubit>().onDelete(),
-                  child: Icon(
-                    Icons.delete,
-                    size: 20.r,
-                    color: Colors.black,
-                  ),
+                child: DeleteIcon(
+                  action: () => context.read<LessonCubit>().onDelete(),
                 ),
               )
             ],

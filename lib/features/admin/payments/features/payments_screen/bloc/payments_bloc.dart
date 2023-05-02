@@ -25,6 +25,8 @@ class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
     );
     on<PaymentsEventStudent>(_onStudentChange);
     on<PaymentsEventSearch>(_onSearch, transformer: restartable());
+    on<PaymentsEventDelete>(_onDeletePayment);
+    on<PaymentsEventPdf>(_onCreatePdf);
   }
 
   void _onStartDateChange(
@@ -104,6 +106,47 @@ class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
       }
     } catch (e) {
       emit(state.copyWith(isLoading: false, isFailure: true));
+    }
+  }
+
+  Future<void> _onDeletePayment(
+    PaymentsEventDelete event,
+    Emitter<PaymentsState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(isUploading: true));
+      await _repository.deletePayment(id: event.id);
+      final payments = [...state.payments]
+          .where(
+            (e) => e.id != event.id,
+          )
+          .toList();
+      emit(state.copyWith(isUploading: false, payments: payments));
+    } catch (e) {
+      emit(state.copyWith(isUploading: false, isFailure: true));
+    }
+  }
+
+  Future<void> _onCreatePdf(
+    PaymentsEventPdf event,
+    Emitter<PaymentsState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(isUploading: true));
+
+      final payments = [...state.payments];
+      final paymentIndex = payments.indexWhere((e) => e.id == event.id);
+      final payment = payments[paymentIndex];
+
+      if (!payment.hasPdf) {
+        final updatedPayment = payment.copyWith(hasPdf: true);
+        payments[paymentIndex] = updatedPayment;
+        await _repository.setPdfStatus(id: event.id);
+      }
+
+      emit(state.copyWith(isUploading: false, payments: payments));
+    } catch (e) {
+      emit(state.copyWith(isUploading: false, isFailure: true));
     }
   }
 }

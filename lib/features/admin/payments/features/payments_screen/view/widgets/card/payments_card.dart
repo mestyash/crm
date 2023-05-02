@@ -1,6 +1,11 @@
 import 'package:crm/core/domain/entity/payment/payment_model.dart';
+import 'package:crm/core/presentation/ui/custom_cupertino_dialog/custom_cupertino_dialog.dart';
+import 'package:crm/core/presentation/ui/delete_icon/delete_icon.dart';
 import 'package:crm/core/styles/project_theme.dart';
+import 'package:crm/features/admin/payments/features/payments_screen/bloc/payments_bloc.dart';
+import 'package:crm/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentsCard extends StatelessWidget {
@@ -10,6 +15,37 @@ class PaymentsCard extends StatelessWidget {
     super.key,
     required this.payment,
   });
+
+  void _deleteDialog(BuildContext context) {
+    final _l10n = context.l10n;
+    CustomCupertinoDialog(
+      context: context,
+      title: _l10n.paymentsScreenDeletePayment,
+      content: _l10n.paymentsScreenDeletePaymentConfirm,
+      firstActionText: _l10n.cancel,
+      firstAction: () => Navigator.pop(context),
+      secondActionText: _l10n.delete,
+      secondAction: () {
+        context.read<PaymentsBloc>().add(PaymentsEventDelete(id: payment.id));
+      },
+    );
+  }
+
+  void _createPdfDialog(BuildContext context) {
+    final _l10n = context.l10n;
+    CustomCupertinoDialog(
+      context: context,
+      title: _l10n.paymentsScreenCreatePdf,
+      content: _l10n.paymentsScreenCreatePdfConfirm,
+      firstActionText: _l10n.cancel,
+      firstAction: () => Navigator.pop(context),
+      secondActionText: _l10n.create,
+      isRedSecondAction: false,
+      secondAction: () {
+        context.read<PaymentsBloc>().add(PaymentsEventPdf(id: payment.id));
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +63,27 @@ class PaymentsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            payment.student.fullName1,
-            style: _textTheme.headline3,
+          Row(
+            children: [
+              Text(
+                payment.student.fullName1,
+                style: _textTheme.headline3,
+              ),
+              Spacer(),
+              SizedBox(width: 5.w),
+              Visibility(
+                visible: !payment.hasPdf,
+                child: DeleteIcon(action: () => _deleteDialog(context)),
+              ),
+              SizedBox(width: 10.w),
+              GestureDetector(
+                onTap: () => _createPdfDialog(context),
+                child: Icon(
+                  Icons.picture_as_pdf_rounded,
+                  size: 20.r,
+                ),
+              )
+            ],
           ),
           SizedBox(height: 10.h),
           Text(

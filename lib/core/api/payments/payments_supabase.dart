@@ -52,6 +52,26 @@ class PaymentsSupabase {
       throw Exception(e);
     }
   }
+
+  Future<void> deletePayment({required int id}) async {
+    try {
+      await _client.request.from('payment').delete().eq('id', id);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
+
+  Future<void> setPdfStatus({required int id}) async {
+    try {
+      await _client.request
+          .from('payment')
+          .update({'hasPdf': true}).eq('id', id);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
 }
 
 class ApiPaymentModel {

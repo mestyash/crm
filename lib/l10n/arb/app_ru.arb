@@ -7,6 +7,7 @@
     "save": "Сохранить",
     "delete": "Удалить",
     "cancel": "Отмена",
+    "create": "Создать", 
     "error": "Упс, произошла ошибка :(",
     "name": "Имя",
     "surname": "Фамилия",
@@ -62,8 +63,12 @@
     "uploadStudentSuccessfullyEdited": "Студент успешно отредактирован!",
     "createPaymentScreenSumPlaceholder": "Введите сумму",
     "createPaymentScreenDatePlaceholder": "Платежный месяц",
-    "groupCheckbox": "Активировать группу",
-    "groupSuccessfullyCreated": "Группа успешно загружена!",
-    "lessonSuccessfullyCreated": "Урок успешно загружен!",
-    "lessonSuccessfullyDeleted": "Урок успешно удален!"
+    "groupScreenCheckbox": "Активировать группу",
+    "groupScreenSuccessfullyCreated": "Группа успешно загружена!",
+    "lessonScreenSuccessfullyCreated": "Урок успешно загружен!",
+    "lessonScreenSuccessfullyDeleted": "Урок успешно удален!",
+    "paymentsScreenDeletePayment": "Удлаить платежку",
+    "paymentsScreenDeletePaymentConfirm": "Вы действительно хотите удалить платежку ?",
+    "paymentsScreenCreatePdf": "Создать pdf",
+    "paymentsScreenCreatePdfConfirm": "После создания PDF платеж нельзя будет удалить"
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:intl/intl.dart';

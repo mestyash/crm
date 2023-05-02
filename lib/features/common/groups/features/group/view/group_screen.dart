@@ -38,7 +38,7 @@ class GroupScreen extends StatelessWidget {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.success(
-          text: _l10n.groupSuccessfullyCreated,
+          text: _l10n.groupScreenSuccessfullyCreated,
         ));
     }
     if (state.textFailure) {
@@ -251,7 +251,7 @@ class _ScreenDataState extends State<_ScreenData> {
               child: InputCheckbox(
                 action: () => _bloc.add(GroupEventActive()),
                 isSelected: state.isActive,
-                text: _l10n.groupCheckbox,
+                text: _l10n.groupScreenCheckbox,
               ),
             ),
             Wrap(

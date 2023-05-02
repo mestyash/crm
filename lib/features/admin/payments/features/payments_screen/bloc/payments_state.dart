@@ -3,6 +3,7 @@ part of 'payments_bloc.dart';
 class PaymentsState extends Equatable {
   PaymentsState({
     this.isLoading = false,
+    this.isUploading = false,
     this.isSearching = false,
     this.isFailure = false,
     // ----
@@ -15,6 +16,7 @@ class PaymentsState extends Equatable {
   });
 
   final bool isLoading;
+  final bool isUploading;
   final bool isSearching;
   final bool isFailure;
   // ----
@@ -36,6 +38,7 @@ class PaymentsState extends Equatable {
 
   PaymentsState copyWith({
     bool? isLoading,
+    bool? isUploading,
     bool? isSearching,
     bool? isFailure,
     // ----
@@ -48,6 +51,7 @@ class PaymentsState extends Equatable {
   }) {
     return PaymentsState(
       isLoading: isLoading ?? this.isLoading,
+      isUploading: isUploading ?? this.isUploading,
       isSearching: isSearching ?? this.isSearching,
       isFailure: isFailure ?? false,
       // ----
@@ -64,6 +68,7 @@ class PaymentsState extends Equatable {
   List<Object?> get props {
     return [
       isLoading,
+      isUploading,
       isSearching,
       isFailure,
       // ----

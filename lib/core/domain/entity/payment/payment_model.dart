@@ -1,6 +1,6 @@
-import 'package:crm/core/utils/date/date_utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
+import 'package:crm/core/utils/date/date_utils.dart';
 
 class PaymentModel extends Equatable {
   final int id;
@@ -8,6 +8,7 @@ class PaymentModel extends Equatable {
   final DateTime paymentMonth;
   final DateTime createdAt;
   final UserModel student;
+  final bool hasPdf;
 
   PaymentModel({
     required this.id,
@@ -15,11 +16,30 @@ class PaymentModel extends Equatable {
     required this.paymentMonth,
     required this.createdAt,
     required this.student,
+    required this.hasPdf,
   });
 
   String get stringCreatedAt => CustomDateUtils.prepareDateForBackend(
         createdAt,
       );
+
+  PaymentModel copyWith({
+    int? id,
+    num? sum,
+    DateTime? paymentMonth,
+    DateTime? createdAt,
+    UserModel? student,
+    bool? hasPdf,
+  }) {
+    return PaymentModel(
+      id: id ?? this.id,
+      sum: sum ?? this.sum,
+      paymentMonth: paymentMonth ?? this.paymentMonth,
+      createdAt: createdAt ?? this.createdAt,
+      student: student ?? this.student,
+      hasPdf: hasPdf ?? this.hasPdf,
+    );
+  }
 
   @override
   List<Object?> get props {
@@ -29,6 +49,7 @@ class PaymentModel extends Equatable {
       paymentMonth,
       createdAt,
       student,
+      hasPdf,
     ];
   }
 }

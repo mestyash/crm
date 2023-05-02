@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'payments_bloc.dart';
 
 abstract class PaymentsEvent extends Equatable {
@@ -47,3 +46,21 @@ class PaymentsEventStudent extends PaymentsEvent {
 }
 
 class PaymentsEventSearch extends PaymentsEvent {}
+
+class PaymentsEventDelete extends PaymentsEvent {
+  final int id;
+
+  PaymentsEventDelete({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}
+
+class PaymentsEventPdf extends PaymentsEvent {
+  final int id;
+
+  PaymentsEventPdf({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}

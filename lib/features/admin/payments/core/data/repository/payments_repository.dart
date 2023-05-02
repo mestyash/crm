@@ -71,4 +71,24 @@ class PaymentsRepository extends IPaymentsRepository {
       throw Exception(e);
     }
   }
+
+  @override
+  Future<void> deletePayment({required int id}) async {
+    try {
+      await _paymentsSupabase.deletePayment(id: id);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<void> setPdfStatus({required int id}) async {
+    try {
+      await _paymentsSupabase.setPdfStatus(id: id);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
 }

@@ -8,5 +8,6 @@ PaymentModel mapPayment(dynamic data) {
     paymentMonth: DateTime.parse(data['paymentMonth'] as String),
     createdAt: DateTime.parse(data['createdAt'] as String),
     student: mapUser(data['student']),
+    hasPdf: data['hasPdf'] as bool,
   );
 }

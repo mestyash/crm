@@ -8,6 +8,8 @@ abstract class IPaymentsRepository {
   );
   Future<List<UserModel>> searchStudents({required String surname});
   Future<void> uploadPayment(UploadPaymentParams params);
+  Future<void> deletePayment({required int id});
+  Future<void> setPdfStatus({required int id});
 }
 
 class GetPaymentsByRangeParams {
