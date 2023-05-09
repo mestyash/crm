@@ -37,7 +37,7 @@ class GroupsSupabase {
     try {
       final data = await _client.request
           .from('group')
-          .select('*, user:teacherId (*)')
+          .select('*, teacher:teacherId (*)')
           .match(
         {
           'teacherId': id,

@@ -1,5 +1,7 @@
+import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/custom_floating_action_button/custom_floating_action_button.dart';
+import 'package:crm/core/presentation/ui/exit_button/exit_button.dart';
 import 'package:crm/core/presentation/ui/search_bar/staff_bar.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
@@ -57,6 +59,8 @@ class _ScreenData extends StatelessWidget {
 
     final cubit = context.read<GroupsCubit>();
 
+    final isAdmin = context.select((CurrentUserCubit e) => e.state!.isAdmin);
+
     final _padding = EdgeInsets.symmetric(
       horizontal: ProjectMargin.contentHorizontal,
     );
@@ -64,6 +68,7 @@ class _ScreenData extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: _l10n.mainAdminNavBarGroups,
+        actions: [if (!isAdmin) ExitButton()],
       ),
       body: Column(
         children: [
@@ -101,8 +106,11 @@ class _ScreenData extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: CustomFloatingActionButton(
-        action: () => _link(context),
+      floatingActionButton: Visibility(
+        visible: isAdmin,
+        child: CustomFloatingActionButton(
+          action: () => _link(context),
+        ),
       ),
     );
   }

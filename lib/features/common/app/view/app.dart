@@ -11,11 +11,13 @@ import 'package:loader_overlay/loader_overlay.dart';
 class App extends StatelessWidget {
   final CurrentUserCubit currentUserCubit;
   final Map<String, WidgetBuilder> router;
+  final GlobalKey<NavigatorState> navigator;
 
   App({
     super.key,
     required this.currentUserCubit,
     required this.router,
+    required this.navigator,
   });
 
   @override
@@ -35,6 +37,7 @@ class App extends StatelessWidget {
           useDefaultLoading: false,
           overlayWidget: LoadingIndicator(),
           child: MaterialApp(
+            navigatorKey: navigator,
             theme: ProjectThemes.lightTheme,
             themeMode: ThemeMode.light,
             routes: router,

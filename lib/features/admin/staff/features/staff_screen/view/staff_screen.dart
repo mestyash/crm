@@ -1,6 +1,7 @@
 import 'package:crm/core/presentation/ui/custom_app_bar/custom_app_bar.dart';
 import 'package:crm/core/presentation/ui/custom_cupertino_dialog/custom_cupertino_dialog.dart';
 import 'package:crm/core/presentation/ui/custom_floating_action_button/custom_floating_action_button.dart';
+import 'package:crm/core/presentation/ui/exit_button/exit_button.dart';
 import 'package:crm/core/presentation/ui/shimmer_container/shimmer_container.dart';
 import 'package:crm/core/presentation/ui/snackbar/snackbar.dart';
 import 'package:crm/core/presentation/ui/user_card/user_card.dart';
@@ -96,6 +97,7 @@ class _StaffScreenData extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: _l10n.mainAdminNavBarStaff,
+        actions: [ExitButton()],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(

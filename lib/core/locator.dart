@@ -5,6 +5,7 @@ import 'package:crm/core/api/staff/staff_supabase.dart';
 import 'package:crm/core/api/students/students_supabase.dart';
 import 'package:crm/core/data/data_source/secure_storage/secure_storage.dart';
 import 'package:crm/core/data/data_source/supabase_client/supabase_client.dart';
+import 'package:crm/core/data/repository/current_user_repository.dart';
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/features/admin/main_admin_screen/main_admin_screen.dart';
 import 'package:crm/features/admin/payments/core/data/repository/payments_repository.dart';
@@ -49,6 +50,7 @@ void initGetIt() {
     () => App(
       currentUserCubit: sl.get<CurrentUserCubit>(),
       router: sl.get<Map<String, WidgetBuilder>>(),
+      navigator: sl.get<GlobalKey<NavigatorState>>(),
     ),
   );
   // ---------- ROUTER ----------
@@ -83,7 +85,9 @@ void initGetIt() {
   );
   // --- TEACHER ---
   sl.registerFactory<MainTeacherScreen>(
-    () => MainTeacherScreen(),
+    () => MainTeacherScreen(
+      groupsCubit: sl.get<GroupsCubit>(),
+    ),
   );
   // --- ADMIN ---
   sl.registerFactory<MainAdminScreen>(
@@ -127,7 +131,9 @@ void initGetIt() {
   // ---------- BLOCS ----------
   // --- COMMON ---
   sl.registerLazySingleton<CurrentUserCubit>(
-    () => CurrentUserCubit(),
+    () => CurrentUserCubit(
+      repository: sl.get<CurrentUserRepository>(),
+    ),
   );
   sl.registerFactory<SplashCubit>(
     () => SplashCubit(
@@ -194,6 +200,12 @@ void initGetIt() {
     ),
   );
   // ---------- REPOSITORIES ----------
+  sl.registerFactory<CurrentUserRepository>(
+    () => CurrentUserRepository(
+      storage: sl.get<UserCredentialsStorage>(),
+      navigator: sl.get<GlobalKey<NavigatorState>>(),
+    ),
+  );
   sl.registerFactory<SplashRepository>(
     () => SplashRepository(
       supabase: sl.get<ProfileSupabase>(),
@@ -201,10 +213,7 @@ void initGetIt() {
     ),
   );
   sl.registerFactory<LoginRepository>(
-    () => LoginRepository(
-      supabase: sl.get<ProfileSupabase>(),
-      storage: sl.get<UserCredentialsStorage>(),
-    ),
+    () => LoginRepository(supabase: sl.get<ProfileSupabase>()),
   );
   sl.registerFactory<StaffRepository>(
     () => StaffRepository(
@@ -275,4 +284,8 @@ void initGetIt() {
   );
   sl.registerFactory<SecureStorage>(() => SecureStorage());
   sl.registerFactory<SupabaseClient>(() => SupabaseClient());
+  // ---
+  sl.registerLazySingleton<GlobalKey<NavigatorState>>(
+    () => GlobalKey<NavigatorState>(),
+  );
 }
