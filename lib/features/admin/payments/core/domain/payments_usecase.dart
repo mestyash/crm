@@ -10,6 +10,7 @@ abstract class IPaymentsRepository {
   Future<void> uploadPayment(UploadPaymentParams params);
   Future<void> deletePayment({required int id});
   Future<void> setPdfStatus({required int id});
+  Future<void> createPdf({required PaymentModel data});
 }
 
 class GetPaymentsByRangeParams {

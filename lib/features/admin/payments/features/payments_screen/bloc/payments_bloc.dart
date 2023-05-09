@@ -133,17 +133,18 @@ class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
   ) async {
     try {
       emit(state.copyWith(isUploading: true));
+      final id = event.data.id;
 
       final payments = [...state.payments];
-      final paymentIndex = payments.indexWhere((e) => e.id == event.id);
+      final paymentIndex = payments.indexWhere((e) => e.id == id);
       final payment = payments[paymentIndex];
 
       if (!payment.hasPdf) {
         final updatedPayment = payment.copyWith(hasPdf: true);
         payments[paymentIndex] = updatedPayment;
-        await _repository.setPdfStatus(id: event.id);
+        await _repository.setPdfStatus(id: id);
       }
-
+      await _repository.createPdf(data: event.data);
       emit(state.copyWith(isUploading: false, payments: payments));
     } catch (e) {
       emit(state.copyWith(isUploading: false, isFailure: true));

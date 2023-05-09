@@ -42,7 +42,7 @@ class PaymentsCard extends StatelessWidget {
       secondActionText: _l10n.create,
       isRedSecondAction: false,
       secondAction: () {
-        context.read<PaymentsBloc>().add(PaymentsEventPdf(id: payment.id));
+        context.read<PaymentsBloc>().add(PaymentsEventPdf(data: payment));
       },
     );
   }

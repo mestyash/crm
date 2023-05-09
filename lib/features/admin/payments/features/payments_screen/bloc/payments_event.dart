@@ -57,10 +57,10 @@ class PaymentsEventDelete extends PaymentsEvent {
 }
 
 class PaymentsEventPdf extends PaymentsEvent {
-  final int id;
+  final PaymentModel data;
 
-  PaymentsEventPdf({required this.id});
+  PaymentsEventPdf({required this.data});
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [data];
 }
