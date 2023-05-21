@@ -228,7 +228,7 @@ class _ScreenDataState extends State<_ScreenData> {
               hintText: _l10n.selectTeacher,
               readOnly: true,
               controller: _teacherController,
-              onTap: _searchTeacherSheet,
+              onTap: isAdmin ? _searchTeacherSheet : null,
             ),
             Visibility(
               visible: isAdmin,
@@ -249,6 +249,7 @@ class _ScreenDataState extends State<_ScreenData> {
               keyboardType: TextInputType.numberWithOptions(
                 decimal: true,
               ),
+              readOnly: !isAdmin,
               onChange: (sum) => _bloc.add(GroupEventSalary(salary: sum)),
             ),
             Visibility(
@@ -275,19 +276,26 @@ class _ScreenDataState extends State<_ScreenData> {
                         : null,
                   ),
                 ),
-                GestureDetector(
-                  onTap: _searchStudentSheet,
-                  child: Icon(
-                    Icons.add,
-                    size: 25.r,
+                Visibility(
+                  visible: isAdmin,
+                  child: GestureDetector(
+                    onTap: _searchStudentSheet,
+                    child: Icon(
+                      Icons.add,
+                      size: 25.r,
+                    ),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 20.h),
-            CustomElevatedButton(
-              text: _l10n.save.toUpperCase(),
-              onTap: state.canSend ? () => _bloc.add(GroupEventUpload()) : null,
+            Visibility(
+              visible: isAdmin,
+              child: CustomElevatedButton(
+                text: _l10n.save.toUpperCase(),
+                onTap:
+                    state.canSend ? () => _bloc.add(GroupEventUpload()) : null,
+              ),
             ),
           ],
         ),
