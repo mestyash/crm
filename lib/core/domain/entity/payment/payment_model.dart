@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
+import 'package:intl/intl.dart';
 
 class PaymentModel extends Equatable {
   final int id;
@@ -22,6 +23,13 @@ class PaymentModel extends Equatable {
   String get stringCreatedAt => CustomDateUtils.prepareDateForBackend(
         createdAt,
       );
+
+  String get stringPaymentMonth {
+    final year = DateTime.now().year;
+    final pattern = year == paymentMonth.year ? 'MMMM' : 'MMMM yyyy';
+
+    return DateFormat(pattern).format(paymentMonth);
+  }
 
   PaymentModel copyWith({
     int? id,

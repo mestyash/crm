@@ -91,25 +91,34 @@ class PaymentsCard extends StatelessWidget {
             style: _textTheme.titleSmall,
           ),
           SizedBox(height: 10.h),
-          RichText(
-            maxLines: 1,
-            overflow: TextOverflow.fade,
-            softWrap: false,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Дата:  ',
-                  style: _textTheme.bodyLarge
-                      ?.copyWith(fontStyle: FontStyle.italic),
+          Row(
+            children: [
+              RichText(
+                maxLines: 1,
+                overflow: TextOverflow.fade,
+                softWrap: false,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Дата:  ',
+                      style: _textTheme.bodyLarge
+                          ?.copyWith(fontStyle: FontStyle.italic),
+                    ),
+                    TextSpan(
+                      text: payment.stringCreatedAt,
+                      style: _textTheme.bodyLarge?.copyWith(
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ],
                 ),
-                TextSpan(
-                  text: payment.stringCreatedAt,
-                  style: _textTheme.bodyLarge?.copyWith(
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ],
-            ),
+              ),
+              Spacer(),
+              Text(
+                payment.stringPaymentMonth,
+                style: _textTheme.bodyLarge,
+              ),
+            ],
           ),
         ],
       ),

@@ -45,7 +45,8 @@ class PaymentsRepository extends IPaymentsRepository {
         );
         payments = response['payload']['payments'] as List<dynamic>;
       }
-      return payments.map((e) => mapPayment(e)).toList();
+      return payments.map((e) => mapPayment(e)).toList()
+        ..sort((a, b) => a.createdAt.compareTo(b.createdAt));
     } catch (e) {
       print(e.toString());
       throw Exception(e);
