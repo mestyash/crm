@@ -90,7 +90,7 @@ class GroupsCard extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: 10.h),
                 child: Text(
-                  group.teacher.fullName,
+                  group.teacher?.fullName ?? '---',
                   style: _textTheme.titleSmall,
                 ),
               ),

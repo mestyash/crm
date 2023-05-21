@@ -25,6 +25,11 @@ class StaffSupabase {
       await _client.request.from('user').update(
         {'isDeleted': true},
       ).eq('id', id);
+      await _client.request.from('group').update(
+        {
+          'teacherId': null,
+        },
+      ).eq('teacherId', id);
     } catch (e) {
       print(e.toString());
       throw Exception(e);

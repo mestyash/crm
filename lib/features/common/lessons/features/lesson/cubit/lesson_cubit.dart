@@ -67,7 +67,7 @@ class LessonCubit extends Cubit<LessonState> {
       final group = state.group!;
       await _repository.createLesson(
         CreateLessonParams(
-          teacherId: group.teacher.id,
+          teacherId: group.teacher!.id,
           groupId: group.id,
           price: group.price,
           salary: group.salary,

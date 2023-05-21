@@ -27,6 +27,11 @@ class LessonState extends Equatable {
   final List<int> studentIds;
   final String comment;
 
+  bool get canCreate => ![
+        studentIds.isNotEmpty,
+        group?.teacher != null,
+      ].contains(false);
+
   bool get isCreating => group != null;
   bool get canDelete => ![
         !isLoading,

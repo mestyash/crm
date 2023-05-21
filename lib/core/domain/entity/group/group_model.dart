@@ -5,7 +5,7 @@ class GroupModel extends Equatable {
   final int id;
   final String name;
   final int language;
-  final UserModel teacher;
+  final UserModel? teacher;
   final num price;
   final num salary;
   final bool isActive;
@@ -23,7 +23,7 @@ class GroupModel extends Equatable {
   });
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       name,

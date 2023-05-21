@@ -121,7 +121,7 @@ class _ScreenDataState extends State<_ScreenData> {
     final lesson = widget.state.lesson;
 
     final teacherName =
-        group?.teacher.fullName ?? lesson?.teacher.fullName ?? '';
+        group?.teacher?.fullName ?? lesson?.teacher.fullName ?? '';
     final salary = (group?.salary ?? lesson?.salary ?? 0).toString();
     final price = (group?.price ?? lesson?.price ?? 0).toString();
     final comment = lesson?.comment ?? '';
@@ -205,7 +205,7 @@ class _ScreenDataState extends State<_ScreenData> {
           visible: state.isCreating,
           child: CustomElevatedButton(
             text: _l10n.save,
-            onTap: state.studentIds.isNotEmpty ? () => _cubit.onUpload() : null,
+            onTap: state.canCreate ? () => _cubit.onUpload() : null,
           ),
         ),
       ],

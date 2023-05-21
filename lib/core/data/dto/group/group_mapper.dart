@@ -8,7 +8,7 @@ GroupModel mapGroup(
       id: data['id'] as int,
       name: data['name'] as String,
       language: data['language'] as int,
-      teacher: mapUser(data['teacher']),
+      teacher: data['teacher'] != null ? mapUser(data['teacher']) : null,
       price: data['price'] as num,
       salary: data['salary'] as num,
       students:
