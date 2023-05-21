@@ -41,7 +41,12 @@ class GroupScreen extends StatelessWidget {
           text: _l10n.groupScreenSuccessfullyCreated,
         ));
     }
-    if (state.textFailure) {
+    if (state.priceTextFailure) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(AppSnackBar.failure(text: _l10n.dataError));
+    }
+    if (state.slaryTextFailure) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(AppSnackBar.failure(text: _l10n.dataError));

@@ -6,7 +6,8 @@ class GroupState extends Equatable {
     this.isUploading = false,
     this.isSearching = false,
     this.successfullyCreated = false,
-    this.textFailure = false,
+    this.priceTextFailure = false,
+    this.slaryTextFailure = false,
     this.isFailure = false,
     // ----
     this.id,
@@ -25,7 +26,8 @@ class GroupState extends Equatable {
   final bool isSearching;
   final bool isUploading;
   final bool successfullyCreated;
-  final bool textFailure;
+  final bool priceTextFailure;
+  final bool slaryTextFailure;
   final bool isFailure;
   // ----
   final int? id;
@@ -46,6 +48,8 @@ class GroupState extends Equatable {
         price > 0,
         salary > 0,
         students.isNotEmpty,
+        !priceTextFailure,
+        !slaryTextFailure,
       ].contains(false);
 
   GroupState copyWith({
@@ -53,7 +57,8 @@ class GroupState extends Equatable {
     bool? isUploading,
     bool? isSearching,
     bool? successfullyCreated,
-    bool? textFailure,
+    bool? priceTextFailure,
+    bool? slaryTextFailure,
     bool? isFailure,
     // ----
     int? id,
@@ -72,7 +77,8 @@ class GroupState extends Equatable {
       isUploading: isUploading ?? this.isUploading,
       isSearching: isSearching ?? this.isSearching,
       successfullyCreated: successfullyCreated ?? this.successfullyCreated,
-      textFailure: textFailure ?? this.textFailure,
+      priceTextFailure: priceTextFailure ?? this.priceTextFailure,
+      slaryTextFailure: slaryTextFailure ?? this.slaryTextFailure,
       isFailure: isFailure ?? false,
       // ----
       id: id ?? this.id,
@@ -95,7 +101,8 @@ class GroupState extends Equatable {
       isUploading,
       isSearching,
       successfullyCreated,
-      textFailure,
+      priceTextFailure,
+      slaryTextFailure,
       isFailure,
       // ----
       id,

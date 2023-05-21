@@ -56,8 +56,13 @@ class CreatePaymentBloc extends Bloc<CreatePaymentEvent, CreatePaymentState> {
     Emitter<CreatePaymentState> emit,
   ) {
     try {
-      final sum = double.parse(event.sum);
-      emit(state.copyWith(sum: sum, textFailure: false));
+      final stringSum = event.sum;
+      if (stringSum.isNotEmpty) {
+        final sum = double.parse(event.sum);
+        emit(state.copyWith(sum: sum, textFailure: false));
+      } else {
+        emit(state.copyWith(sum: 0, textFailure: false));
+      }
     } catch (e) {
       emit(state.copyWith(textFailure: true));
     }

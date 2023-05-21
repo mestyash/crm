@@ -148,10 +148,15 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     Emitter<GroupState> emit,
   ) {
     try {
-      final price = double.parse(event.price);
-      emit(state.copyWith(price: price, textFailure: false));
+      final stringPrice = event.price;
+      if (stringPrice.isNotEmpty) {
+        final price = double.parse(event.price);
+        emit(state.copyWith(price: price, priceTextFailure: false));
+      } else {
+        emit(state.copyWith(price: 0, priceTextFailure: false));
+      }
     } catch (e) {
-      emit(state.copyWith(textFailure: true));
+      emit(state.copyWith(priceTextFailure: true));
     }
   }
 
@@ -160,10 +165,15 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     Emitter<GroupState> emit,
   ) {
     try {
-      final salary = double.parse(event.salary);
-      emit(state.copyWith(salary: salary, textFailure: false));
+      final stringSalary = event.salary;
+      if (stringSalary.isNotEmpty) {
+        final salary = double.parse(event.salary);
+        emit(state.copyWith(salary: salary, slaryTextFailure: false));
+      } else {
+        emit(state.copyWith(salary: 0, slaryTextFailure: false));
+      }
     } catch (e) {
-      emit(state.copyWith(textFailure: true));
+      emit(state.copyWith(slaryTextFailure: true));
     }
   }
 

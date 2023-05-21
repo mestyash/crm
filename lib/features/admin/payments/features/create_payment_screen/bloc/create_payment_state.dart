@@ -31,6 +31,7 @@ class CreatePaymentState extends Equatable {
         student != null,
         sum > 0,
         date != null,
+        !textFailure,
       ].contains(false);
 
   CreatePaymentState copyWith({
