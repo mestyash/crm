@@ -56,6 +56,9 @@ class StaffCubit extends Cubit<StaffState> {
     List<StaffEmployeeModel> staff,
     String text,
   ) {
-    return staff.where((e) => e.userData.fullName.contains(text)).toList();
+    final lowerCaseText = text.toLowerCase();
+    return staff
+        .where((e) => e.userData.fullName.toLowerCase().contains(lowerCaseText))
+        .toList();
   }
 }
