@@ -56,6 +56,9 @@ class StudentsCubit extends Cubit<StudentsState> {
     List<UserModel> students,
     String text,
   ) {
-    return students.where((e) => e.fullName.contains(text)).toList();
+    final lowerCaseText = text.toLowerCase();
+    return students
+        .where((e) => e.fullName.toLowerCase().contains(lowerCaseText))
+        .toList();
   }
 }
