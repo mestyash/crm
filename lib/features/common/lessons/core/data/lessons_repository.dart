@@ -22,7 +22,8 @@ class LessonsRepository extends ILessonsRepository {
     try {
       final response = await _lessonsSupabase.getLessons(groupId: groupId);
       final lessons = response['payload']['lessons'] as List<dynamic>;
-      return lessons.map((e) => mapLesson(e)).toList();
+      return lessons.map((e) => mapLesson(e)).toList()
+        ..sort((b, a) => a.date.compareTo(b.date));
     } catch (e) {
       print(e.toString());
       throw Exception(e);
