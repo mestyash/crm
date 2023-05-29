@@ -72,6 +72,24 @@ class LessonsSupabase {
       throw Exception(e);
     }
   }
+
+  Future<Map<String, dynamic>> getLessonsInfoByRange({
+    required String startDate,
+    required String endDate,
+  }) async {
+    try {
+      final data = await _client.request
+          .from('lesson')
+          .select('*, teacher: teacherId (*)')
+          .gte('date', startDate)
+          .lte('date', endDate);
+
+      return SupabaseUtils.responseWrapper('lessons', data);
+    } catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
+  }
 }
 
 class ApiLessonModel {

@@ -16,6 +16,9 @@ import 'package:crm/features/admin/staff/core/data/staff_repository.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/cubit/upload_staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/upload_staff/view/upload_staff_screen.dart';
+import 'package:crm/features/admin/statistics/salary_statistics/data/repository/salary_statistics_repository.dart';
+import 'package:crm/features/admin/statistics/salary_statistics/presentation/cubit/salary_statistics_cubit.dart';
+import 'package:crm/features/admin/statistics/salary_statistics/presentation/view/salary_statistics_screen.dart';
 import 'package:crm/features/admin/students/core/data/students_repository.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
 import 'package:crm/features/admin/students/features/upload_student/cubit/upload_student_cubit.dart';
@@ -69,6 +72,7 @@ void initGetIt() {
       Routes.uploadStaff: (context) => sl.get<UploadStaffScreen>(),
       Routes.uploadStudent: (context) => sl.get<UploadStudentScreen>(),
       Routes.createPayment: (context) => sl.get<CreatePaymentScreen>(),
+      Routes.salaryStatistics: (context) => sl.get<SalaryStatisticsScreen>(),
     }),
   );
   // ---------- FEATURES ----------
@@ -81,6 +85,21 @@ void initGetIt() {
   sl.registerFactory<LoginScreen>(
     () => LoginScreen(
       cubit: sl.get<LoginCubit>(),
+    ),
+  );
+  sl.registerFactory<GroupScreen>(
+    () => GroupScreen(
+      bloc: sl.get<GroupBloc>(),
+    ),
+  );
+  sl.registerFactory<LessonsScreen>(
+    () => LessonsScreen(
+      cubit: sl.get<LessonsCubit>(),
+    ),
+  );
+  sl.registerFactory<LessonScreen>(
+    () => LessonScreen(
+      cubit: sl.get<LessonCubit>(),
     ),
   );
   // --- TEACHER ---
@@ -113,21 +132,12 @@ void initGetIt() {
       bloc: sl.get<CreatePaymentBloc>(),
     ),
   );
-  sl.registerFactory<GroupScreen>(
-    () => GroupScreen(
-      bloc: sl.get<GroupBloc>(),
+  sl.registerFactory<SalaryStatisticsScreen>(
+    () => SalaryStatisticsScreen(
+      cubit: sl.get<SalaryStatisticsCubit>(),
     ),
   );
-  sl.registerFactory<LessonsScreen>(
-    () => LessonsScreen(
-      cubit: sl.get<LessonsCubit>(),
-    ),
-  );
-  sl.registerFactory<LessonScreen>(
-    () => LessonScreen(
-      cubit: sl.get<LessonCubit>(),
-    ),
-  );
+
   // ---------- BLOCS ----------
   // --- COMMON ---
   sl.registerLazySingleton<CurrentUserCubit>(
@@ -168,6 +178,11 @@ void initGetIt() {
       repository: sl.get<LessonsRepository>(),
     ),
   );
+  sl.registerFactory<SalaryStatisticsCubit>(
+    () => SalaryStatisticsCubit(
+      repository: sl.get<SalaryStatisticsRepository>(),
+    ),
+  );
   // --- ADMIN ---
   sl.registerFactory<StaffCubit>(
     () => StaffCubit(
@@ -199,6 +214,7 @@ void initGetIt() {
       repository: sl.get<PaymentsRepository>(),
     ),
   );
+
   // ---------- REPOSITORIES ----------
   sl.registerFactory<CurrentUserRepository>(
     () => CurrentUserRepository(
@@ -242,6 +258,11 @@ void initGetIt() {
     () => LessonsRepository(
       lessonsSupabase: sl.get<LessonsSupabase>(),
       groupsSupabase: sl.get<GroupsSupabase>(),
+    ),
+  );
+  sl.registerFactory<SalaryStatisticsRepository>(
+    () => SalaryStatisticsRepository(
+      supabase: sl.get<LessonsSupabase>(),
     ),
   );
   // ---------- DATA SOURCES ----------

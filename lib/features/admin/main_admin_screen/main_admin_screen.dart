@@ -3,6 +3,7 @@ import 'package:crm/features/admin/payments/features/payments_screen/bloc/paymen
 import 'package:crm/features/admin/payments/features/payments_screen/view/payments_screen.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/cubit/staff_cubit.dart';
 import 'package:crm/features/admin/staff/features/staff_screen/view/staff_screen.dart';
+import 'package:crm/features/admin/statistics/statistics_screen/statistics_screen.dart';
 import 'package:crm/features/admin/students/features/students_screen/cubit/students_cubit.dart';
 import 'package:crm/features/admin/students/features/students_screen/view/students_screen.dart';
 import 'package:crm/features/common/groups/features/groups/cubit/groups_cubit.dart';
@@ -33,6 +34,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
   late StudentsScreen _studentsScreen;
   late PaymentsScreen _paymentsScreen;
   late GroupsScreen _groupsScreen;
+  late StatisticsScreen _statisticsScreen;
 
   int _selectedIndex = 0;
   late List<Widget> _pages;
@@ -43,6 +45,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
     _studentsScreen = StudentsScreen();
     _paymentsScreen = PaymentsScreen();
     _groupsScreen = GroupsScreen();
+    _statisticsScreen = StatisticsScreen();
 
     _pages = [
       BlocProvider<StaffCubit>(
@@ -61,6 +64,7 @@ class _MainTeacherScreenState extends State<MainAdminScreen> {
         create: (_) => widget.groupsCubit..loadGroups(),
         child: _groupsScreen,
       ),
+      _statisticsScreen,
     ];
     super.initState();
   }

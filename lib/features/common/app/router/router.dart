@@ -12,4 +12,5 @@ class Routes {
   static const uploadStaff = '/uploadStaff';
   static const uploadStudent = '/uploadStudent';
   static const createPayment = '/createPayment';
+  static const salaryStatistics = '/salaryStatistics';
 }

@@ -101,14 +101,14 @@ class PpaymentsFilterState extends State<PaymentsFilter> {
           Row(
             children: [
               _DatePicker(
-                title: 'От',
+                title: _l10n.from,
                 date: widget.startDate,
                 textController: _startDateController,
                 onDateChange: _onStartDateChange,
               ),
               SizedBox(width: 20.w),
               _DatePicker(
-                title: 'До',
+                title: _l10n.to,
                 date: widget.endDate,
                 textController: _endDateController,
                 onDateChange: _onEndDateChange,

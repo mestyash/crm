@@ -100,6 +100,16 @@ class AdminNavBar extends StatelessWidget {
             text: _l10n.mainAdminNavBarGroups,
             iconColor: _scaffoldColor,
           ),
+          GButton(
+            leading: Icon(
+              Icons.equalizer,
+              color: _iconColor(4),
+              size: 20.r,
+            ),
+            icon: _defaultIcon,
+            text: _l10n.mainAdminNavBarStatistics,
+            iconColor: _scaffoldColor,
+          ),
         ],
         selectedIndex: selectedIndex,
         onTabChange: onPageChanged,
