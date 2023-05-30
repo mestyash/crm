@@ -1,12 +1,11 @@
-import 'package:crm/core/data/repository/current_user_repository.dart';
 import 'package:crm/core/domain/entity/current_user/current_user_model.dart';
 import 'package:crm/core/domain/usecase/current_user_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CurrentUserCubit extends Cubit<CurrentUserModel?> {
-  final CurrentUserRepository _repository;
+  final ICurrentUserRepository _repository;
 
-  CurrentUserCubit({required CurrentUserRepository repository})
+  CurrentUserCubit({required ICurrentUserRepository repository})
       : _repository = repository,
         super(null);
 

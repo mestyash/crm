@@ -3,7 +3,6 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/payment/payment_model.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/utils/bloc/bloc_utils.dart';
-import 'package:crm/features/admin/payments/core/data/repository/payments_repository.dart';
 import 'package:crm/features/admin/payments/core/domain/payments_usecase.dart';
 import 'package:equatable/equatable.dart';
 
@@ -11,9 +10,9 @@ part 'payments_event.dart';
 part 'payments_state.dart';
 
 class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
-  final PaymentsRepository _repository;
+  final IPaymentsRepository _repository;
 
-  PaymentsBloc({required PaymentsRepository repository})
+  PaymentsBloc({required IPaymentsRepository repository})
       : _repository = repository,
         super(PaymentsState()) {
     on<PaymentsEventStartDate>(_onStartDateChange);

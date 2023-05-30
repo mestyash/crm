@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
-import 'package:crm/features/common/groups/core/data/groups_repository.dart';
 import 'package:crm/features/common/groups/core/domain/groups_usecase.dart';
 import 'package:equatable/equatable.dart';
 
@@ -10,9 +9,9 @@ part 'group_event.dart';
 part 'group_state.dart';
 
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
-  final GroupsRepository _repository;
+  final IGroupsRepository _repository;
 
-  GroupBloc({required GroupsRepository repository})
+  GroupBloc({required IGroupsRepository repository})
       : _repository = repository,
         super(GroupState()) {
     on<GroupEventLoad>(_onGroupLoad);

@@ -1,15 +1,15 @@
 import 'package:crm/core/domain/entity/user/user_model.dart';
-import 'package:crm/features/admin/students/core/data/students_repository.dart';
+import 'package:crm/features/admin/students/core/domain/students_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'students_state.dart';
 
 class StudentsCubit extends Cubit<StudentsState> {
-  StudentsRepository _repository;
+  IStudentsRepository _repository;
 
   StudentsCubit({
-    required StudentsRepository repository,
+    required IStudentsRepository repository,
   })  : _repository = repository,
         super(StudentsState());
 

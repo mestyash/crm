@@ -1,17 +1,17 @@
 import 'package:crm/core/domain/entity/group/group_model.dart';
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
-import 'package:crm/features/common/groups/core/data/groups_repository.dart';
+import 'package:crm/features/common/groups/core/domain/groups_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'groups_state.dart';
 
 class GroupsCubit extends Cubit<GroupsState> {
-  final GroupsRepository _repository;
+  final IGroupsRepository _repository;
   final CurrentUserCubit _currentUserCubit;
 
   GroupsCubit({
-    required GroupsRepository repository,
+    required IGroupsRepository repository,
     required CurrentUserCubit currentUserCubit,
   })  : _repository = repository,
         _currentUserCubit = currentUserCubit,

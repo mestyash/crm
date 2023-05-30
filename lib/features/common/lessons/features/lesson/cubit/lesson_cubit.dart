@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:crm/core/domain/entity/group/group_model.dart';
 import 'package:crm/core/domain/entity/lesson/lesson_model.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
-import 'package:crm/features/common/lessons/core/data/lessons_repository.dart';
 import 'package:crm/features/common/lessons/core/domain/lessons_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'lesson_state.dart';
 
 class LessonCubit extends Cubit<LessonState> {
-  final LessonsRepository _repository;
+  final ILessonsRepository _repository;
 
-  LessonCubit({required LessonsRepository repository})
+  LessonCubit({required ILessonsRepository repository})
       : _repository = repository,
         super(LessonState());
 

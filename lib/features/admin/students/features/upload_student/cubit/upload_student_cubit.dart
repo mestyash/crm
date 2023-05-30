@@ -1,4 +1,3 @@
-import 'package:crm/features/admin/students/core/data/students_repository.dart';
 import 'package:crm/features/admin/students/core/domain/students_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'upload_student_state.dart';
 
 class UploadStudentCubit extends Cubit<UploadStudentState> {
-  StudentsRepository _repository;
+  IStudentsRepository _repository;
 
   UploadStudentCubit({
-    required StudentsRepository repository,
+    required IStudentsRepository repository,
   })  : _repository = repository,
         super(UploadStudentState());
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/features/common/app/router/router.dart';
-import 'package:crm/features/common/splash_screen/data/splash_repository.dart';
+import 'package:crm/features/common/splash_screen/domain/splash_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,11 +9,11 @@ part 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   CurrentUserCubit _currentUserCubit;
-  SplashRepository _repository;
+  ISplashRepository _repository;
 
   SplashCubit({
     required CurrentUserCubit currentUserCubit,
-    required SplashRepository repository,
+    required ISplashRepository repository,
   })  : _currentUserCubit = currentUserCubit,
         _repository = repository,
         super(SplashState());
