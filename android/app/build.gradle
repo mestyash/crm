@@ -74,20 +74,20 @@ android {
         }
     }
 
-    flavorDimensions "default"
+    flavorDimensions "flavor-type"
     productFlavors { 
         production {
-            dimension "default"
+            dimension "flavor-type"
             applicationIdSuffix ""
             manifestPlaceholders = [appName: "Crm"]
         }
         staging {
-            dimension "default"
+            dimension "flavor-type"
             applicationIdSuffix ".stg"
             manifestPlaceholders = [appName: "[STG] Crm"]
         }
         development {
-            dimension "default"
+            dimension "flavor-type"
             applicationIdSuffix ".dev"
             manifestPlaceholders = [appName: "[DEV] Crm"]
         }
