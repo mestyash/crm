@@ -1,4 +1,4 @@
-import 'package:crm/features/admin/students/core/domain/students_usecase.dart';
+import 'package:crm/features/admin/students/core/domain/students_interface.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
