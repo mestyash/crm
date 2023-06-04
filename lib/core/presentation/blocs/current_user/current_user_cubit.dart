@@ -1,5 +1,5 @@
 import 'package:crm/core/domain/entity/current_user/current_user_model.dart';
-import 'package:crm/core/domain/usecase/current_user_usecase.dart';
+import 'package:crm/core/domain/usecase/current_user_interfaces.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CurrentUserCubit extends Cubit<CurrentUserModel?> {
