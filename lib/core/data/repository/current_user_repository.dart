@@ -1,5 +1,5 @@
 import 'package:crm/core/data/data_source/user_credentials_storage/user_credentials_storage.dart';
-import 'package:crm/core/domain/usecase/current_user_usecase.dart';
+import 'package:crm/core/domain/interfaces/current_user_interfaces.dart';
 import 'package:crm/features/common/app/router/router.dart';
 import 'package:flutter/material.dart';
 
