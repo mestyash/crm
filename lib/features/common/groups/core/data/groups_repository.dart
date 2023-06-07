@@ -5,7 +5,7 @@ import 'package:crm/core/data/dto/group/group_mapper.dart';
 import 'package:crm/core/data/dto/user/user_mapper.dart';
 import 'package:crm/core/domain/entity/group/group_model.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
-import 'package:crm/features/common/groups/core/domain/groups_usecase.dart';
+import 'package:crm/features/common/groups/core/domain/groups_interface.dart';
 
 class GroupsRepository extends IGroupsRepository {
   final GroupsSupabase _groupsSupabase;

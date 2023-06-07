@@ -1,7 +1,7 @@
 import 'package:crm/core/data/dto/current_user/current_user_mapper.dart';
 import 'package:crm/core/domain/entity/current_user/current_user_model.dart';
 import 'package:crm/core/api/profile/profile_supabase.dart';
-import 'package:crm/features/common/login_screen/domain/login_usecase.dart';
+import 'package:crm/features/common/login_screen/domain/login_interface.dart';
 
 class LoginRepository extends ILoginRepository {
   ProfileSupabase _supabase;

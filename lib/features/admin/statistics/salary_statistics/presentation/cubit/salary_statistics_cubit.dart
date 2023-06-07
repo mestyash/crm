@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:crm/features/admin/statistics/salary_statistics/domain/entity/salary_statistic_model.dart';
-import 'package:crm/features/admin/statistics/salary_statistics/domain/usecase/salary_statistics_usecase.dart';
+import 'package:crm/features/admin/statistics/salary_statistics/domain/interfaces/salary_statistics_interface.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

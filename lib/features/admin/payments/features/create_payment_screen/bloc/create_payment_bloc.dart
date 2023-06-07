@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
-import 'package:crm/features/admin/payments/core/domain/payments_usecase.dart';
+import 'package:crm/features/admin/payments/core/domain/payments_interface.dart';
 import 'package:equatable/equatable.dart';
 
 part 'create_payment_event.dart';

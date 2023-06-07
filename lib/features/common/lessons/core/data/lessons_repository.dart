@@ -5,7 +5,7 @@ import 'package:crm/core/data/dto/lesson/lesson_mapper.dart';
 import 'package:crm/core/domain/entity/lesson/lesson_model.dart';
 import 'package:crm/core/domain/entity/group/group_model.dart';
 import 'package:crm/core/utils/date/date_utils.dart';
-import 'package:crm/features/common/lessons/core/domain/lessons_usecase.dart';
+import 'package:crm/features/common/lessons/core/domain/lessons_interface.dart';
 
 class LessonsRepository extends ILessonsRepository {
   final LessonsSupabase _lessonsSupabase;

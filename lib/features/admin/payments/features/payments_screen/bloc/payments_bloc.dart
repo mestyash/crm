@@ -3,7 +3,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/payment/payment_model.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
 import 'package:crm/core/utils/bloc/bloc_utils.dart';
-import 'package:crm/features/admin/payments/core/domain/payments_usecase.dart';
+import 'package:crm/features/admin/payments/core/domain/payments_interface.dart';
 import 'package:equatable/equatable.dart';
 
 part 'payments_event.dart';

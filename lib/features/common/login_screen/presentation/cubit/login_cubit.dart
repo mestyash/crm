@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:crm/core/presentation/blocs/current_user/current_user_cubit.dart';
 import 'package:crm/features/common/app/router/router.dart';
-import 'package:crm/features/common/login_screen/domain/login_usecase.dart';
+import 'package:crm/features/common/login_screen/domain/login_interface.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

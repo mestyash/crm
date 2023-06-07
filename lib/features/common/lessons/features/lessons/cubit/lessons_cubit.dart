@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:crm/core/domain/entity/lesson/lesson_model.dart';
-import 'package:crm/features/common/lessons/core/domain/lessons_usecase.dart';
+import 'package:crm/features/common/lessons/core/domain/lessons_interface.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

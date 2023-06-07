@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:crm/core/domain/entity/user/user_model.dart';
-import 'package:crm/features/common/groups/core/domain/groups_usecase.dart';
+import 'package:crm/features/common/groups/core/domain/groups_interface.dart';
 import 'package:equatable/equatable.dart';
 
 part 'group_event.dart';
