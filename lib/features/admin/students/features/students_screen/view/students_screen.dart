@@ -105,7 +105,7 @@ class _StudentsScreenData extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SearchBar(
+            CustomSearchBar(
               enabled: !state.isLoading,
               onTextChange: (text) =>
                   context.read<StudentsCubit>().onTextChange(text),

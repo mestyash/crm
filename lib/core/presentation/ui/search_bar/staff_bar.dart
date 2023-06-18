@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SearchBar extends StatelessWidget {
+class CustomSearchBar extends StatelessWidget {
   final bool enabled;
   final void Function(String text) onTextChange;
   final String placeholder;
 
-  const SearchBar({
+  const CustomSearchBar({
     Key? key,
     required this.enabled,
     required this.onTextChange,

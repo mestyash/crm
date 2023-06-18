@@ -79,7 +79,7 @@ class _ScreenData extends StatelessWidget {
               ProjectMargin.contentHorizontal,
               20.h,
             ),
-            child: SearchBar(
+            child: CustomSearchBar(
               enabled: true,
               onTextChange: (text) => cubit.onTextChange(text),
             ),

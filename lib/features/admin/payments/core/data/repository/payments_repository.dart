@@ -240,7 +240,6 @@ class PaymentsRepository extends IPaymentsRepository {
       final file = File(path);
       await file.writeAsBytes(await pdf.save());
       await OpenFilex.open(path);
-      await file.delete();
     } catch (e) {
       print(e.toString());
       throw Exception(e);

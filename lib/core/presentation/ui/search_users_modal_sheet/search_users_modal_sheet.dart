@@ -56,7 +56,7 @@ class SearchUsersModalSheet extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: ProjectMargin.contentHorizontal,
               ),
-              child: SearchBar(
+              child: CustomSearchBar(
                 enabled: true,
                 onTextChange: onTextChange,
                 placeholder: _l10n.enterSurname,

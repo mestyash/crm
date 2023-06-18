@@ -106,7 +106,7 @@ class _StaffScreenData extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SearchBar(
+            CustomSearchBar(
               enabled: !state.isLoading,
               onTextChange: (text) =>
                   context.read<StaffCubit>().onTextChange(text),
