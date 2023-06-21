@@ -37,6 +37,8 @@
 /packages/flutter/coverage/
 version
 
+.env
+
 # packages file containing multi-root paths
 .packages.generated
 

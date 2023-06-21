@@ -56,18 +56,14 @@ void initGetIt() {
       navigator: sl.get<GlobalKey<NavigatorState>>(),
     ),
   );
-  // ---------- ROUTER ----------
   sl.registerLazySingleton<Map<String, WidgetBuilder>>(
     () => ({
-      // --- common ---
       Routes.splash: (context) => sl.get<SplashScreen>(),
       Routes.login: (context) => sl.get<LoginScreen>(),
-      // --- teacher ---
       Routes.mainTeacher: (context) => sl.get<MainTeacherScreen>(),
       Routes.group: (context) => sl.get<GroupScreen>(),
       Routes.lessons: (context) => sl.get<LessonsScreen>(),
       Routes.lesson: (context) => sl.get<LessonScreen>(),
-      // --- admin ---
       Routes.mainAdmin: (context) => sl.get<MainAdminScreen>(),
       Routes.uploadStaff: (context) => sl.get<UploadStaffScreen>(),
       Routes.uploadStudent: (context) => sl.get<UploadStudentScreen>(),
@@ -75,8 +71,6 @@ void initGetIt() {
       Routes.salaryStatistics: (context) => sl.get<SalaryStatisticsScreen>(),
     }),
   );
-  // ---------- FEATURES ----------
-  // --- COMMON ---
   sl.registerFactory<SplashScreen>(
     () => SplashScreen(
       cubit: sl.get<SplashCubit>(),
@@ -102,13 +96,11 @@ void initGetIt() {
       cubit: sl.get<LessonCubit>(),
     ),
   );
-  // --- TEACHER ---
   sl.registerFactory<MainTeacherScreen>(
     () => MainTeacherScreen(
       groupsCubit: sl.get<GroupsCubit>(),
     ),
   );
-  // --- ADMIN ---
   sl.registerFactory<MainAdminScreen>(
     () => MainAdminScreen(
       staffCubit: sl.get<StaffCubit>(),
@@ -137,9 +129,6 @@ void initGetIt() {
       cubit: sl.get<SalaryStatisticsCubit>(),
     ),
   );
-
-  // ---------- BLOCS ----------
-  // --- COMMON ---
   sl.registerLazySingleton<CurrentUserCubit>(
     () => CurrentUserCubit(
       repository: sl.get<CurrentUserRepository>(),
@@ -183,7 +172,6 @@ void initGetIt() {
       repository: sl.get<SalaryStatisticsRepository>(),
     ),
   );
-  // --- ADMIN ---
   sl.registerFactory<StaffCubit>(
     () => StaffCubit(
       repository: sl.get<StaffRepository>(),
@@ -214,8 +202,6 @@ void initGetIt() {
       repository: sl.get<PaymentsRepository>(),
     ),
   );
-
-  // ---------- REPOSITORIES ----------
   sl.registerFactory<CurrentUserRepository>(
     () => CurrentUserRepository(
       storage: sl.get<UserCredentialsStorage>(),
@@ -265,8 +251,6 @@ void initGetIt() {
       supabase: sl.get<LessonsSupabase>(),
     ),
   );
-  // ---------- DATA SOURCES ----------
-  // API
   sl.registerFactory<ProfileSupabase>(
     () => ProfileSupabase(
       client: sl.get<SupabaseClient>(),
@@ -297,7 +281,6 @@ void initGetIt() {
       client: sl.get<SupabaseClient>(),
     ),
   );
-  // ---
   sl.registerFactory<UserCredentialsStorage>(
     () => UserCredentialsStorage(
       storage: sl.get<SecureStorage>(),
@@ -305,7 +288,6 @@ void initGetIt() {
   );
   sl.registerFactory<SecureStorage>(() => SecureStorage());
   sl.registerFactory<SupabaseClient>(() => SupabaseClient());
-  // ---
   sl.registerLazySingleton<GlobalKey<NavigatorState>>(
     () => GlobalKey<NavigatorState>(),
   );
